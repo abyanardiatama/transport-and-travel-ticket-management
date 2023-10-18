@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +19,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('login.index');
 });
+// Login dan Logut
+Route::get('/login',[LoginController::class, 'index'])->name('login')->middleware('guest');
+Route::post('/login',[LoginController::class, 'authenticate']);
+Route::post('/logout',[LoginController::class, 'logout']);
+Route::get('/dashboard',[DashboardController::class, 'index'])->middleware('auth');
+
 // Dashboard
-Route::get('/dashboard', function () {
-    return view('dashboard.index');
-});
+// Route::resource('/dashboard',DashboardController::class)->middleware('auth');
+// Route::resource('/dashboard', DashboardController::class)->middleware('auth');

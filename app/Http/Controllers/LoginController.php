@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 class LoginController extends Controller
 {
     public function index(){
-        return view('login.login', [
+        return view('login.index', [
             'title' => 'Login',
             'active' => 'login'
         ]);
@@ -37,7 +37,7 @@ class LoginController extends Controller
         $request->session()->regenerateToken();
         $this->middleware('guest')->except('logout');
 
-        return redirect('/login');
+        return redirect('/');
     }
 
 }

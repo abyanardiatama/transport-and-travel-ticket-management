@@ -8,7 +8,7 @@
                     <path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
                 </svg>
             </button>
-            <a href="https://flowbite.com" class="flex ml-2 md:mr-24">
+            <a href="https://pt-sucofindo-semarang.business.site" target="_blank" class="flex ml-2 md:mr-24">
             <img src="/logo-nobg.png" class="h-8 mr-3" alt="FlowBite Logo" />
             <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">PT. Sucofindo</span>
             </a>
@@ -43,7 +43,11 @@
                     <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Earnings</a>
                     </li>
                     <li>
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Sign out</a>
+                        <form action="/logout" method="POST">
+                            @csrf
+                            <button class="block w-full px-4 py-2 text-sm text-start text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem" type="submit">Log out</button>
+                        </form>
+                    {{-- <a href="/logout" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Sign out</a> --}}
                     </li>
                 </ul>
                 </div>
