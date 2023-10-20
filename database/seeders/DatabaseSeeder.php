@@ -13,6 +13,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        //Include SuratPerintahKerjaSeeder
+        $this->call(SuratPerintahKerjaSeeder::class);
+        //Include SuratPermintaanTiketDinasSeeder
+        $this->call(SuratPermintaanTiketDinasSeeder::class);
+        //Include SuratPermintaanTransportSeeder
+        $this->call(SuratPermintaanTransportSeeder::class);
+        
         User::create([
             'name' => 'Admin SCI',
             'email' => 'admin@gmail.com',
