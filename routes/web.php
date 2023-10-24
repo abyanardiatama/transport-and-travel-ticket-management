@@ -31,13 +31,5 @@ Route::get('/dashboard',[DashboardController::class, 'index'])->middleware('auth
 // Dashboard
 Route::resource('/dashboard/permintaantransport', SuratPermintaanTransportController::class)->middleware('auth');
 Route::resource('/dashboard/permintaantiketdinas', SuratPermintaanTiketDinasController::class)->middleware('auth');
-
-//Surat Permintaan Transport
-Route::resource('/dashboard/permintaantransport', SuratPermintaanTransportController::class)->middleware('auth');
-
-//Surat Permintaan Tiket Dinas
-Route::resource('/dashboard/permintaantiketdinas', SuratPermintaanTiketDinasController::class)->middleware('auth');
-
-//Surat Perintah Kerja
 Route::resource('/dashboard/perintahkerja', SuratPermintaanTiketDinasController::class)->middleware('auth');
 

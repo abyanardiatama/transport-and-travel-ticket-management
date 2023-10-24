@@ -28,7 +28,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>  
 </head>
 <body>
-    @include('partials.navbar')
+    {{-- @include('partials.navbar') --}}
     <div class="container mx-auto font-family-karla">
         @yield('container')
     </div>
