@@ -81,6 +81,8 @@ class SuratPermintaanTransportController extends Controller
             SuratPermintaanTransport::create($validatedData);
             //send success message to dashboard
             Session::flash('success', 'Surat Permintaan Transport berhasil dibuat');
+            //add data to seeder
+
             //redirect to dashboard
             return redirect('/dashboard');
         }

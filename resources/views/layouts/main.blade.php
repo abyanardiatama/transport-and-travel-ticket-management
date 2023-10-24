@@ -9,7 +9,6 @@
   <meta http-equiv="Expires" content="0">
   
   @vite(['resources/css/app.css','resources/js/app.js'])
-  <script type="text/javascript" src="/js/index.min.js"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.css" rel="stylesheet" />
 
   <title>Manajemen Transportasi SCI</title>

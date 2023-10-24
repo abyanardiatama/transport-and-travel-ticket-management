@@ -1,7 +1,7 @@
 @extends('dashboard.layouts.main')
 @section('container')
     <div class="max-w-full pt-20 px-6">
-        <h1 class="text-md  font-medium">Buat Surat Permintaan Transportasi</h1>
+        <h1 class="text-md  font-medium dark:text-white">Buat Surat Permintaan Transportasi</h1>
         <hr class="bg-slate-200 mt-5 max-w-lg">
         <form action="/dashboard/permintaantransport/" method="post" class="max-w-3xl py-4 font-montserrat">
             @csrf
@@ -29,11 +29,13 @@
                 </div>
                 {{-- rute pemakaian --}} {{-- dropdown --}}
                 <div class="col-span-2 sm:col-span-1">
-                    <select name="rute_pemakaian" id="rute_pemakaian" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <select name="rute_pemakaian" id="rute_pemakaian" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                         <option value="">Rute Pemakaian</option>
                         <option value="Dalam Kota">Dalam Kota</option>
                         <option value="Luar Kota">Luar Kota</option>
                     </select>
+                    {{-- validation --}}
+
                 </div>
                 {{-- keperluan --}}
                 <div class="col-span-2 sm:col-span-1">
@@ -76,11 +78,24 @@
             </form>
             {{-- Note bahwa surat akan diteruskan ke atasan untuk persetujuan --}}
             <div class="col-span-full">
-                <p class="text-gray-500">* Dengan menekan submit Anda telah menyetujui dibuatnya surat permintaan dan akan dikirimkan ke atasan</p>
+                {{-- <p class="text-gray-500">* Dengan menekan submit Anda telah menyetujui dibuatnya surat permintaan dan akan dikirimkan ke atasan</p> --}}
+                <div class="flex p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
+                    <svg class="flex-shrink-0 inline w-4 h-4 mr-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                    </svg>
+                    <span class="sr-only">Info</span>
+                    <div>
+                      <span class="font-medium">Pastikan Semua kolom telah diisi dengan benar</span>
+                        <ul class="mt-1.5 list-disc list-inside">
+                          <li>Dengan menekan submit Anda telah menyetujui dibuatnya surat permintaan</li>
+                          <li>Surat akan dikirimkan ke atasan untuk disetujui</li>
+                      </ul>
+                    </div>
+                  </div>
             </div>
             {{-- back button --}}
             <div class="col-span-2 sm:col-span-1 sm:flex justify-start">
-                <button id="backButton" class="w-full bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-lg shadow-lg hover:shadow-xl transition duration-200">Kembali</a>
+                <button id="backButton" class="text-sm w-full bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-lg shadow-lg hover:shadow-xl transition duration-200">Kembali</a>
             </div>
             <script>
                 const backButton = document.getElementById('backButton');
@@ -91,8 +106,7 @@
             </script>
             {{-- button submit --}}
             <div class="col-span-2 sm:col-span-1 sm:flex justify-end">
-                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-800 text-white font-semibold py-2 px-4 rounded-lg shadow-lg hover:shadow-xl transition duration-200">Buat Surat Permintaan Transportasi</button>
+                <button type="submit" class="text-sm w-full bg-blue-600 hover:bg-blue-800 text-white font-semibold py-2 px-4 rounded-lg shadow-lg hover:shadow-xl transition duration-200">Buat Surat Permintaan Transportasi</button>
             </div>
     </div>
-    
 @endsection

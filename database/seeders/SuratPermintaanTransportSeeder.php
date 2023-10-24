@@ -27,10 +27,10 @@ class SuratPermintaanTransportSeeder extends Seeder
             'jam_kembali' => '17:00',
             'biaya_perjalanan' => '100.000',
             'isApprove_pegawai' => true,
-            'isApprove_atasan' => true,
+            'isApprove_atasan' => false,
             'nomor_polisi' => 'B 1234 ABC',
             'nama_driver' => 'Budi Santoso',
-            'isApprove_admin' => true,
+            'isApprove_admin' => false,
         ]);
         SuratPermintaanTransport::create([
             'nama_pemohon' => 'Anton Sutanto',
@@ -48,7 +48,7 @@ class SuratPermintaanTransportSeeder extends Seeder
             'isApprove_atasan' => true,
             'nomor_polisi' => 'H 1234 GHI',
             'nama_driver' => 'Rudi Prasetyo',
-            'isApprove_admin' => true,
+            'isApprove_admin' => false,
         ]);
         SuratPermintaanTransport::create([
             'nama_pemohon' => 'Agus Riyanto',
