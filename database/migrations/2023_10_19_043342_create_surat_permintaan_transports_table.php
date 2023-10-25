@@ -24,10 +24,12 @@ return new class extends Migration
             $table->string('jam_berangkat');
             $table->string('jam_kembali');
             $table->string('biaya_perjalanan');
+            $table->integer('jumlah_penumpang');
             $table->boolean('isApprove_pegawai')->default(false);
             $table->boolean('isApprove_atasan')->default(false);
             $table->string('nomor_polisi')->nullable();
             $table->string('nama_driver')->nullable();
+            $table->string('kendaraan_lain')->nullable();
             $table->boolean('isApprove_admin')->default(false);
             $table->timestamps();
         });

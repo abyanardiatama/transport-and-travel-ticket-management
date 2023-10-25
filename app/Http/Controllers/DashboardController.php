@@ -12,10 +12,10 @@ class DashboardController extends Controller
 {
     public function index() {
         $suratPermintaanTransport = SuratPermintaanTransport::all();
-        $suratPermintaanTransport = $suratPermintaanTransport->sortByDesc('created_at')->take(3);
+        $suratPermintaanTransport = $suratPermintaanTransport->sortByDesc('updated_at')->take(3);
 
         $suratPermintaanTiketDinas = SuratPermintaanTiketDinas::all();
-        $suratPermintaanTiketDinas = $suratPermintaanTiketDinas->sortByDesc('created_at')->take(3);
+        $suratPermintaanTiketDinas = $suratPermintaanTiketDinas->sortByDesc('updated_at')->take(3);
 
         
         //auth
