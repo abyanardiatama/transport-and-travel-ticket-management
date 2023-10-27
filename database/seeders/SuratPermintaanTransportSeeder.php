@@ -16,6 +16,7 @@ class SuratPermintaanTransportSeeder extends Seeder
     {
         SuratPermintaanTransport::create([
             'nama_pemohon' => 'Kamala Putri',
+            'id_pemohon' => '2',
             'unit' => 'SCI-AKL',
             'email_atasan' => 'atasan1@gmail.com',
             'tujuan' => 'Bandung',
@@ -28,11 +29,12 @@ class SuratPermintaanTransportSeeder extends Seeder
             'biaya_perjalanan' => '100.000',
             'jumlah_penumpang' => '3',
             'isApprove_pegawai' => true,
-            'isApprove_atasan' => false,
-            'isApprove_admin' => false,
+            'isApprove_atasan' => null,
+            'isApprove_admin' => null,
         ]);
         SuratPermintaanTransport::create([
             'nama_pemohon' => 'Anton Sutanto',
+            'id_pemohon' => '2',
             'unit' => 'SCI-3',
             'email_atasan' => 'atasan1@gmail.com',
             'tujuan' => 'Yogyakarta',
@@ -46,10 +48,11 @@ class SuratPermintaanTransportSeeder extends Seeder
             'jumlah_penumpang' => '2',
             'isApprove_pegawai' => true,
             'isApprove_atasan' => true,
-            'isApprove_admin' => false,
+            'isApprove_admin' => null,
         ]);
         SuratPermintaanTransport::create([
             'nama_pemohon' => 'Agus Riyanto',
+            'id_pemohon' => '2',
             'unit' => 'PDO-4',
             'email_atasan' => 'atasan1@gmail.com',
             'tujuan' => 'Semarang',

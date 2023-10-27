@@ -39,7 +39,7 @@
                     <li>
                         <form action="/logout" method="POST">
                             @csrf
-                            <button class="block w-full px-4 py-2 text-sm text-start text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem" type="submit">Log out</button>
+                            <button class="block w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem" type="submit">Log out</button>
                         </form>
                     </li>
                 </ul>

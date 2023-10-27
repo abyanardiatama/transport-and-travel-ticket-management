@@ -25,9 +25,12 @@
         <form action="/dashboard/permintaantransport/" method="post" class="max-w-3xl py-4 font-montserrat">
             @csrf
             <div class="grid grid-cols-2 gap-4">
+                {{-- field id_pemohon --}}
+                <div hidden class="col-span-2 sm:col-span-1">
+                    <input type="text" name="id_pemohon" id="id_pemohon" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ Auth::user()->id }}" value="{{ Auth::user()->id }}" placeholder="ID Pemohon" readonly>
+                </div>
                 {{-- field nama --}}
                 <div class="col-span-2 sm:col-span-1">
-                    {{-- validation --}}
                     <input type="text" name="nama_pemohon" id="nama_pemohon" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Nama Pemohon" value="{{ old('nama_pemohon') }}" required>
                 </div>
                 {{-- field unit --}}
@@ -37,7 +40,25 @@
                 {{-- email atasan --}}
                 <div class="col-span-2 sm:col-span-1">
                     <input type="email" name="email_atasan" id="email_atasan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ old('email_atasan') }}" placeholder="Email Atasan" required>
+                    {{-- all email atasan --}}
+                    <datalist id="email_atasan_data">
+                        @foreach ($users as $item)
+                            <option value="{{ $item->email }}">{{ $item->email }}</option>
+                        @endforeach
+                    </datalist>
                 </div>
+                <script>
+                    //when type email atasan give recomendation based on email_atasan_data
+                    const email_atasan = document.getElementById('email_atasan');
+                    email_atasan.addEventListener('input', function(){
+                        this.setAttribute('list', 'email_atasan_data');
+                    });
+                    //if there is no email_atasan_data, focus on email_atasan field with red border
+                </script>
+                {{-- check if email atasan is valid --}}
+                <script>
+                    
+                </script>
                 {{-- biaya perjalanan --}}
                 <div class="col-span-2 sm:col-span-1">
                     <input type="text" name="biaya_perjalanan" id="biaya_perjalanan" min="0" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ old('biaya_perjalanan') }}" placeholder="Biaya Perjalanan" required>
@@ -94,8 +115,7 @@
                 </div>              
             </form>
             {{-- Note bahwa surat akan diteruskan ke atasan untuk persetujuan --}}
-            <div class="col-span-full">
-                {{-- <p class="text-gray-500">* Dengan menekan submit Anda telah menyetujui dibuatnya surat permintaan dan akan dikirimkan ke atasan</p> --}}
+            <div class="col-span-2">
                 <div class="flex p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
                     <svg class="flex-shrink-0 inline w-4 h-4 mr-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                       <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>

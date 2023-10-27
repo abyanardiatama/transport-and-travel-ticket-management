@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('surat_permintaan_transports', function (Blueprint $table) {
             $table->id();
+            $table->string('id_pemohon');
             $table->string('nama_pemohon');
             $table->string('unit');
             $table->string('email_atasan');
@@ -26,11 +27,11 @@ return new class extends Migration
             $table->string('biaya_perjalanan');
             $table->integer('jumlah_penumpang');
             $table->boolean('isApprove_pegawai')->default(false);
-            $table->boolean('isApprove_atasan')->default(false);
+            $table->boolean('isApprove_atasan')->nullable();
             $table->string('nomor_polisi')->nullable();
             $table->string('nama_driver')->nullable();
             $table->string('kendaraan_lain')->nullable();
-            $table->boolean('isApprove_admin')->default(false);
+            $table->boolean('isApprove_admin')->nullable();
             $table->timestamps();
         });
     }

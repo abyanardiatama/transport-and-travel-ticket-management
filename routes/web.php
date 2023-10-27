@@ -33,6 +33,11 @@ Route::resource('/dashboard/permintaantransport', SuratPermintaanTransportContro
 Route::resource('/dashboard/permintaantiketdinas', SuratPermintaanTiketDinasController::class)->middleware('auth');
 Route::resource('/dashboard/perintahkerja', SuratPermintaanTiketDinasController::class)->middleware('auth');
 
+//Atasan Approve
+Route::get('/dashboard/permintaantransport/{id}/approveatasan', [SuratPermintaanTransportController::class, 'approveAtasan'])->middleware('auth');
+//Atasan Tolak
+Route::get('/dashboard/permintaantransport/{id}/tolakatasan', [SuratPermintaanTransportController::class, 'tolakAtasan'])->middleware('auth');
+
 //Admin Lengkapi data
 Route::get('/dashboard/permintaantransport/{id}/lengkapidata', [SuratPermintaanTransportController::class, 'lengkapiData'])->middleware('auth');
 Route::post('/dashboard/permintaantransport/{id}/lengkapidata', [SuratPermintaanTransportController::class, 'updateLengkapiData'])->middleware('auth');

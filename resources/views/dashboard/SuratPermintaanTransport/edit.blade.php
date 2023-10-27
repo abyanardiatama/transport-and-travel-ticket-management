@@ -32,9 +32,14 @@
         @endif
         @if (Auth::user()->is_admin == true)
             <form action="/dashboard/permintaantransport/{{ $suratTransport->id }}/lengkapidata" method="post" class="max-w-3xl py-4 font-montserrat">
+                @method('post')
         @endif
             @csrf
             <div class="grid grid-cols-2 gap-4">
+                {{-- field id_pemohon --}}
+                <div hidden class="col-span-2 sm:col-span-1">
+                    <input type="text" name="id_pemohon" id="id_pemohon" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ Auth::user()->id }}" value="{{ Auth::user()->id }}" placeholder="ID Pemohon" readonly>
+                </div>
                 {{-- field nama --}}
                 <div class="col-span-2 sm:col-span-1">
                     <input type="text" name="nama_pemohon" id="nama_pemohon" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Nama Pemohon" value="{{ old('nama_pemohon', $suratTransport->nama_pemohon) }}" required>
@@ -57,11 +62,15 @@
                 </div>
                 {{-- rute pemakaian --}} {{-- dropdown --}}
                 <div class="col-span-2 sm:col-span-1">
-                    <select name="rute_pemakaian" id="rute_pemakaian" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
-                        <option value="">Rute Pemakaian</option>
-                        <option value="Dalam Kota" {{ $suratTransport->rute_pemakaian == 'Dalam Kota' ? 'selected' : '' }}>Dalam Kota</option>
-                        <option value="Luar Kota" {{ $suratTransport->rute_pemakaian == 'Luar Kota' ? 'selected' : '' }}>Luar Kota</option>
-                    </select>
+                    @if (Auth::user()->is_pegawai==true)
+                        <select name="rute_pemakaian" id="rute_pemakaian" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $suratTransport->rute_pemakaian }}" required>
+                            <option value="">Rute Pemakaian</option>
+                            <option value="Dalam Kota" {{ $suratTransport->rute_pemakaian == 'Dalam Kota' ? 'selected' : '' }}>Dalam Kota</option>
+                            <option value="Luar Kota" {{ $suratTransport->rute_pemakaian == 'Luar Kota' ? 'selected' : '' }}>Luar Kota</option>
+                        </select>
+                    @elseif (Auth::user()->is_admin==true)
+                        <input name="rute_pemakaian" id="rute_pemakaian" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $suratTransport->rute_pemakaian }}" required></input>
+                    @endif
                 </div>
                 {{-- keperluan --}}
                 <div class="col-span-2 sm:col-span-1">
@@ -71,6 +80,7 @@
                 <div class="col-span-2 sm:col-span-1">
                     <input type="number" name="jumlah_penumpang" id="jumlah_penumpang" min="2" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ old('jumlah_penumpang', $suratTransport->jumlah_penumpang) }}" placeholder="Jumlah Penumpang (Termasuk Driver)" required>
                 </div>
+                {{-- waktu  --}}
                 <div class="col-span-2 sm:col-span-1">
                     <div class="relative">
                         <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -103,7 +113,7 @@
                 </div>
                 @if (Auth::user()->is_admin==true)
                     {{-- Checkbox ada kendaraan --}}
-                    <div class="col-span-full pt-5">
+                    <div class="col-span-2 pt-5">
                         {{-- <label class="relative inline-flex items-center mb-4 cursor-pointer">
                             <input type="checkbox" id="checkbox" nama="isKendaraan_available" value="" class="sr-only peer">
                             <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
@@ -132,8 +142,8 @@
                         </select>
                     </div>
                     {{-- jenis kendaraan --}}
-                    <div id="div_kendaraan_lain" class="col-span-full">
-                        <input id="kendaraan_lain" type="text" name="kendaraan_lain" id="kendaraan_lain" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Jenis Kendaraan" value="" required>
+                    <div id="div_kendaraan_lain" class="col-span-2">
+                        <input id="kendaraan_lain" type="text" name="kendaraan_lain" id="kendaraan_lain" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Kendaraan Alternatif" value="" required>
                         @error('kendaraan_lain')
                             <div class="text-red-500 mt-2 text-sm">
                                 {{ $message }}
@@ -183,7 +193,7 @@
                   
             </form>
             {{-- Note bahwa surat akan diteruskan ke atasan untuk persetujuan --}}
-            <div class="col-span-full">
+            <div class="col-span-2">
                 {{-- <p class="text-gray-500">* Dengan menekan submit Anda telah menyetujui dibuatnya surat permintaan dan akan dikirimkan ke atasan</p> --}}
                 <div class="flex p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
                     <svg class="flex-shrink-0 inline w-4 h-4 mr-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -220,4 +230,32 @@
                 @endif
             </div>
     </div>
+    @if (Auth::user()->is_admin == true)
+        <script>
+            //readonly all input
+            const nama_pemohon = document.getElementById('nama_pemohon');
+            const unit = document.getElementById('unit');
+            const email_atasan = document.getElementById('email_atasan');
+            const biaya_perjalanan = document.getElementById('biaya_perjalanan');
+            const tujuan = document.getElementById('tujuan');
+            const rute_pemakaian = document.getElementById('rute_pemakaian');
+            const keperluan = document.getElementById('keperluan');
+            const jumlah_penumpang = document.getElementById('jumlah_penumpang');
+
+            nama_pemohon.readOnly = true;
+            unit.readOnly = true;
+            email_atasan.readOnly = true;
+            biaya_perjalanan.readOnly = true;
+            tujuan.readOnly = true;
+            rute_pemakaian.readOnly = true;
+            // rute_pemakaian.disabled = true;
+            keperluan.readOnly = true;
+            jumlah_penumpang.readOnly = true;
+            waktu_berangkat.readOnly = true;
+            // waktu_berangkat.disabled = true;
+            waktu_kembali.readOnly = true;
+            // waktu_kembali.disabled = true;
+        </script>
+        
+    @endif
 @endsection

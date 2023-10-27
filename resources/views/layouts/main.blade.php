@@ -26,9 +26,9 @@
   {{-- js flowbite --}}
   <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>  
 </head>
-<body>
+<body class="bg-gray-50 dark:bg-gray-900  font-poppins">
     {{-- @include('partials.navbar') --}}
-    <div class="container mx-auto font-family-karla">
+    <div class="max-h-screen max-w-full px-5 py-48 relative flex items-center justify-center overflow-y-auto ">
         @yield('container')
     </div>
 </body>
