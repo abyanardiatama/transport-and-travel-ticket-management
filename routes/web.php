@@ -42,4 +42,5 @@ Route::get('/dashboard/permintaantransport/{id}/tolakatasan', [SuratPermintaanTr
 Route::get('/dashboard/permintaantransport/{id}/lengkapidata', [SuratPermintaanTransportController::class, 'lengkapiData'])->middleware('auth');
 Route::post('/dashboard/permintaantransport/{id}/lengkapidata', [SuratPermintaanTransportController::class, 'updateLengkapiData'])->middleware('auth');
 
-
+//Admin Delete Surat Transport
+Route::get('/dashboard/permintaantransport/{id}/delete', [SuratPermintaanTransportController::class, 'deleteTransport'])->middleware('auth');

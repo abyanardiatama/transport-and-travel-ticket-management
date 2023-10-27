@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   {{-- Prevent cache on browser --}}
   {{-- <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"> --}}
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Expires" content="0">
+  {{-- <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0"> --}}
   
   {{-- JS Flowbite --}}
   <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css" rel="stylesheet" />

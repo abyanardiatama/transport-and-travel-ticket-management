@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('surat_permintaan_tiket_dinas', function (Blueprint $table) {
             $table->id();
+            $table->string('id_pemohon');
             $table->string('nama_pemohon');
             $table->string('unit');
             $table->string('email_atasan');
@@ -26,7 +27,7 @@ return new class extends Migration
             $table->string('perusahaan_angkutan');
             // tanggal pembuatan surat diambil dari timestamp
             $table->boolean('isApprove_pegawai')->default(false);
-            $table->boolean('isApprove_atasan')->default(false);
+            $table->boolean('isApprove_atasan')->nullable();
             $table->timestamps();
         });
     }
