@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('surat_perintah_kerjas', function (Blueprint $table) {
             $table->id();
+            $table->string('id_admin')->default('1');
+            $table->foreignId('id_surat_permintaan_transport')->nullable();
             $table->string('nama_driver');
             $table->string('jobdesc');
             $table->string('keperluan');

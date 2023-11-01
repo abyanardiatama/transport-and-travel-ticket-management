@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSuratPermintaanTransportRequest;
 use App\Http\Requests\UpdateSuratPermintaanTransportRequest;
+use App\Models\SuratPerintahKerja;
 use Illuminate\Http\Request;
 use App\Models\SuratPermintaanTransport;
+use App\Models\Kendaraan;
 use App\Models\User;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
@@ -67,8 +69,6 @@ class SuratPermintaanTransportController extends Controller
      */
     public function store(StoreSuratPermintaanTransportRequest $request)
     {
-        //get all request
-        $data = $request->all();
         $validatedData = $request->validate([
             'nama_pemohon' => 'required',
             'unit' => 'required',
@@ -97,9 +97,6 @@ class SuratPermintaanTransportController extends Controller
         $waktu_kembali = $request->waktu_kembali;
         $waktu_berangkat = date('H:i', strtotime($waktu_berangkat));
         $waktu_kembali = date('H:i', strtotime($waktu_kembali));
-        //delete 00 from time
-        $waktu_berangkat = str_replace('00', '', $waktu_berangkat);
-        $waktu_kembali = str_replace('00', '', $waktu_kembali);
 
         //add tanggal_berangkat, tanggal_kembali, waktu_berangkat, waktu_kembali to validatedData
         $validatedData['tanggal_berangkat'] = $tanggal_berangkat;
@@ -114,17 +111,29 @@ class SuratPermintaanTransportController extends Controller
         //cek all user email with is_atasan1 = true
         $is_atasan1 = User::where('email', $email_atasan)->where('is_atasan1', true)->first();
         //send error message if email_atasan not found
-        if(!$is_atasan1){
+        $is_atasan2 = User::where('email', $email_atasan)->where('is_atasan2', true)->first();
+        //check if email atasan is is_atasan1 or is atasan2
+        if(!$is_atasan1 && !$is_atasan2){
             //send error to name email_atasan
             Session::flash('error', 'Email atasan tidak ditemukan');
             return redirect('/dashboard/permintaantransport/create');
         }
         //tanggal berangkat must be less than tanggal kembali
-        elseif($validatedData['tanggal_berangkat'] > $validatedData['tanggal_kembali']){
+        elseif($validatedData['tanggal_berangkat'] > $validatedData['tanggal_kembali'] || $validatedData['tanggal_berangkat'] == $validatedData['tanggal_kembali']){
             //send error message
             Session::flash('error', 'Waktu berangkat tidak valid');
             return redirect('/dashboard/permintaantransport/create');
-        }else{
+        }//check is there tanggal_berangkat, tanggal_kembali, jam_berangkat, jam_kembali overlap with other data
+        elseif(SuratPermintaanTransport::where('tanggal_berangkat', $validatedData['tanggal_berangkat'])
+        ->where('tanggal_kembali', $validatedData['tanggal_kembali'])
+        ->where('jam_berangkat', $validatedData['jam_berangkat'])
+        ->where('jam_kembali', $validatedData['jam_kembali'])
+        ->exists()){
+            //send error message
+            Session::flash('error', 'Jadwal sudah terisi');
+            return redirect('/dashboard/permintaantransport/create');
+        }
+        else{
             //create new SuratPermintaanTransport
             SuratPermintaanTransport::create($validatedData);
             //send success message to dashboard
@@ -154,6 +163,7 @@ class SuratPermintaanTransportController extends Controller
         //merge tanggal_berangkat and jam_berangkat
         $waktu_berangkat = $suratTransport->tanggal_berangkat . ' ' . $suratTransport->jam_berangkat;
         $waktu_kembali = $suratTransport->tanggal_kembali . ' ' . $suratTransport->jam_kembali;
+        //get all user with is_driver ==true
         return view('dashboard.SuratPermintaanTransport.edit',[
             'suratTransport' => $suratTransport,
             'waktu_berangkat' => $waktu_berangkat,
@@ -197,10 +207,15 @@ class SuratPermintaanTransportController extends Controller
         //merge tanggal_berangkat and jam_berangkat
         $waktu_berangkat = $suratTransport->tanggal_berangkat . ' ' . $suratTransport->jam_berangkat;
         $waktu_kembali = $suratTransport->tanggal_kembali . ' ' . $suratTransport->jam_kembali;
+        $users = User::where('is_driver', true)->get();
+        //get data kendaraan that status = tersedia
+        $kendaraan = Kendaraan::where('status', 'tersedia')->get();
         return view('dashboard.SuratPermintaanTransport.edit',[
             'suratTransport' => $suratTransport,
             'waktu_berangkat' => $waktu_berangkat,
             'waktu_kembali' => $waktu_kembali,
+            'users' => $users,
+            'kendaraan' => $kendaraan,
         ]);
     }
 
@@ -248,23 +263,51 @@ class SuratPermintaanTransportController extends Controller
         $validatedData['jam_berangkat'] = $waktu_berangkat;
         $validatedData['jam_kembali'] = $waktu_kembali;
         
+        //set status in table kendaraan in $validatedData  to 'tidak tersedia'
+        $nomor_polisi = $validatedData['nomor_polisi'];
+        $kendaraan = Kendaraan::where('plat_nomor', $nomor_polisi)->first();
+        $kendaraan->status = 'Tidak Tersedia';
+        $kendaraan->save();
+
         //add isApprove_admin
         $validatedData['isApprove_admin'] = true;
         
         //create new SuratPermintaanTransport
         SuratPermintaanTransport::where('id', $suratPermintaanTransport->id)->update($validatedData);
         //send success message to dashboard
-        Session::flash('success', 'Surat Permintaan Transport berhasil dilengkapi');
-        //redirect to dashboard
-        return redirect('/dashboard');
+        //if nama driver and nomor polisi is null redirect to /dashboard
+        if($validatedData['nama_driver'] == null && $validatedData['nomor_polisi'] == null){
+            Session::flash('success', 'Surat Permintaan Transport berhasil dilengkapi');
+            return redirect('/dashboard');
+        }
+        //if nama driver and nomor polisi is not null redirect to /dashboard/perintahkerja/create and send $validatedData
+        else{
+            Session::flash('success', 'Surat Permintaan Transport berhasil dilengkapi');
+            //update
+            SuratPermintaanTransport::where('id', $suratPermintaanTransport->id);
+            //go to perintah kerja create
+            //get data from surat permintaan transport
+            $suratPermintaanTransport = SuratPermintaanTransport::find($id);
+            //Count lama perjalanan based on tanggal berangkat and tanggal kembali
+            $tanggal_berangkat = $validatedData['tanggal_berangkat'];
+            $tanggal_kembali = $validatedData['tanggal_kembali'];
+            $lama_perjalanan = (strtotime($tanggal_kembali) - strtotime($tanggal_berangkat)) / (60 * 60 * 24);
+            $lama_perjalanan = $lama_perjalanan + 1;
+            return view('dashboard.SuratPerintahKerja.create', [
+                'suratPermintaanTransport' => $suratPermintaanTransport,
+                'lama_perjalanan' => $lama_perjalanan,
+            ]);
+        }
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSuratPermintaanTransportRequest $request, SuratPermintaanTransport $suratPermintaanTransport)
+    public function update(UpdateSuratPermintaanTransportRequest $request, $id)
     {
+        $suratPermintaanTransport = SuratPermintaanTransport::find($id);
         $validatedData = $request->validate([
+            'id_pemohon' => 'required',
             'nama_pemohon' => 'required',
             'unit' => 'required',
             'email_atasan' => 'required|email:rfc,dns',
@@ -276,10 +319,6 @@ class SuratPermintaanTransportController extends Controller
             'waktu_berangkat' => 'required',
             'waktu_kembali' => 'required',
         ]);
-        //delete column waktu_berangkat
-        unset($validatedData['waktu_berangkat']);
-        unset($validatedData['waktu_kembali']);
-
         //get date from waktu_berangkat
         $tanggal_berangkat = $request->waktu_berangkat;
         $tanggal_kembali = $request->waktu_kembali;
@@ -288,13 +327,11 @@ class SuratPermintaanTransportController extends Controller
         //delete 00 from date
         $tanggal_berangkat = str_replace('00', '', $tanggal_berangkat);
         $tanggal_kembali = str_replace('00', '', $tanggal_kembali);
-
         //get time from waktu_berangkat
         $waktu_berangkat = $request->waktu_berangkat;
         $waktu_kembali = $request->waktu_kembali;
         $waktu_berangkat = date('H:i', strtotime($waktu_berangkat));
         $waktu_kembali = date('H:i', strtotime($waktu_kembali));
-
         //add tanggal_berangkat, tanggal_kembali, waktu_berangkat, waktu_kembali to validatedData
         $validatedData['tanggal_berangkat'] = $tanggal_berangkat;
         $validatedData['tanggal_kembali'] = $tanggal_kembali;
@@ -302,28 +339,31 @@ class SuratPermintaanTransportController extends Controller
         $validatedData['jam_kembali'] = $waktu_kembali;
         //add isApprove_pegawai
         $validatedData['isApprove_pegawai'] = true;
-        
         //cek if email_atasan on the database
         $email_atasan = $validatedData['email_atasan'];
         //cek all user email with is_atasan1 = true
         $is_atasan1 = User::where('email', $email_atasan)->where('is_atasan1', true)->first();
-        //send error message if email_atasan not found
+        //delete column waktu_berangkat
+        unset($validatedData['waktu_berangkat']);
+        unset($validatedData['waktu_kembali']);
+        $validatedData['isApprove_pegawai'] = true;
+        $validatedData['isApprove_atasan'] = null;
+        $validatedData['isApprove_admin'] = null;
         if(!$is_atasan1){
             //send error to name email_atasan
             Session::flash('error', 'Email atasan tidak ditemukan');
+            return redirect('/dashboard/permintaantransport/{id}/edit');
         }
         //tanggal berangkat must be less than tanggal kembali
         elseif($validatedData['tanggal_berangkat'] > $validatedData['tanggal_kembali']){
             //send error message
             Session::flash('error', 'Waktu berangkat tidak valid');
+            return redirect('/dashboard/permintaantransport/{id}/edit');
         }else{
-            
             //update SuratPermintaanTransport
             SuratPermintaanTransport::where('id', $suratPermintaanTransport->id)->update($validatedData);
             //send success message to dashboard
             Session::flash('success', 'Surat Permintaan Transport berhasil diedit');
-            //add data to seeder
-
             //redirect to dashboard
             return redirect('/dashboard');
         }

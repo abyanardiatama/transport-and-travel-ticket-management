@@ -9,4 +9,8 @@ class SuratPermintaanTransport extends Model
 {
     protected $guarded = ['id'];
     use HasFactory;
+    public function suratPerintahKerja()
+    {
+        return $this->hasOne(SuratPerintahKerja::class);
+    }
 }

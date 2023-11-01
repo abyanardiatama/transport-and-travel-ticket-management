@@ -129,16 +129,20 @@
                     <div id="div_nomor_polisi" class="col-span-2 sm:col-span-1" hidden>
                         <select hidden id="nomor_polisi" name="nomor_polisi" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option value="">Nomor Polisi</option>
-                            <option value="B 1234 ABC" {{ $suratTransport->kendaraan == 'B 1234 ABC' ? 'selected' : '' }}>B 1234 ABC</option>
-                            <option value="B 1234 ABC" {{ $suratTransport->kendaraan == 'B 1234 ABC' ? 'selected' : '' }}>B 1234 ABC</option>
+                            {{-- option all kendaraan --}}
+                            @foreach ($kendaraan as $kendaraan)
+                                <option value="{{ $kendaraan->plat_nomor }}">{{ $kendaraan->nama_kendaraan }} -- {{ $kendaraan->plat_nomor }}</option>
+                            @endforeach
                         </select>
                     </div>
                     {{-- field driver --}}
                     <div id="div_nama_driver" class="col-span-2 sm:col-span-1" hidden>
                         <select hidden id="nama_driver" name="nama_driver" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option value="">Driver</option>
-                            <option value="Pak Sutrisno" {{ $suratTransport->driver == 'Pak Sutrisno' ? 'selected' : '' }}>Pak Sutrisno</option>
-                            <option value="Pak Sutrisno" {{ $suratTransport->driver == 'Pak Sutrisno' ? 'selected' : '' }}>Pak Sutrisno</option>
+                            {{-- option all user with is_driver == true --}}
+                            @foreach ($users as $user)
+                                <option value="{{ $user->name }}" {{ $suratTransport->driver == $user->name ? 'selected' : '' }}>{{ $user->name }}</option>
+                            @endforeach
                         </select>
                     </div>
                     {{-- jenis kendaraan --}}

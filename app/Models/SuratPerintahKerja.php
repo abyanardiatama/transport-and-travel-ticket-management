@@ -9,4 +9,10 @@ class SuratPerintahKerja extends Model
 {
     protected $guarded = ['id'];
     use HasFactory;
+
+    public function suratPermintaanTransport()
+    {
+        return $this->belongsTo(SuratPermintaanTransport::class);
+    }
 }
+

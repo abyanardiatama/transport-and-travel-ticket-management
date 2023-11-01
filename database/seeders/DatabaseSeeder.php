@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
         $this->call(SuratPermintaanTiketDinasSeeder::class);
         //Include SuratPermintaanTransportSeeder
         $this->call(SuratPermintaanTransportSeeder::class);
+        //Include KendaraanSeeder
+        $this->call(KendaraanSeeder::class);
         
         User::create([
             'name' => 'Admin SCI',
@@ -64,7 +66,17 @@ class DatabaseSeeder extends Seeder
             'name' => 'Driver SCI',
             'email' => 'driver@gmail.com',
             'password' => bcrypt('password'),
-            'is_pegawai' => true,
+            'is_pegawai' => false,
+            'is_atasan1' => false,
+            'is_atasan2' => false,
+            'is_admin' => false,
+            'is_driver' => true,
+        ]);
+        User::create([
+            'name' => 'Driver SCI 2',
+            'email' => 'driver2@gmail.com',
+            'password' => bcrypt('password'),
+            'is_pegawai' => false,
             'is_atasan1' => false,
             'is_atasan2' => false,
             'is_admin' => false,

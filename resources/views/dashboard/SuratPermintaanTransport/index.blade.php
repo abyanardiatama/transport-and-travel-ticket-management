@@ -31,7 +31,7 @@
                 <input type="search" id="default-search" class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Cari Permintaan Transport" required>
             </div>
             {{-- List All Surat Permintaan Transport --}}
-            <div class="h-fit py-5 rounded bg-gray-50 dark:bg-gray-800">
+            <div class="h-fit mt-5 mb-5 rounded bg-gray-50 dark:bg-gray-800">
                 <div class="h-fit rounded bg-gray-50 dark:bg-gray-800">
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                         <table id="default-table" class="w-screen text-sm text-left text-gray-500 dark:text-gray-400">
@@ -162,7 +162,7 @@
                                                             </div>
                                                             <!-- Modal body -->
                                                             <form action="/dashboard/permintaantransport/{{ $suratTransport->id }}/approveatasan" class="max-w-3xl py-4 pb-8 px-3">
-                                                                <div class="grid grid-cols-2 gap-4">
+                                                                <div class="grid grid-cols-2 gap-4 p-4">
                                                                     {{-- nama pemohon --}}
                                                                     <div class="col-span-2 sm:col-span-1">
                                                                         <label for="nama_pemohon" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Pemohon</label>
@@ -307,9 +307,11 @@
                                                 @endif
                                             </td>
                                             <td class="px-6 py-4 text-right">
-                                                <a href="/dashboard/permintaantransport/{{ $suratTransport->id }}/edit" class="focus:outline-none text-gray-900 bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-xs px-5 py-2.5  dark:focus:ring-yellow-900">
-                                                    Edit
-                                                </a>
+                                                @if ($suratTransport->isApprove_pegawai == true && $suratTransport->isApprove_atasan === null && $suratTransport->isApprove_admin === null)
+                                                    <a href="/dashboard/permintaantransport/{{ $suratTransport->id }}/edit" class="focus:outline-none text-gray-900 bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-xs px-5 py-2.5  dark:focus:ring-yellow-900">
+                                                        Edit
+                                                    </a>
+                                                @endif
                                             </td>
                                             @endif
                                         </tr>
