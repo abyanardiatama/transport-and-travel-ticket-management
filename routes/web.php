@@ -41,7 +41,7 @@ Route::get('/dashboard/permintaantransport/{id}/approveatasan', [SuratPermintaan
 Route::get('/dashboard/permintaantransport/{id}/tolakatasan', [SuratPermintaanTransportController::class, 'tolakAtasan'])->middleware('auth');
 
 //Admin Lengkapi data
-Route::get('/dashboard/permintaantransport/{id}/lengkapidata', [SuratPermintaanTransportController::class, 'lengkapiData'])->middleware('auth');
+Route::get('/dashboard/permintaantransport/{id}/lengkapidata', [SuratPermintaanTransportController::class, 'lengkapiData'])->name('permintaantransport.lengkapidata')->middleware('auth');
 Route::post('/dashboard/permintaantransport/{id}/lengkapidata', [SuratPermintaanTransportController::class, 'updateLengkapiData'])->middleware('auth');
 //Admin Buat Surat Perintah Kerja
 Route::post('/dashboard/perintahkerja/store', [SuratPerintahKerjaController::class, 'store'])->name('perintahkerja.store')->middleware('auth');
