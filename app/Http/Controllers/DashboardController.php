@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\SuratPermintaanTiketDinas;
 use App\Models\SuratPermintaanTransport;
 use App\Models\SuratPerintahKerja;
+use App\Models\Kendaraan;
 
 class DashboardController extends Controller
 {
@@ -19,9 +20,8 @@ class DashboardController extends Controller
         $countSuratPermintaanTransport = 0;
         $countSuratTiketDinas = 0;
 
-        //count suratTransport that has not been approve by atasan
-        //count suratTiketDinas that has not been approve by atasan
-        
+        $approvedSuratTransport = SuratPermintaanTransport::where('isApprove_pegawai', true)->where('isApprove_atasan', true)->where('isApprove_admin', true)->get();
+        //get kendaraan where approvedSuratTransport->nomor_polisi == kendaraan->nomor_polisi
 
         if(Auth::user()->is_pegawai == 1){
             //display surat permintaan transport that id_pemohon == id user and sort by updated at
@@ -71,6 +71,7 @@ class DashboardController extends Controller
                 'countSuratPerintahKerja' => $countSuratPerintahKerja,
                 'nomor_polisi' => $nomor_polisi,
                 'countSuratTransport' => $countSuratTransport,
+                'approvedSuratTransport' => $approvedSuratTransport,
             ]);
         }
         elseif(Auth::user()->is_driver ==1 ){
@@ -109,6 +110,7 @@ class DashboardController extends Controller
                 'countSuratPerintahKerja' => $countSuratPerintahKerja,
                 'nomor_polisi' => $nomor_polisi,
                 'countSuratTransport' => $countSuratTransport,
+                'approvedSuratTransport' => $approvedSuratTransport,
             ]);
 
         }
@@ -143,6 +145,7 @@ class DashboardController extends Controller
                 'suratPermintaanTiketDinas' => $suratPermintaanTiketDinas,
                 'countSuratPermintaanTransport' => $countSuratPermintaanTransport,
                 'countSuratTiketDinas' => $countSuratTiketDinas,
+                'approvedSuratTransport' => $approvedSuratTransport,
             ]);
         }
         
