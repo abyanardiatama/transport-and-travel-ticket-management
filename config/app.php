@@ -69,8 +69,9 @@ return [
     | ahead and set this to a sensible default for you out of the box.
     |
     */
-
-    'timezone' => 'UTC',
+    //set timezone in jakarta
+    'timezone' => 'Asia/Jakarta',
+    // 'timezone' => 'UTC',
 
     /*
     |--------------------------------------------------------------------------

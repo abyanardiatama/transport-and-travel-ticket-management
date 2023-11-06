@@ -8,6 +8,7 @@ use App\Models\SuratPermintaanTiketDinas;
 use App\Models\SuratPermintaanTransport;
 use App\Models\SuratPerintahKerja;
 use Spatie\Activitylog\Models\Activity;
+use Illuminate\Support\Facades\DB;
 use Spatie\Activitylog\Traits\LogsActivity;
 use App\Models\Kendaraan;
 
@@ -203,7 +204,15 @@ class DashboardController extends Controller
     }
 
     public function logActivity() {
-        $logActivity = Activity::all();
-        return response()->json($logActivity, 200, [], JSON_PRETTY_PRINT);
+        $logActivity = Activity::all()->sortByDesc('created_at');
+        // $logActivity = DB::table('activity_log')->paginate(15);
+        $countActivity = Activity::all()->count();
+        return view('dashboard.log.index', [
+            'title' => 'Log Activity',
+            'active' => 'logActivity',
+            'logActivity' => $logActivity ,
+            'countActivity' => $countActivity,
+        ]);
+        // return response()->json($logActivity, 200, [], JSON_PRETTY_PRINT);
     }
 }
