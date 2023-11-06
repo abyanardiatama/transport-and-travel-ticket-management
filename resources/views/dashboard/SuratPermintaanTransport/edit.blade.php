@@ -213,7 +213,7 @@
                     </div>
                   </div>
             </div>
-            {{-- back button --}}
+            {{-- button back --}}
             <div class="col-span-2 sm:col-span-1 sm:flex justify-start">
                 <button id="backButton" class="text-sm w-full bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-lg shadow-lg hover:shadow-xl transition duration-200">Kembali</a>
             </div>
@@ -221,7 +221,7 @@
                 const backButton = document.getElementById('backButton');
                 backButton.addEventListener('click', function(){
                     //back to /dashboard
-                    window.location.href = '/dashboard';
+                    window.location.href = '{{ url()->previous() }}';
                 });
             </script>
             {{-- button submit --}}

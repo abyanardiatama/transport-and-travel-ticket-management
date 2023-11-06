@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('nama_kendaraan');
             $table->string('plat_nomor');
-            $table->string('status');
             $table->timestamps();
         });
     }

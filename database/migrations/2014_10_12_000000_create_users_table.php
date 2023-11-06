@@ -17,11 +17,11 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->boolean('is_pegawai')->default(false);
-            $table->boolean('is_atasan1')->default(false);
-            $table->boolean('is_atasan2')->default(false);
-            $table->boolean('is_admin')->default(false);
-            $table->boolean('is_driver')->default(false);
+            $table->boolean('is_pegawai')->default(true);
+            $table->boolean('is_atasan1')->default(true);
+            $table->boolean('is_atasan2')->default(true);
+            $table->boolean('is_admin')->default(true);
+            $table->boolean('is_driver')->default(true);
             $table->rememberToken();
             $table->timestamps();
         });

@@ -72,22 +72,24 @@
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             {{ $suratTiketDinas->jenis_transportasi }} - {{ $suratTiketDinas->jenis_kelas }}
                                         </td>
-                                        @if (Auth::user()->is_pegawai == true || Auth::user()->is_admin == true)
+                                        @if (Auth::user()->is_pegawai == true)
                                             <td class="px-6 py-4">
                                                 @if ($suratTiketDinas->isApprove_pegawai == true && $suratTiketDinas->isApprove_atasan == true)
                                                     {{-- Download Button --}}
-                                                    <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                                                        <svg class="w-3 h-3 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 19">
+                                                    <button type="button" class="flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                                                        <svg class="w-3 h-3 mr-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 19">
                                                             <path stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15h.01M4 12H2a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1h-3M9.5 1v10.93m4-3.93-4 4-4-4"/>
                                                         </svg>
+                                                        Download
                                                     </button>
+                                                    <td></td>
                                                     @if (Auth::user()->is_admin == true)
                                                         <td class="px-6 py-4 text-right">
                                                             {{-- Delete Button --}}
-                                                            <button type="button" data-modal-target="popup-modal-delete-dinas" data-modal-toggle="popup-modal-delete-dinas" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">
-                                                                {{-- <svg class="w-3 h-3 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 19">
-                                                                    <path stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15h.01M4 12H2a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1h-3M9.5 1v10.93m4-3.93-4 4-4-4"/>
-                                                                </svg> --}}
+                                                            <button type="button" data-modal-target="popup-modal-delete-dinas" data-modal-toggle="popup-modal-delete-dinas" class="flex items-center text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-xs px-5 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">
+                                                                <svg class="w-3 h-3 mr-2 text-gray-800 dark:text-white"  aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
+                                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h16M7 8v8m4-8v8M7 1h4a1 1 0 0 1 1 1v3H6V2a1 1 0 0 1 1-1ZM3 5h12v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5Z"/>
+                                                                </svg>
                                                                 Hapus
                                                             </button>
                                                             {{-- Modal Delete --}}
@@ -116,20 +118,25 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-
                                                         </td>
                                                     @endif
                                                 @elseif ($suratTiketDinas->isApprove_pegawai == true && $suratTiketDinas->isApprove_atasan === null)
                                                     <span class="bg-yellow-100 text-yellow-800 text-xs text-center font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300 whitespace-nowrap">Menunggu Persetujuan</span>
                                                     <td class="px-6 py-4 text-right">
-                                                        <a href="/dashboard/permintaantiketdinas/{{ $suratTiketDinas->id }}/edit" class="focus:outline-none text-gray-900 bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-xs px-5 py-2.5  dark:focus:ring-yellow-900">
+                                                        {{-- <a href="/dashboard/permintaantiketdinas/{{ $suratTiketDinas->id }}/edit" class="flex items-center justify-center focus:outline-none text-gray-900 bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-xs px-5 py-2.5  dark:focus:ring-yellow-900">
+                                                            <svg class="w-3 h-3 mr-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                                                <path stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17v1a.97.97 0 0 1-.933 1H1.933A.97.97 0 0 1 1 18V5.828a2 2 0 0 1 .586-1.414l2.828-2.828A2 2 0 0 1 5.828 1h8.239A.97.97 0 0 1 15 2M6 1v4a1 1 0 0 1-1 1H1m13.14.772 2.745 2.746M18.1 5.612a2.086 2.086 0 0 1 0 2.953l-6.65 6.646-3.693.739.739-3.692 6.646-6.646a2.087 2.087 0 0 1 2.958 0Z"/>
+                                                            </svg>
                                                             Edit
-                                                        </a>
+                                                        </a> --}}
                                                     </td>  
                                                 @elseif ($suratTiketDinas->isApprove_pegawai == true && $suratTiketDinas->isApprove_atasan == false)
                                                     <span class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">Ditolak</span>
                                                     <td class="px-6 py-4 text-right">
-                                                        <a href="/dashboard/permintaantiketdinas/{{ $suratTiketDinas->id }}/edit" class="focus:outline-none text-gray-900 bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-xs px-5 py-2.5  dark:focus:ring-yellow-900">
+                                                        <a href="/dashboard/permintaantiketdinas/{{ $suratTiketDinas->id }}/edit" class="flex items-center justify-center focus:outline-none text-gray-900 bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-xs px-5 py-2.5 mr-2 dark:focus:ring-yellow-900">
+                                                            <svg class="w-3 h-3 mr-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                                                <path stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17v1a.97.97 0 0 1-.933 1H1.933A.97.97 0 0 1 1 18V5.828a2 2 0 0 1 .586-1.414l2.828-2.828A2 2 0 0 1 5.828 1h8.239A.97.97 0 0 1 15 2M6 1v4a1 1 0 0 1-1 1H1m13.14.772 2.745 2.746M18.1 5.612a2.086 2.086 0 0 1 0 2.953l-6.65 6.646-3.693.739.739-3.692 6.646-6.646a2.087 2.087 0 0 1 2.958 0Z"/>
+                                                            </svg>
                                                             Edit
                                                         </a>
                                                     </td>
@@ -137,15 +144,278 @@
                                             </td>
                                         @endif
                                         @if (Auth::user()->is_admin == true)
-                                            
+                                            <td class="px-6 py-4">
+                                                @if ($suratTiketDinas->isApprove_pegawai == true && $suratTiketDinas->isApprove_atasan == true)
+                                                    {{-- Download Button --}} 
+                                                    <button  href="#" class="flex items-center justify-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-5 py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                                                        <svg class="w-3 h-3 mr-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 19">
+                                                            <path stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15h.01M4 12H2a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1h-3M9.5 1v10.93m4-3.93-4 4-4-4"/>
+                                                        </svg>
+                                                        Download     
+                                                    </button>
+                                                    <td class="px-6 py-4 flex items-end justify-end whitespace-nowrap">
+                                                        {{-- Button Lihat Data --}}
+                                                        <button data-modal-target="defaultModalLihat3" data-modal-toggle="defaultModalLihat3" type="button" class="flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-5 py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 whitespace-nowrap">
+                                                            <svg class="flex-shrink w-3 h-3 mr-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 20 14">
+                                                                <path d="M10 0C4.612 0 0 5.336 0 7c0 1.742 3.546 7 10 7 6.454 0 10-5.258 10-7 0-1.664-4.612-7-10-7Zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z"/>
+                                                            </svg>
+                                                            Lihat Data
+                                                        </button>
+                                                        {{-- Modal Lihat Data --}}
+                                                        <div id="defaultModalLihat3" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                                            <div class="relative w-full max-w-2xl max-h-full">
+                                                                <!-- Modal content -->
+                                                                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                                                    <!-- Modal header -->
+                                                                    <div class="flex items-start justify-start p-4 border-b rounded-t dark:border-gray-600">
+                                                                        <h3 class="text-left text-md sm:text-lg font-medium text-gray-900 dark:text-white">
+                                                                            Surat Permintaan Pengurusan Tiket Dinas
+                                                                        </h3>
+                                                                        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="defaultModalLihat3">
+                                                                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                                                            </svg>
+                                                                            <span class="sr-only">Close modal</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <!-- Modal body -->
+                                                                    <form action="/dashboard/permintaantiketdinas/{{ $suratTiketDinas->id }}/approveatasan" class="max-w-3xl py-4 pb-8 px-3">
+                                                                        <div class="grid grid-cols-2 gap-4 p-4">
+                                                                            {{-- nama pemohon --}}
+                                                                            <div class="col-span-2 sm:col-span-1">
+                                                                                <label for="nama_pemohon" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Pemohon</label>
+                                                                                <input type="text" id="nama_pemohon" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $suratTiketDinas->nama_pemohon }}" disabled>
+                                                                            </div>
+                                                                            {{-- unit --}}
+                                                                            <div class="col-span-2 sm:col-span-1">
+                                                                                <label for="unit" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Unit</label>
+                                                                                <input type="text" id="unit" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $suratTiketDinas->unit }}" disabled>
+                                                                            </div>
+                                                                            {{-- beban_biaya --}}
+                                                                            <div class="col-span-2 sm:col-span-1">
+                                                                                <label for="beban_biaya" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Beban Biaya</label>
+                                                                                <input type="text" id="beban_biaya" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $suratTiketDinas->beban_biaya }}" disabled>
+                                                                            </div>
+                                                                            {{-- jenis transportasi --}}
+                                                                            <div class="col-span-2 sm:col-span-1">
+                                                                                <label for="jenis_transportasi" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis Transportasi</label>
+                                                                                <input type="text" id="jenis_transportasi" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $suratTiketDinas->jenis_transportasi }} - {{ $suratTiketDinas->jenis_kelas }}" disabled>
+                                                                            </div>
+                                                                            {{-- rute asal --}}
+                                                                            <div class="col-span-2 sm:col-span-1">
+                                                                                <label for="rute_asal" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Rute Asal</label>
+                                                                                <input type="text" id="rute_asal" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $suratTiketDinas->rute_asal }}" disabled>
+                                                                            </div>
+                                                                            {{-- rute tujuan --}}
+                                                                            <div class="col-span-2 sm:col-span-1">
+                                                                                <label for="rute_tujuan" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Rute Tujuan</label>
+                                                                                <input type="text" id="rute_tujuan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $suratTiketDinas->rute_tujuan }}" disabled>
+                                                                            </div>
+                                                                            {{-- tanggal dan jam berangkat --}}
+                                                                            <div class="col-span-2 sm:col-span-1">
+                                                                                <label for="tanggal_berangkat" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal dan Jam Berangkat</label>
+                                                                                <input type="text" id="tanggal_berangkat" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datetimepicker" value="{{ $suratTiketDinas->tanggal_berangkat }} {{ $suratTiketDinas->jam_berangkat }}" disabled>
+                                                                            </div>
+                                                                            {{-- perusahaan angkutan --}}
+                                                                            <div class="col-span-2 sm:col-span-1">
+                                                                                <label for="perusahaan_angkutan" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Perusahaan Angkutan</label>
+                                                                                <input type="text" id="perusahaan_angkutan" name="perusahaan_angkutan" value="{{ $suratTiketDinas->perusahaan_angkutan }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-300 dark:focus:ring-blue-500 dark:focus:border-blue-500" disabled>
+                                                                            </div>
+                                                                        </div>
+                                                                    </form>
+                                                                    <!-- Modal footer -->
+                                                                    <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                                                                        <div class="flex p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
+                                                                            <svg class="flex-shrink-0 inline w-4 h-4 mr-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                                                            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                                                                            </svg>
+                                                                            <span class="sr-only">Info</span>
+                                                                            <div class="text-left">
+                                                                                <span class="font-medium">Pastikan data telah terisi dengan benar</span>
+                                                                                <ul class="mt-1.5 list-disc list-inside">
+                                                                                    <li>Dengan menyetujui data ini, data akan diteruskan kepada pemohon</li>
+                                                                                    <li>Data akan dikirimkan ke admin untuk direview</li>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        {{-- Delete Button --}}
+                                                        <button type="button" data-modal-target="popup-modal-delete-dinas3" data-modal-toggle="popup-modal-delete-dinas3" class="flex items-center text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-xs px-5 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">
+                                                            <svg class="w-3 h-3 mr-2 text-gray-800 dark:text-white"  aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
+                                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h16M7 8v8m4-8v8M7 1h4a1 1 0 0 1 1 1v3H6V2a1 1 0 0 1 1-1ZM3 5h12v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5Z"/>
+                                                            </svg>
+                                                            Hapus
+                                                        </button>
+                                                        {{-- Modal Delete --}}
+                                                        <div id="popup-modal-delete-dinas3" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                                            <div class="relative w-full max-w-md max-h-full">
+                                                                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                                                    <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="popup-modal-delete-dinas3">
+                                                                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                                                        </svg>
+                                                                        <span class="sr-only">Close modal</span>
+                                                                    </button>
+                                                                    <div class="p-6 text-center">
+                                                                        <svg class="mx-auto mb-4 text-red-400 w-12 h-12 dark:text-red-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m13 7-6 6m0-6 6 6m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                                                                        </svg>
+                                                                        <h3 class="mb-5 text-lg font-medium text-gray-900 dark:text-gray-300">Yakin ingin menghapus data?</h3>
+                                                                        <button data-modal-hide="popup-modal-delete-dinas3" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                                                                            Tidak, Batal
+                                                                        </button>
+
+                                                                        <a href="/dashboard/permintaantiketdinas/{{ $suratTiketDinas->id }}/delete" data-modal-hide="popup-modal-delete" type="button" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">
+                                                                            Ya, Hapus
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                @elseif ($suratTiketDinas->isApprove_pegawai == true && $suratTiketDinas->isApprove_atasan === null)
+                                                    <span class="bg-yellow-100 text-yellow-800 text-xs text-center font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300 whitespace-nowrap">Menunggu Persetujuan</span>
+                                                    <td class="px-6 py-4 flex items-end justify-end whitespace-nowrap">
+                                                        
+                                                    </td>
+                                                @elseif ($suratTiketDinas->isApprove_pegawai == true && $suratTiketDinas->isApprove_atasan == false)
+                                                    <span class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">Ditolak</span>
+                                                    <td class="px-6 py-4 flex items-end justify-end whitespace-nowrap">
+                                                        {{-- Button Lihat Data --}}
+                                                        <button data-modal-target="defaultModalLihat2" data-modal-toggle="defaultModalLihat2" type="button" class="flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-5 py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 whitespace-nowrap">
+                                                            <svg class="flex-shrink w-3 h-3 mr-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 20 14">
+                                                                <path d="M10 0C4.612 0 0 5.336 0 7c0 1.742 3.546 7 10 7 6.454 0 10-5.258 10-7 0-1.664-4.612-7-10-7Zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z"/>
+                                                            </svg>
+                                                            Lihat Data
+                                                        </button>
+                                                        {{-- Modal Lihat Data --}}
+                                                        <div id="defaultModalLihat2" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                                            <div class="relative w-full max-w-2xl max-h-full">
+                                                                <!-- Modal content -->
+                                                                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                                                    <!-- Modal header -->
+                                                                    <div class="flex items-start justify-start p-4 border-b rounded-t dark:border-gray-600">
+                                                                        <h3 class="text-left text-md sm:text-lg font-medium text-gray-900 dark:text-white">
+                                                                            Surat Permintaan Pengurusan Tiket Dinas
+                                                                        </h3>
+                                                                        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="defaultModalLihat2">
+                                                                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                                                            </svg>
+                                                                            <span class="sr-only">Close modal</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <!-- Modal body -->
+                                                                    <form action="/dashboard/permintaantiketdinas/{{ $suratTiketDinas->id }}/approveatasan" class="max-w-3xl py-4 pb-8 px-3">
+                                                                        <div class="grid grid-cols-2 gap-4 p-4">
+                                                                            {{-- nama pemohon --}}
+                                                                            <div class="col-span-2 sm:col-span-1">
+                                                                                <label for="nama_pemohon" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Pemohon</label>
+                                                                                <input type="text" id="nama_pemohon" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $suratTiketDinas->nama_pemohon }}" disabled>
+                                                                            </div>
+                                                                            {{-- unit --}}
+                                                                            <div class="col-span-2 sm:col-span-1">
+                                                                                <label for="unit" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Unit</label>
+                                                                                <input type="text" id="unit" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $suratTiketDinas->unit }}" disabled>
+                                                                            </div>
+                                                                            {{-- beban_biaya --}}
+                                                                            <div class="col-span-2 sm:col-span-1">
+                                                                                <label for="beban_biaya" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Beban Biaya</label>
+                                                                                <input type="text" id="beban_biaya" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $suratTiketDinas->beban_biaya }}" disabled>
+                                                                            </div>
+                                                                            {{-- jenis transportasi --}}
+                                                                            <div class="col-span-2 sm:col-span-1">
+                                                                                <label for="jenis_transportasi" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis Transportasi</label>
+                                                                                <input type="text" id="jenis_transportasi" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $suratTiketDinas->jenis_transportasi }} - {{ $suratTiketDinas->jenis_kelas }}" disabled>
+                                                                            </div>
+                                                                            {{-- rute asal --}}
+                                                                            <div class="col-span-2 sm:col-span-1">
+                                                                                <label for="rute_asal" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Rute Asal</label>
+                                                                                <input type="text" id="rute_asal" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $suratTiketDinas->rute_asal }}" disabled>
+                                                                            </div>
+                                                                            {{-- rute tujuan --}}
+                                                                            <div class="col-span-2 sm:col-span-1">
+                                                                                <label for="rute_tujuan" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Rute Tujuan</label>
+                                                                                <input type="text" id="rute_tujuan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $suratTiketDinas->rute_tujuan }}" disabled>
+                                                                            </div>
+                                                                            {{-- tanggal dan jam berangkat --}}
+                                                                            <div class="col-span-2 sm:col-span-1">
+                                                                                <label for="tanggal_berangkat" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal dan Jam Berangkat</label>
+                                                                                <input type="text" id="tanggal_berangkat" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datetimepicker" value="{{ $suratTiketDinas->tanggal_berangkat }} {{ $suratTiketDinas->jam_berangkat }}" disabled>
+                                                                            </div>
+                                                                            {{-- perusahaan angkutan --}}
+                                                                            <div class="col-span-2 sm:col-span-1">
+                                                                                <label for="perusahaan_angkutan" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Perusahaan Angkutan</label>
+                                                                                <input type="text" id="perusahaan_angkutan" name="perusahaan_angkutan" value="{{ $suratTiketDinas->perusahaan_angkutan }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-300 dark:focus:ring-blue-500 dark:focus:border-blue-500" disabled>
+                                                                            </div>
+                                                                        </div>
+                                                                    </form>
+                                                                    <!-- Modal footer -->
+                                                                    <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                                                                        <div class="flex p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
+                                                                            <svg class="flex-shrink-0 inline w-4 h-4 mr-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                                                              <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                                                                            </svg>
+                                                                            <span class="sr-only">Info</span>
+                                                                            <div class="text-left">
+                                                                                <span class="font-medium">Pastikan data telah terisi dengan benar</span>
+                                                                                <ul class="mt-1.5 list-disc list-inside">
+                                                                                    <li>Dengan menyetujui data ini, data akan diteruskan kepada pemohon</li>
+                                                                                    <li>Data akan dikirimkan ke admin untuk direview</li>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        {{-- Delete Button --}}
+                                                        <button type="button" data-modal-target="popup-modal-delete-dinas2" data-modal-toggle="popup-modal-delete-dinas2" class="flex items-center text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-xs px-5 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">
+                                                            <svg class="w-3 h-3 mr-2 text-gray-800 dark:text-white"  aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
+                                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h16M7 8v8m4-8v8M7 1h4a1 1 0 0 1 1 1v3H6V2a1 1 0 0 1 1-1ZM3 5h12v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5Z"/>
+                                                            </svg>
+                                                            Hapus
+                                                        </button>
+                                                        {{-- Modal Delete --}}
+                                                        <div id="popup-modal-delete-dinas2" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                                            <div class="relative w-full max-w-md max-h-full">
+                                                                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                                                    <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="popup-modal-delete-dinas2">
+                                                                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                                                        </svg>
+                                                                        <span class="sr-only">Close modal</span>
+                                                                    </button>
+                                                                    <div class="p-6 text-center">
+                                                                        <svg class="mx-auto mb-4 text-red-400 w-12 h-12 dark:text-red-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m13 7-6 6m0-6 6 6m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                                                                        </svg>
+                                                                        <h3 class="mb-5 text-lg font-medium text-gray-900 dark:text-gray-300">Yakin ingin menghapus data?</h3>
+                                                                        <button data-modal-hide="popup-modal-delete-dinas2" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                                                                            Tidak, Batal
+                                                                        </button>
+
+                                                                        <a href="/dashboard/permintaantiketdinas/{{ $suratTiketDinas->id }}/delete" data-modal-hide="popup-modal-delete" type="button" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">
+                                                                            Ya, Hapus
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                @endif  
+                                            </td>
                                         @endif
-                                        @if (Auth::user()->is_atasan1 == true)
+                                        @if (Auth::user()->is_atasan1 == true || Auth::user()->is_atasan2 == true)
                                             <td class="px-6 py-4 text-right flex items-center justify-center">
                                                 {{-- Button Lihat Data --}}
-                                                <button data-modal-target="defaultModalLihat" data-modal-toggle="defaultModalLihat" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 whitespace-nowrap">
-                                                    {{-- <svg class="flex-shrink w-3 h-3 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 20 14">
+                                                <button data-modal-target="defaultModalLihat" data-modal-toggle="defaultModalLihat" type="button" class="flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 whitespace-nowrap">
+                                                    <svg class="flex-shrink w-3 h-3 mr-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 20 14">
                                                         <path d="M10 0C4.612 0 0 5.336 0 7c0 1.742 3.546 7 10 7 6.454 0 10-5.258 10-7 0-1.664-4.612-7-10-7Zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z"/>
-                                                    </svg> --}}
+                                                    </svg>
                                                     Lihat Data
                                                 </button>
                                                 {{-- Modal Lihat Data --}}
@@ -230,7 +500,10 @@
                                                     </div>
                                                 </div>
                                                 {{-- Button Setuju --}}
-                                                <a data-modal-target="popup-modal-approve" data-modal-toggle="popup-modal-approve" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 whitespace-nowrap">
+                                                <a data-modal-target="popup-modal-approve" data-modal-toggle="popup-modal-approve" class="flex items-center focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-xs px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 whitespace-nowrap">
+                                                    <svg class="flex-shrink w-3 h-3 mr-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                                                    </svg>
                                                     Setuju
                                                 </a>
                                                 {{-- Modal Approve --}}
@@ -259,10 +532,10 @@
                                                     </div>
                                                 </div>
                                                 {{-- Button Tolak --}}
-                                                <button data-modal-target="popup-modal-tolak" data-modal-toggle="popup-modal-tolak" type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 whitespace-nowrap">
-                                                    {{-- <svg class="flex-shrink w-3 h-3 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                                        <path stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                                                    </svg> --}}
+                                                <button data-modal-target="popup-modal-tolak" data-modal-toggle="popup-modal-tolak" type="button" class="flex items-center focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-xs px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 whitespace-nowrap">
+                                                    <svg class="flex-shrink w-2.5 h-2.5 mr-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                                    </svg>
                                                     Tolak
                                                 </button>
                                                 {{-- Modal Reject --}}
@@ -292,6 +565,7 @@
                                                 </div>
     
                                             </td>
+                                            <td></td>
                                         @endif
                                     </tr>
                                 @endforeach

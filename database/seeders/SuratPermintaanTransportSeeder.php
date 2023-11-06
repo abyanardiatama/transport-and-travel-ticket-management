@@ -55,7 +55,7 @@ class SuratPermintaanTransportSeeder extends Seeder
             'id_pemohon' => '2',
             'unit' => 'PDO-4',
             'email_atasan' => 'atasan2@gmail.com',
-            'tujuan' => 'Semarang',
+            'tujuan' => 'PT Kimia Firmindo',
             'rute_pemakaian' => 'Dalam Kota',
             'keperluan' => 'Ambil Dokumen',
             'tanggal_berangkat' => '2021-10-25',

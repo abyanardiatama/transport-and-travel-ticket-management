@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\SuratPermintaanTiketDinas;
 use App\Models\SuratPermintaanTransport;
 use App\Models\SuratPerintahKerja;
+use Spatie\Activitylog\Models\Activity;
+use Spatie\Activitylog\Traits\LogsActivity;
 use App\Models\Kendaraan;
 
 class DashboardController extends Controller
@@ -20,7 +22,9 @@ class DashboardController extends Controller
         $countSuratPermintaanTransport = 0;
         $countSuratTiketDinas = 0;
 
-        $approvedSuratTransport = SuratPermintaanTransport::where('isApprove_pegawai', true)->where('isApprove_atasan', true)->where('isApprove_admin', true)->get();
+        $approvedSuratTransport = SuratPermintaanTransport::where('isApprove_pegawai', true)->where('isApprove_atasan', true)->where('isApprove_admin', true)->get()->sortByDesc('created_at');
+        $countApprovedSuratTransport = $approvedSuratTransport->count();
+        $checkUser = SuratPermintaanTransport::where('id_pemohon', Auth::user()->id)->first();
         //get kendaraan where approvedSuratTransport->nomor_polisi == kendaraan->nomor_polisi
 
         if(Auth::user()->is_pegawai == 1){
@@ -34,6 +38,17 @@ class DashboardController extends Controller
             $suratPermintaanTiketDinas = SuratPermintaanTiketDinas::where('id_pemohon', Auth::user()->id)->take(3)->get()->sortBy('updated_at');
             // $suratPermintaanTiketDinas = SuratPermintaanTiketDinas::where('id_pemohon', Auth::user()->id)->take(3)->get();
             $countSuratTiketDinas = SuratPermintaanTiketDinas::where('id_pemohon', Auth::user()->id)->where('isApprove_pegawai', true)->where('isApprove_atasan', true)->count();
+            //logging activity and get his user name
+            
+            activity()
+                ->withProperties([
+                    'nama_user'=>Auth::user()->name, 
+                    'email_user'=>Auth::user()->email, 
+                    'role_user'=>'pegawai', 
+                    'login_at'=>now()->toDateTimeString()])
+                ->log('user_pegawai_login');
+
+
         }
         elseif(Auth::user()->is_admin == 1){
             //display surat permintaan transport that is_approve_pegawai = 1 and is_approve_atasan = 1, and is_approve_admin = 0
@@ -60,6 +75,14 @@ class DashboardController extends Controller
             } else {
                 $suratPerintahKerja = null;
             }
+            activity()
+                ->withProperties([
+                    'nama_user'=>Auth::user()->name, 
+                    'email_user'=>Auth::user()->email, 
+                    'role_user'=>'admin', 
+                    'login_at'=>now()->toDateTimeString()])
+                ->log('user_admin_login');
+
             return view('dashboard.index', [
                 'title' => 'Dashboard',
                 'active' => 'dashboard',
@@ -72,6 +95,8 @@ class DashboardController extends Controller
                 'nomor_polisi' => $nomor_polisi,
                 'countSuratTransport' => $countSuratTransport,
                 'approvedSuratTransport' => $approvedSuratTransport,
+                'countApprovedSuratTransport' => $countApprovedSuratTransport,
+                'checkUser' => $checkUser,
             ]);
         }
         elseif(Auth::user()->is_driver ==1 ){
@@ -100,6 +125,14 @@ class DashboardController extends Controller
             } else {
                 $suratPerintahKerja = null;
             }
+            activity()
+                ->withProperties([
+                    'nama_user'=>Auth::user()->name, 
+                    'email_user'=>Auth::user()->email, 
+                    'role_user'=>'driver', 
+                    'login_at'=>now()->toDateTimeString()])
+                ->log('user_driver_login');
+
             return view('dashboard.index', [
                 'title' => 'Dashboard',
                 'active' => 'dashboard',
@@ -111,6 +144,8 @@ class DashboardController extends Controller
                 'nomor_polisi' => $nomor_polisi,
                 'countSuratTransport' => $countSuratTransport,
                 'approvedSuratTransport' => $approvedSuratTransport,
+                'countApprovedSuratTransport' => $countApprovedSuratTransport,
+                'checkUser' => $checkUser,
             ]);
 
         }
@@ -122,6 +157,13 @@ class DashboardController extends Controller
             
             $suratPermintaanTiketDinas = SuratPermintaanTiketDinas::where('isApprove_pegawai', true)->where('isApprove_atasan', null)->where('email_atasan', Auth::user()->email)->take(3)->get();
             $countSuratTiketDinas = SuratPermintaanTiketDinas::where('isApprove_pegawai', true)->where('isApprove_atasan', null)->where('email_atasan', Auth::user()->email)->count();
+            activity()
+                ->withProperties([
+                    'nama_user'=>Auth::user()->name, 
+                    'email_user'=>Auth::user()->email, 
+                    'role_user'=>'atasan', 
+                    'login_at'=>now()->toDateTimeString()])
+                ->log('user_atasan_login');
         }
         elseif(Auth::user()->is_atasan2 == 1){
             //display surat permintaan transport that is_approve_pegawai = 1 and is_approve_atasan = 0, and is_approve_admin = 0, and email_atasan == email user
@@ -130,6 +172,13 @@ class DashboardController extends Controller
             
             $suratPermintaanTiketDinas = SuratPermintaanTiketDinas::where('isApprove_pegawai', 1)->where('isApprove_atasan', null)->where('email_atasan', Auth::user()->email)->take(3)->get();
             $countSuratTiketDinas = SuratPermintaanTiketDinas::where('isApprove_pegawai', 1)->where('isApprove_atasan', null)->where('email_atasan', Auth::user()->email)->count();
+            activity()
+                ->withProperties([
+                    'nama_user'=>Auth::user()->name, 
+                    'email_user'=>Auth::user()->email, 
+                    'role_user'=>'atasan', 
+                    'login_at'=>now()->toDateTimeString()])
+                ->log('user_atasan_login');
         }
         
         
@@ -146,8 +195,15 @@ class DashboardController extends Controller
                 'countSuratPermintaanTransport' => $countSuratPermintaanTransport,
                 'countSuratTiketDinas' => $countSuratTiketDinas,
                 'approvedSuratTransport' => $approvedSuratTransport,
+                'countApprovedSuratTransport' => $countApprovedSuratTransport,
+                'checkUser' => $checkUser,
             ]);
         }
         
+    }
+
+    public function logActivity() {
+        $logActivity = Activity::all();
+        return response()->json($logActivity, 200, [], JSON_PRETTY_PRINT);
     }
 }

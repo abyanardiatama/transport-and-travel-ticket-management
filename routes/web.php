@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\KendaraanController;
 use App\Http\Controllers\SuratPerintahKerjaController;
 use App\Http\Controllers\SuratPermintaanTiketDinasController;
 use App\Http\Controllers\SuratPermintaanTransportController;
+use App\Http\Controllers\UserController;
 use App\Models\SuratPerintahKerja;
 use App\Models\SuratPermintaanTransport;
 use Illuminate\Support\Facades\Route;
@@ -59,3 +61,15 @@ Route::get('/dashboard/permintaantiketdinas/{id}/atasantolak', [SuratPermintaanT
 
 //Admin Review Data
 Route::get('/dashboard/permintaantiketdinas/{id}/review', [SuratPermintaanTiketDinasController::class, 'reviewData'])->middleware('auth');
+
+//User
+Route::resource('/dashboard/user', UserController::class)->middleware('auth');
+Route::get('/dashboard/user/{id}/delete', [UserController::class, 'deleteUser'])->middleware('auth');
+Route::put('/dashboard/user/{id}/edit', [UserController::class, 'update'])->middleware('auth')->name('user.edit');
+//Kendaraan
+Route::resource('/dashboard/kendaraan', KendaraanController::class)->middleware('auth');
+Route::get('/dashboard/kendaraan/{id}/delete', [KendaraanController::class, 'deleteKendaraan'])->middleware('auth');
+Route::put('/dashboard/kendaraan/{id}/edit', [KendaraanController::class, 'update'])->middleware('auth')->name('kendaraan.edit');
+
+//Log Activity
+Route::get('/dashboard/log', [DashboardController::class, 'logActivity'])->middleware('auth');

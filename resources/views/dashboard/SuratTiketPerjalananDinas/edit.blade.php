@@ -22,7 +22,7 @@
     @if (Auth::user()->is_pegawai == true)
         <h1 class="text-md  font-medium dark:text-white">Edit Surat Permintaan Tiket Dinas</h1>
     @elseif (Auth::user()->is_admin == true)
-        <h1 class="text-md  font-medium dark:text-white">Review Surat Permintaan Transportasi</h1>
+        <h1 class="text-md  font-medium dark:text-white">Review Surat Permintaan Tiket Dinas</h1>
     @endif
     <hr class="bg-slate-200 mt-5 max-w-lg">
 

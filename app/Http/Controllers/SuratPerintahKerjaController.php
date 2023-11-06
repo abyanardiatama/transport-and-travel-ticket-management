@@ -15,14 +15,22 @@ class SuratPerintahKerjaController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {   $IdsuratTransport = SuratPermintaanTransport::where('isApprove_pegawai', true)
+    {   
+        
+        $IdsuratTransport = SuratPermintaanTransport::where('isApprove_pegawai', true)
         ->where('isApprove_atasan', true)
         ->where('isApprove_admin', true)
         ->first();
         if ($IdsuratTransport) {
             $id = $IdsuratTransport->id;
-            $suratPerintahKerja = SuratPerintahKerja::where('nama_driver', Auth::user()->name)->get();
-            $countSuratPerintahKerja = SuratPerintahKerja::where('nama_driver', Auth::user()->name)->count();
+            if(Auth::user()->is_driver == true){
+                $suratPerintahKerja = SuratPerintahKerja::where('nama_driver', Auth::user()->name)->get();
+                $countSuratPerintahKerja = SuratPerintahKerja::where('nama_driver', Auth::user()->name)->count();
+            }
+            elseif(Auth::user()->is_admin == true){
+                $suratPerintahKerja = SuratPerintahKerja::all();
+                $countSuratPerintahKerja = SuratPerintahKerja::all()->count();
+            }
             //get nomor polisi from surat permintaan transport
             $suratTransport = SuratPermintaanTransport::where('id', $id)->first();
             $countSuratTransport = SuratPermintaanTransport::where('id', $id)->count();
@@ -30,13 +38,6 @@ class SuratPerintahKerjaController extends Controller
         } else {
             $suratPerintahKerja = null;
         }
-        // $id = $IdsuratTransport->id;
-        // $suratPerintahKerja = SuratPerintahKerja::where('id_surat_permintaan_transport', $id)->first();
-        // $countSuratPerintahKerja = SuratPerintahKerja::where('id_surat_permintaan_transport', $id)->count();
-        // //get nama_driver
-        // //get surat transport that same id with surat perintah kerja
-        // $suratTransport = SuratPermintaanTransport::where('id', $id)->first();
-        // $nomor_polisi = $suratTransport->nomor_polisi;
         return view('dashboard.SuratPerintahKerja.index',[
             'suratPerintahKerja' => $suratPerintahKerja,
             'nomor_polisi' => $nomor_polisi,

@@ -182,7 +182,6 @@ class SuratPermintaanTransportController extends Controller
         // }
 
         else{
-            dd('sini');
             //create new SuratPermintaanTransport
             SuratPermintaanTransport::create($validatedData);
             //send success message to dashboard
@@ -259,7 +258,7 @@ class SuratPermintaanTransportController extends Controller
         $waktu_kembali = $suratTransport->tanggal_kembali . ' ' . $suratTransport->jam_kembali;
         $users = User::where('is_driver', true)->get();
         //get data kendaraan that status = tersedia
-        $kendaraan = Kendaraan::where('status', 'tersedia')->get();
+        $kendaraan = Kendaraan::all();
         return view('dashboard.SuratPermintaanTransport.edit',[
             'suratTransport' => $suratTransport,
             'waktu_berangkat' => $waktu_berangkat,
@@ -328,7 +327,7 @@ class SuratPermintaanTransportController extends Controller
             ->exists()){
                 unset($validatedData['waktu_berangkat']);
                 unset($validatedData['waktu_kembali']);
-                Session::flash('error', 'Mobil masih dipakai');
+                Session::flash('error', 'Jadwal sudah terisi, silahkan cek daftar penggunaan kendaraan');
                 return redirect()->route('permintaantransport.lengkapidata', compact('id'));
             }
             //Mengencek hari yang sama dimana jam berangkat berada diantara jam berangkat dan jam kembali di database 
@@ -341,7 +340,7 @@ class SuratPermintaanTransportController extends Controller
             ->exists()){
                 unset($validatedData['waktu_berangkat']);
                 unset($validatedData['waktu_kembali']);
-                Session::flash('error', 'Jadwal Sudah Terisi');
+                Session::flash('error', 'Jadwal sudah terisi, silahkan cek daftar penggunaan kendaraan');
                 return redirect()->route('permintaantransport.lengkapidata', compact('id'));
             }
             //Mengencek hari yang sama dimana jam berangkat berada sebelum jam berangkat di database dan jam kembali berada setelah jam berangkat di database
@@ -354,7 +353,7 @@ class SuratPermintaanTransportController extends Controller
             ->exists()){
                 unset($validatedData['waktu_berangkat']);
                 unset($validatedData['waktu_kembali']);
-                Session::flash('error', 'Mobil masih dipergunakan');
+                Session::flash('error', 'Jadwal sudah terisi, silahkan cek daftar penggunaan kendaraan');
                 return redirect()->route('permintaantransport.lengkapidata', compact('id'));
             }
             //Mengencek dimana tanggal berangkat berada diantara tanggal berangkat dan tanggal kembali di database
@@ -366,7 +365,7 @@ class SuratPermintaanTransportController extends Controller
             ->exists()){
                 unset($validatedData['waktu_berangkat']);
                 unset($validatedData['waktu_kembali']);
-                Session::flash('error', 'Kendaraan masih digunakan');
+                Session::flash('error', 'Jadwal sudah terisi, silahkan cek daftar penggunaan kendaraan');
                 return redirect()->route('permintaantransport.lengkapidata', compact('id'));
             }
             //Mengencek dimana tanggal berangkat berada sebelum tanggal berangkat di database dan tanggal kembali berada setelah tanggal berangkat di database
@@ -378,7 +377,7 @@ class SuratPermintaanTransportController extends Controller
             ->exists()){
                 unset($validatedData['waktu_berangkat']);
                 unset($validatedData['waktu_kembali']);
-                Session::flash('error', 'Mobil gak ada');
+                Session::flash('error', 'Jadwal sudah terisi, silahkan cek daftar penggunaan kendaraan');
                 return redirect()->route('permintaantransport.lengkapidata', compact('id'));
             }
             elseif(SuratPermintaanTransport::where('nama_driver', $validatedData['nama_driver'])
@@ -388,11 +387,10 @@ class SuratPermintaanTransportController extends Controller
             ->exists()){
                 unset($validatedData['waktu_berangkat']);
                 unset($validatedData['waktu_kembali']);
-                Session::flash('error', 'Mobil mengembara');
+                Session::flash('error', 'Jadwal sudah terisi, silahkan cek daftar penggunaan kendaraan');
                 return redirect()->route('permintaantransport.lengkapidata', compact('id'));
             }
             else{
-                dd('lohe');
                 Session::flash('success', 'Surat Permintaan Transport berhasil dilengkapi');
                 //update
                 //delete column waktu_berangkat
@@ -458,16 +456,18 @@ class SuratPermintaanTransportController extends Controller
         $email_atasan = $validatedData['email_atasan'];
         //cek all user email with is_atasan1 = true
         $is_atasan1 = User::where('email', $email_atasan)->where('is_atasan1', true)->first();
+        $is_atasan2 = User::where('email', $email_atasan)->where('is_atasan2', true)->first();
         //delete column waktu_berangkat
         unset($validatedData['waktu_berangkat']);
         unset($validatedData['waktu_kembali']);
         $validatedData['isApprove_pegawai'] = true;
         $validatedData['isApprove_atasan'] = null;
         $validatedData['isApprove_admin'] = null;
-        if(!$is_atasan1){
+
+        if(!$is_atasan1 && !$is_atasan2){
             //send error to name email_atasan
             Session::flash('error', 'Email atasan tidak ditemukan');
-            return redirect('/dashboard/permintaantransport/{id}/edit');
+            return redirect('/dashboard/permintaantransport/create');
         }
         //tanggal berangkat must be less than tanggal kembali
         elseif($validatedData['tanggal_berangkat'] > $validatedData['tanggal_kembali']){
@@ -485,33 +485,6 @@ class SuratPermintaanTransportController extends Controller
         elseif($validatedData['tanggal_berangkat'] == $validatedData['tanggal_kembali'] && $validatedData['jam_berangkat'] == $validatedData['jam_kembali']){
             //send error message
             Session::flash('error', 'Waktu berangkat tidak valid');
-            return redirect('/dashboard/permintaantransport/create');
-        }
-        //check if any same data on database
-        elseif(SuratPermintaanTransport::where('tanggal_berangkat', $validatedData['tanggal_berangkat'])
-        ->where('tanggal_kembali', $validatedData['tanggal_kembali'])
-        ->where('jam_berangkat', $validatedData['jam_berangkat'])
-        ->where('jam_kembali', $validatedData['jam_kembali'])
-        ->exists()){
-            Session::flash('error', 'Jadwal sudah sama dengan yang lain');
-            return redirect('/dashboard/permintaantransport/create');
-        }
-        
-        //check if tanggal_berangkat and tanggal_kembali is same but jam_berangkat is overlap with other data in database
-        elseif(SuratPermintaanTransport::where('tanggal_berangkat', $validatedData['tanggal_berangkat'])
-        ->where('tanggal_kembali', $validatedData['tanggal_kembali'])
-        ->where('jam_berangkat', '<=', $validatedData['jam_berangkat'])
-        ->where('jam_kembali', '>=', $validatedData['jam_berangkat'])
-        ->exists()){
-            Session::flash('error', 'Jadwal sudah terisi');
-            return redirect('/dashboard/permintaantransport/create');
-        }
-        elseif(SuratPermintaanTransport::where('tanggal_berangkat', $validatedData['tanggal_berangkat'])
-        ->where('tanggal_kembali', $validatedData['tanggal_kembali'])
-        ->where('jam_berangkat', '>=', $validatedData['jam_berangkat'])
-        ->where('jam_berangkat', '<=', $validatedData['jam_kembali'])
-        ->exists()){
-            Session::flash('error', 'Jadwal sudah terisi');
             return redirect('/dashboard/permintaantransport/create');
         }
         else{

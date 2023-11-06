@@ -21,7 +21,7 @@ class SuratPermintaanTiketDinasController extends Controller
         }
         elseif (auth()->user()->is_admin == 1){
             $suratPermintaanTiketDinas = SuratPermintaanTiketDinas::all();
-            $countSuratTiketDinas = SuratPermintaanTiketDinas::where('isApprove_pegawai', true)->where('isApprove_atasan', true)->count();
+            $countSuratTiketDinas = $suratPermintaanTiketDinas->count();
         }
         elseif (auth()->user()->is_atasan1 == 1){
             $suratPermintaanTiketDinas = SuratPermintaanTiketDinas::where('isApprove_pegawai', true)->where('isApprove_atasan', null)->where('email_atasan', auth()->user()->email)->get();

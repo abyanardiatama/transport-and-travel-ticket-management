@@ -29,13 +29,48 @@ class LoginController extends Controller
     }
 
     public function logout(Request $request){
+        if(Auth::user()->is_pegawai == 1){
+            activity()
+                ->withProperties([
+                    'nama_user'=>Auth::user()->name, 
+                    'email_user'=>Auth::user()->email, 
+                    'role_user'=>'pegawai', 
+                    'login_at'=>now()->toDateTimeString()])
+                ->log('user_pegawai_logout');
+        }
+        elseif(Auth::user()->is_admin == 1){
+            activity()
+                ->withProperties([
+                    'nama_user'=>Auth::user()->name, 
+                    'email_user'=>Auth::user()->email, 
+                    'role_user'=>'admin', 
+                    'login_at'=>now()->toDateTimeString()])
+                ->log('user_admin_logout');
+        }
+        elseif(Auth::user()->is_atasan == 1){
+            activity()
+                ->withProperties([
+                    'nama_user'=>Auth::user()->name, 
+                    'email_user'=>Auth::user()->email, 
+                    'role_user'=>'atasan', 
+                    'login_at'=>now()->toDateTimeString()])
+                ->log('user_atasan_logout');
+        }
+        elseif(Auth::user()->is_driver == 1){
+            activity()
+                ->withProperties([
+                    'nama_user'=>Auth::user()->name, 
+                    'email_user'=>Auth::user()->email, 
+                    'role_user'=>'driver', 
+                    'login_at'=>now()->toDateTimeString()])
+                ->log('user_driver_logout');
+        }
         Auth::logout();
 
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
         $this->middleware('guest')->except('logout');
-
         return redirect('/');
     }
 

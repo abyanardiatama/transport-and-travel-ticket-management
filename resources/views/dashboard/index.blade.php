@@ -77,7 +77,149 @@
         {{-- End Top Content --}}
             
         {{-- Button Tambah Surat Perintah Kerja --}}
-        @if (Auth::user()->is_driver == false)
+        @if (Auth::user()->is_admin == true)
+            <div class="grid grid-cols-1 md:grid-cols-2 md:gap-4 mb-2">
+                {{-- Button Tambah Surat Permintaan Transport --}}
+                <a href="/dashboard/permintaantransport/create" class="mb-2 md:mb-0 text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-3 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">+ Permintaan Transport</a>
+
+                {{-- Button Tambah Surat Permintaan Pengurusan Tiket Dinas --}}
+                <a href="/dashboard/permintaantiketdinas/create" class="mb-2 md:mb-0 text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-3 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">+ Permintaan Pengurusan Tiket Dinas</a>
+
+                {{-- Button Add User --}}
+                <button data-modal-target="defaultModal1" data-modal-toggle="defaultModal1" class="text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-3 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">+ Tambah User</button>
+                <div id="defaultModal1" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                    <div class="relative w-full max-w-2xl max-h-full">
+                        <!-- Modal content -->
+                        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                            <!-- Modal header -->
+                            <div class="flex items-start justify-start p-4 border-b rounded-t dark:border-gray-600">
+                                <h3 class="text-left text-md sm:text-lg font-medium text-gray-900 dark:text-white">
+                                    Tambah Pengguna
+                                </h3>
+                                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="defaultModal1">
+                                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                    </svg>
+                                    <span class="sr-only">Close modal</span>
+                                </button>
+                            </div>
+                            <!-- Modal body -->
+                            <form action="/dashboard/user" class="max-w-3xl py-4 pb-8 px-3" method="post">
+                                @csrf
+                                <div class="grid grid-cols-2 gap-4 p-4">
+                                    {{-- nama pengguna --}}
+                                    <div class="col-span-2 sm:col-span-1">
+                                        <label for="name" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Pengguna</label>
+                                        <input type="text" id="name" name="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                                    </div>
+                                    {{-- email --}}
+                                    <div class="col-span-2 sm:col-span-1">
+                                        <label for="email" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                                        <input type="email" id="email" name="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                                    </div>
+                                    {{-- password --}}
+                                    <div class="col-span-2 sm:col-span-1">
+                                        <label for="password" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                                        <input type="password" id="password" name="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                                    </div>
+                                    {{-- role --}}
+                                    <div class="col-span-2 sm:col-span-1">
+                                        <label for="role" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Role</label>
+                                        <select name="role" id="role" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 px-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                                            <option value="">Pilih Role</option>
+                                            <option value="admin">Admin</option>
+                                            <option value="pegawai">Pegawai</option>
+                                            <option value="atasan1">Atasan 1</option>
+                                            <option value="atasan2">Atasan 2</option>
+                                            <option value="driver">Driver</option>
+                                        </select>
+                                    </div>
+                                    {{-- Submit button --}}
+                                    <div class="col-span-2">
+                                        <button type="submit" class="text-sm w-full bg-blue-600 hover:bg-blue-800 text-white font-semibold py-3 px-4 rounded-lg shadow-lg hover:shadow-xl transition duration-200">Tambah User</button>
+                                    </div>
+                                </div>
+                            </form>
+                            <!-- Modal footer -->
+                            <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                                <div class="flex p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
+                                    <svg class="flex-shrink-0 inline w-4 h-4 mr-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                                    </svg>
+                                    <span class="sr-only">Info</span>
+                                    <div class="text-left">
+                                        <span class="font-medium">Pastikan data telah terisi dengan benar</span>
+                                        <ul class="mt-1.5 list-disc list-inside">
+                                            <li>Dengan menyetujui data ini, data akan diteruskan untuk dilengkapi</li>
+                                            <li>Data akan dikirimkan ke admin untuk disetujui</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Button Add Kendaraan --}}
+                <button data-modal-target="defaultModal2" data-modal-toggle="defaultModal2" class="text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-3 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">+ Tambah Kendaraan</button>
+                <div id="defaultModal2" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                    <div class="relative w-full max-w-2xl max-h-full">
+                        <!-- Modal content -->
+                        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                            <!-- Modal header -->
+                            <div class="flex items-start justify-start p-4 border-b rounded-t dark:border-gray-600">
+                                <h3 class="text-left text-md sm:text-lg font-medium text-gray-900 dark:text-white">
+                                    Tambah Kendaraan
+                                </h3>
+                                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="defaultModal2">
+                                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                    </svg>
+                                    <span class="sr-only">Close modal</span>
+                                </button>
+                            </div>
+                            <!-- Modal body -->
+                            <form action="/dashboard/kendaraan" class="max-w-3xl py-4 pb-8 px-3" method="post">
+                                @csrf
+                                <div class="grid grid-cols-2 gap-4 p-4">
+                                    {{-- nama kendaraan --}}
+                                    <div class="col-span-2 sm:col-span-1">
+                                        <label for="nama_kendaraan" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Kendaraan</label>
+                                        <input type="text" id="nama_kendaraan" name="nama_kendaraan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                                    </div>
+                                    {{-- nomor polisi --}}
+                                    <div class="col-span-2 sm:col-span-1">
+                                        <label for="plat_nomor" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nomor Polisi</label>
+                                        <input type="text" id="plat_nomor" name="plat_nomor" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                                    </div>
+
+                                    {{-- Submit button --}}
+                                    <div class="col-span-2">
+                                        <button type="submit" class="text-sm w-full bg-blue-600 hover:bg-blue-800 text-white font-semibold py-3 px-4 rounded-lg shadow-lg hover:shadow-xl transition duration-200">Tambah Kendaraan</button>
+                                    </div>
+                                </div>
+                            </form>
+                            <!-- Modal footer -->
+                            <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                                <div class="flex p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
+                                    <svg class="flex-shrink-0 inline w-4 h-4 mr-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                                    </svg>
+                                    <span class="sr-only">Info</span>
+                                    <div class="text-left">
+                                        <span class="font-medium">Pastikan data telah terisi dengan benar</span>
+                                        <ul class="mt-1.5 list-disc list-inside">
+                                            <li>Dengan menyetujui data ini, data akan diteruskan untuk dilengkapi</li>
+                                            <li>Data akan dikirimkan ke admin untuk disetujui</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @elseif (Auth::user()->is_driver == false)
             <div class="grid grid-cols-1 md:grid-cols-2 md:gap-4 mb-2">
                 {{-- Button Tambah Surat Permintaan Transport --}}
                 <a href="/dashboard/permintaantransport/create" class="text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-3 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">+ Surat Permintaan Transport</a>
@@ -136,108 +278,110 @@
                                             {{ $suratTransport->nama_pemohon }}
                                         </td>
                                         <td class="px-6 py-4 text-right flex items-center justify-center">
-                                            {{-- Button Lihat Data --}}
-                                            <button data-modal-target="defaultModal" data-modal-toggle="defaultModal" type="button" class="flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 whitespace-nowrap">
-                                                <svg class="flex-shrink w-3 h-3 mr-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 20 14">
-                                                    <path d="M10 0C4.612 0 0 5.336 0 7c0 1.742 3.546 7 10 7 6.454 0 10-5.258 10-7 0-1.664-4.612-7-10-7Zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z"/>
-                                                </svg>
-                                                Lihat Data
-                                            </button>
-                                            {{-- Modal Lihat Data --}}
-                                            <div id="defaultModal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                                                <div class="relative w-full max-w-2xl max-h-full">
-                                                    <!-- Modal content -->
-                                                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                                                        <!-- Modal header -->
-                                                        <div class="flex items-start justify-start p-4 border-b rounded-t dark:border-gray-600">
-                                                            <h3 class="text-left text-md sm:text-lg font-medium text-gray-900 dark:text-white">
-                                                                Surat Permintaan Sarana Transport
-                                                            </h3>
-                                                            <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="defaultModal">
-                                                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                                                                </svg>
-                                                                <span class="sr-only">Close modal</span>
-                                                            </button>
-                                                        </div>
-                                                        <!-- Modal body -->
-                                                        <form action="/dashboard/permintaantransport/{{ $suratTransport->id }}/approveatasan" class="max-w-3xl py-4 pb-8 px-3">
-                                                            <div class="grid grid-cols-2 gap-4 p-4">
-                                                                {{-- nama pemohon --}}
-                                                                <div class="col-span-2 sm:col-span-1">
-                                                                    <label for="nama_pemohon" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Pemohon</label>
-                                                                    <input type="text" id="nama_pemohon" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $suratTransport->nama_pemohon }}" disabled>
-                                                                </div>
-                                                                {{-- unit --}}
-                                                                <div class="col-span-2 sm:col-span-1">
-                                                                    <label for="unit" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Unit</label>
-                                                                    <input type="text" id="unit" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $suratTransport->unit }}" disabled>
-                                                                </div>
-                                                                {{-- biaya perjalanan --}}
-                                                                <div class="col-span-2 sm:col-span-1">
-                                                                    <label for="biaya_perjalanan" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Biaya Perjalanan</label>
-                                                                    <input type="number" id="biaya_perjalanan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $suratTransport->biaya_perjalanan }}" disabled>
-                                                                </div>
-                                                                {{-- keperluan --}}
-                                                                <div class="col-span-2 sm:col-span-1">
-                                                                    <label for="keperluan" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Keperluan</label>
-                                                                    <input name="keperluan" id="keperluan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $suratTransport->keperluan }}" disabled></input>
-                                                                </div>
-                                                                {{-- tujuan --}}
-                                                                <div class="col-span-2 sm:col-span-1">
-                                                                    <label for="tujuan" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tujuan</label>
-                                                                    <input name="tujuan" id="tujuan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $suratTransport->tujuan }}" disabled></input>
-                                                                </div>
-                                                                {{-- rute pemakaian --}}
-                                                                <div class="col-span-2 sm:col-span-1">
-                                                                    <label for="rute_pemakaian" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Rute Pemakaian</label>
-                                                                    <input name="rute_pemakaian" id="rute_pemakaian" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $suratTransport->rute_pemakaian }}" disabled></input>
-                                                                </div>
-                                                                {{-- waktu berangkat --}}
-                                                                <div class="col-span-2 sm:col-span-1">
-                                                                    <label for="waktu_berangkat" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Waktu Berangkat</label>
-                                                                    <input name="waktu_berangkat" id="waktu_berangkat" type="datetime-local" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $suratTransport->tanggal_berangkat }} {{ $suratTransport->jam_berangkat }}" disabled></input>
-                                                                </div>
-                                                                {{-- waktu kembali --}}
-                                                                <div class="col-span-2 sm:col-span-1">
-                                                                    <label for="waktu_kembali" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Waktu Kembali</label>
-                                                                    <input name="waktu_kembali" id="waktu_kembali" type="datetime-local" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $suratTransport->tanggal_kembali }} {{ $suratTransport->jam_kembali }}" disabled></input>
-                                                                </div>
+                                            @if ($checkUser)
+                                                {{-- Button Lihat Data --}}
+                                                <button data-modal-target="defaultModal" data-modal-toggle="defaultModal" type="button" class="flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-5 py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 whitespace-nowrap">
+                                                    <svg class="flex-shrink w-3 h-3 mr-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 20 14">
+                                                        <path d="M10 0C4.612 0 0 5.336 0 7c0 1.742 3.546 7 10 7 6.454 0 10-5.258 10-7 0-1.664-4.612-7-10-7Zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z"/>
+                                                    </svg>
+                                                    Lihat Data
+                                                </button>
+                                                {{-- Modal Lihat Data --}}
+                                                <div id="defaultModal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                                    <div class="relative w-full max-w-2xl max-h-full">
+                                                        <!-- Modal content -->
+                                                        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                                            <!-- Modal header -->
+                                                            <div class="flex items-start justify-start p-4 border-b rounded-t dark:border-gray-600">
+                                                                <h3 class="text-left text-md sm:text-lg font-medium text-gray-900 dark:text-white">
+                                                                    Surat Permintaan Sarana Transport
+                                                                </h3>
+                                                                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="defaultModal">
+                                                                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                                                    </svg>
+                                                                    <span class="sr-only">Close modal</span>
+                                                                </button>
                                                             </div>
-                                                        </form>
-                                                        <!-- Modal footer -->
-                                                        <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
-                                                            <div class="flex p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
-                                                                <svg class="flex-shrink-0 inline w-4 h-4 mr-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                                                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
-                                                                </svg>
-                                                                <span class="sr-only">Info</span>
-                                                                <div class="text-left">
-                                                                    <span class="font-medium">Pastikan data telah terisi dengan benar</span>
-                                                                    <ul class="mt-1.5 list-disc list-inside">
-                                                                        <li>Dengan menyetujui data ini, data akan diteruskan untuk dilengkapi</li>
-                                                                        <li>Data akan dikirimkan ke admin untuk disetujui</li>
-                                                                    </ul>
+                                                            <!-- Modal body -->
+                                                            <form action="/dashboard/permintaantransport/{{ $suratTransport->id }}/approveatasan" class="max-w-3xl py-4 pb-8 px-3">
+                                                                <div class="grid grid-cols-2 gap-4 p-4">
+                                                                    {{-- nama pemohon --}}
+                                                                    <div class="col-span-2 sm:col-span-1">
+                                                                        <label for="nama_pemohon" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Pemohon</label>
+                                                                        <input type="text" id="nama_pemohon" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $suratTransport->nama_pemohon }}" disabled>
+                                                                    </div>
+                                                                    {{-- unit --}}
+                                                                    <div class="col-span-2 sm:col-span-1">
+                                                                        <label for="unit" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Unit</label>
+                                                                        <input type="text" id="unit" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $suratTransport->unit }}" disabled>
+                                                                    </div>
+                                                                    {{-- biaya perjalanan --}}
+                                                                    <div class="col-span-2 sm:col-span-1">
+                                                                        <label for="biaya_perjalanan" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Biaya Perjalanan</label>
+                                                                        <input type="number" id="biaya_perjalanan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $suratTransport->biaya_perjalanan }}" disabled>
+                                                                    </div>
+                                                                    {{-- keperluan --}}
+                                                                    <div class="col-span-2 sm:col-span-1">
+                                                                        <label for="keperluan" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Keperluan</label>
+                                                                        <input name="keperluan" id="keperluan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $suratTransport->keperluan }}" disabled></input>
+                                                                    </div>
+                                                                    {{-- tujuan --}}
+                                                                    <div class="col-span-2 sm:col-span-1">
+                                                                        <label for="tujuan" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tujuan</label>
+                                                                        <input name="tujuan" id="tujuan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $suratTransport->tujuan }}" disabled></input>
+                                                                    </div>
+                                                                    {{-- rute pemakaian --}}
+                                                                    <div class="col-span-2 sm:col-span-1">
+                                                                        <label for="rute_pemakaian" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Rute Pemakaian</label>
+                                                                        <input name="rute_pemakaian" id="rute_pemakaian" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $suratTransport->rute_pemakaian }}" disabled></input>
+                                                                    </div>
+                                                                    {{-- waktu berangkat --}}
+                                                                    <div class="col-span-2 sm:col-span-1">
+                                                                        <label for="waktu_berangkat" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Waktu Berangkat</label>
+                                                                        <input name="waktu_berangkat" id="waktu_berangkat" type="datetime-local" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $suratTransport->tanggal_berangkat }} {{ $suratTransport->jam_berangkat }}" disabled></input>
+                                                                    </div>
+                                                                    {{-- waktu kembali --}}
+                                                                    <div class="col-span-2 sm:col-span-1">
+                                                                        <label for="waktu_kembali" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Waktu Kembali</label>
+                                                                        <input name="waktu_kembali" id="waktu_kembali" type="datetime-local" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $suratTransport->tanggal_kembali }} {{ $suratTransport->jam_kembali }}" disabled></input>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                            <!-- Modal footer -->
+                                                            <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                                                                <div class="flex p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
+                                                                    <svg class="flex-shrink-0 inline w-4 h-4 mr-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                                                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                                                                    </svg>
+                                                                    <span class="sr-only">Info</span>
+                                                                    <div class="text-left">
+                                                                        <span class="font-medium">Pastikan data telah terisi dengan benar</span>
+                                                                        <ul class="mt-1.5 list-disc list-inside">
+                                                                            <li>Dengan menyetujui data ini, data akan diteruskan untuk dilengkapi</li>
+                                                                            <li>Data akan dikirimkan ke admin untuk disetujui</li>
+                                                                        </ul>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            {{-- Download Button --}}
-                                            <button type="button" class="flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                                                <svg class="w-3 h-3 mr-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 19">
-                                                    <path stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15h.01M4 12H2a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1h-3M9.5 1v10.93m4-3.93-4 4-4-4"/>
-                                                </svg>
-                                                Download
-                                            </button>
+                                                {{-- Download Button --}}
+                                                <button type="button" class="flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                                                    <svg class="w-3 h-3 mr-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 19">
+                                                        <path stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15h.01M4 12H2a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1h-3M9.5 1v10.93m4-3.93-4 4-4-4"/>
+                                                    </svg>
+                                                    Download
+                                                </button>
+                                            @endif
                                         </td>    
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
                     </div>           
-                    @if($countSuratPermintaanTransport==0)
+                    @if($countApprovedSuratTransport==0)
                         <div class="flex items-center justify-center p-4 text-sm text-gray-800 rounded-lg bg-gray-50 dark:bg-gray-800 dark:text-gray-300" role="alert">
                             <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                                 <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
@@ -289,6 +433,11 @@
                                             
                                         </th>
                                     @endif
+                                    @if (Auth::user()->is_atasan1==true || Auth::user()->is_atasan2==true)
+                                        <th scope="col" class="px-6 py-3 text-center min-w-max">
+                                            
+                                        </th>
+                                    @endif
                                 </tr>
                             </thead>
                             <tbody>
@@ -310,18 +459,18 @@
                                             <td class="px-6 py-4 text-right flex items-end justify-end whitespace-nowrap">
                                                 @if ($suratTransport->isApprove_atasan == true && $suratTransport->isApprove_admin == true)
                                                     {{-- Download Button --}} 
-                                                    <a  href="#" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                                                        <svg class="w-3 h-3 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 19">
+                                                    <a  href="#" class="flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-5 py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                                                        <svg class="w-3 h-3 mr-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 19">
                                                             <path stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15h.01M4 12H2a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1h-3M9.5 1v10.93m4-3.93-4 4-4-4"/>
                                                         </svg>
-                                                        
+                                                        Download     
                                                     </a>
                                                 @elseif ($suratTransport->isApprove_atasan == true)
                                                     {{-- Button Approve Admin --}}
-                                                    <a href="/dashboard/permintaantransport/{{ $suratTransport->id }}/lengkapidata" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                                                        {{-- <svg class="flex-shrink w-3 h-3 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
-                                                            <path stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
-                                                        </svg> --}}
+                                                    <a href="/dashboard/permintaantransport/{{ $suratTransport->id }}/lengkapidata" class="flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                                                        <svg class="flex-shrink w-3 h-3 mr-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 5h1v12a2 2 0 0 1-2 2m0 0a2 2 0 0 1-2-2V2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v15a2 2 0 0 0 2 2h14ZM10 4h2m-2 3h2m-8 3h8m-8 3h8m-8 3h8M4 4h3v3H4V4Z"/>
+                                                        </svg>
                                                         Lengkapi Data
                                                     </a>
                                                 @elseif ($suratTransport->isApprove_atasan == false)
@@ -425,7 +574,10 @@
                                         @if (Auth::user()->is_atasan1 == true || Auth::user()->is_atasan2 == true)
                                             <td class="px-6 py-4 text-right flex items-center justify-center">
                                                 {{-- Button Lihat Data Baru --}}
-                                                <button data-modal-target="modal-{{ $suratTransport->id }}" data-modal-toggle="modal-{{ $suratTransport->id }}" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus-ring-blue-800 whitespace-nowrap">
+                                                <button data-modal-target="modal-{{ $suratTransport->id }}" data-modal-toggle="modal-{{ $suratTransport->id }}" type="button" class="flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus-ring-blue-800 whitespace-nowrap">
+                                                    <svg class="flex-shrink w-3 h-3 mr-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 20 14">
+                                                        <path d="M10 0C4.612 0 0 5.336 0 7c0 1.742 3.546 7 10 7 6.454 0 10-5.258 10-7 0-1.664-4.612-7-10-7Zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z"/>
+                                                    </svg>
                                                     Lihat Data
                                                 </button>
                                                 {{-- Modal Lihat Data Baru --}}
@@ -510,7 +662,10 @@
                                                     </div>
                                                 </div>
                                                 {{-- Button Setuju --}}
-                                                <a data-modal-target="popup-modal-approve" data-modal-toggle="popup-modal-approve" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 whitespace-nowrap">
+                                                <a data-modal-target="popup-modal-approve" data-modal-toggle="popup-modal-approve" class="flex items-center focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-xs px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 whitespace-nowrap">
+                                                    <svg class="flex-shrink w-3 h-3 mr-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                                                    </svg>
                                                     Setuju
                                                 </a>
                                                 {{-- Modal Approve --}}
@@ -539,10 +694,10 @@
                                                     </div>
                                                 </div>
                                                 {{-- Button Tolak --}}
-                                                <button data-modal-target="popup-modal-tolak" data-modal-toggle="popup-modal-tolak" type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 whitespace-nowrap">
-                                                    {{-- <svg class="flex-shrink w-3 h-3 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                                        <path stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                                                    </svg> --}}
+                                                <button data-modal-target="popup-modal-tolak" data-modal-toggle="popup-modal-tolak" type="button" class="flex items-center focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-xs px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 whitespace-nowrap">
+                                                    <svg class="flex-shrink w-2.5 h-2.5 mr-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                                    </svg>
                                                     Tolak
                                                 </button>
                                                 {{-- Modal Reject --}}
@@ -578,14 +733,14 @@
                                             <td class="px-6 py-4">
                                                 @if ($suratTransport->isApprove_pegawai == true && $suratTransport->isApprove_atasan == true && $suratTransport->isApprove_admin == true)
                                                     {{-- Download Button --}}
-                                                    <button type="button" class="flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                                                    <button type="button" class="flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
                                                         <svg class="mr-2 w-3 h-3 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 19">
                                                             <path stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15h.01M4 12H2a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1h-3M9.5 1v10.93m4-3.93-4 4-4-4"/>
                                                         </svg>
                                                         Download
                                                     </button>
                                                 @elseif ($suratTransport->isApprove_pegawai == true && $suratTransport->isApprove_atasan == true)
-                                                    <span class="bg-lime-100 text-lime-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-lime-900 dark:text-lime-300">Menuggu dilengkapi</span>
+                                                    <span class="bg-lime-100 text-lime-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-lime-900 dark:text-lime-300 whitespace-nowrap">Menunggu dilengkapi</span>
                                                 @elseif ($suratTransport->isApprove_pegawai == true && $suratTransport->isApprove_atasan === null)
                                                     <span class="bg-yellow-100 text-yellow-800 text-xs text-center font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300 whitespace-nowrap">Menunggu persetujuan</span> 
                                                 @elseif ($suratTransport->isApprove_pegawai == true && $suratTransport->isApprove_atasan == false)
@@ -596,8 +751,13 @@
                                                 
                                             {{-- Can't edit when isApprove pegawai, atasan and admin --}}
                                             <td class="px-6 py-4 text-right">
-                                                @if ($suratTransport->isApprove_pegawai == true && $suratTransport->isApprove_atasan === null && $suratTransport->isApprove_admin === null)
-                                                    <a href="/dashboard/permintaantransport/{{ $suratTransport->id }}/edit" class="focus:outline-none text-gray-900 bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-xs px-5 py-2.5  dark:focus:ring-yellow-900">
+                                                @if (
+                                                    $suratTransport->isApprove_pegawai == true && $suratTransport->isApprove_atasan === null && $suratTransport->isApprove_admin === null ||
+                                                    $suratTransport->isApprove_pegawai == true && $suratTransport->isApprove_atasan == false && $suratTransport->isApprove_admin === null)
+                                                    <a href="/dashboard/permintaantransport/{{ $suratTransport->id }}/edit" class="flex items-center focus:outline-none text-gray-900 bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-xs px-5 py-2.5  dark:focus:ring-yellow-900">
+                                                        <svg class="w-3 h-3 mr-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                                            <path stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17v1a.97.97 0 0 1-.933 1H1.933A.97.97 0 0 1 1 18V5.828a2 2 0 0 1 .586-1.414l2.828-2.828A2 2 0 0 1 5.828 1h8.239A.97.97 0 0 1 15 2M6 1v4a1 1 0 0 1-1 1H1m13.14.772 2.745 2.746M18.1 5.612a2.086 2.086 0 0 1 0 2.953l-6.65 6.646-3.693.739.739-3.692 6.646-6.646a2.087 2.087 0 0 1 2.958 0Z"/>
+                                                        </svg>
                                                         Edit
                                                     </a>
                                                 @endif
@@ -644,9 +804,11 @@
                                     <th scope="col" class="px-6 py-3">
                                         Jenis Tiket
                                     </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Status
-                                    </th>
+                                    @if(Auth::user()->is_pegawai == true)
+                                        <th scope="col" class="px-6 py-3">
+                                            Status
+                                        </th>
+                                    @endif
                                     <th scope="col" class="px-6 py-3 text-right">
                                         <span class="sr-only">Edit</span>
                                     </th>
@@ -671,10 +833,11 @@
                                             <td class="px-6 py-4">
                                                 @if ($suratTiketDinas->isApprove_pegawai == true && $suratTiketDinas->isApprove_atasan == true)
                                                     {{-- Download Button --}}
-                                                    <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                                                        <svg class="w-3 h-3 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 19">
+                                                    <button type="button" class="flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                                                        <svg class="w-3 h-3 mr-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 19">
                                                             <path stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15h.01M4 12H2a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1h-3M9.5 1v10.93m4-3.93-4 4-4-4"/>
                                                         </svg>
+                                                        Download
                                                     </button>
                                                 @elseif ($suratTiketDinas->isApprove_pegawai == true && $suratTiketDinas->isApprove_atasan === null)
                                                     <span class="bg-yellow-100 text-yellow-800 text-xs text-center font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300 whitespace-nowrap">Menunggu Persetujuan</span>  
@@ -685,7 +848,10 @@
                                             <td class="px-6 py-4 text-right">
                                                 {{-- not show button edit when it has only approve pegawai --}}
                                                 @if ($suratTiketDinas->isApprove_pegawai == true && !$suratTiketDinas->isApprove_atasan == true )
-                                                    <a href="/dashboard/permintaantiketdinas/{{ $suratTiketDinas->id }}/edit" class="focus:outline-none text-gray-900 bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-xs px-5 py-2.5  dark:focus:ring-yellow-900">
+                                                    <a href="/dashboard/permintaantiketdinas/{{ $suratTiketDinas->id }}/edit" class="flex items-center focus:outline-none text-gray-900 bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-xs px-5 py-2.5  dark:focus:ring-yellow-900">
+                                                        <svg class="w-3 h-3 mr-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                                            <path stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17v1a.97.97 0 0 1-.933 1H1.933A.97.97 0 0 1 1 18V5.828a2 2 0 0 1 .586-1.414l2.828-2.828A2 2 0 0 1 5.828 1h8.239A.97.97 0 0 1 15 2M6 1v4a1 1 0 0 1-1 1H1m13.14.772 2.745 2.746M18.1 5.612a2.086 2.086 0 0 1 0 2.953l-6.65 6.646-3.693.739.739-3.692 6.646-6.646a2.087 2.087 0 0 1 2.958 0Z"/>
+                                                        </svg>
                                                         Edit
                                                     </a>
                                                 @endif
@@ -694,10 +860,10 @@
                                         @if (Auth::user()->is_admin == true)
                                             <td class="px-6 py-4">
                                                 {{-- Button Lihat Data Baru --}}
-                                                <button data-modal-target="modal1-{{ $suratTiketDinas->id }}" data-modal-toggle="modal1-{{ $suratTiketDinas->id }}" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 whitespace-nowrap">
-                                                    {{-- <svg class="flex-shrink w-3 h-3 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 20 14">
+                                                <button data-modal-target="modal1-{{ $suratTiketDinas->id }}" data-modal-toggle="modal1-{{ $suratTiketDinas->id }}" type="button" class="flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 whitespace-nowrap">
+                                                    <svg class="flex-shrink w-3 h-3 mr-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 20 14">
                                                         <path d="M10 0C4.612 0 0 5.336 0 7c0 1.742 3.546 7 10 7 6.454 0 10-5.258 10-7 0-1.664-4.612-7-10-7Zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z"/>
-                                                    </svg> --}}
+                                                    </svg>
                                                     Lihat Data
                                                 </button>
                                                 {{-- Modal Lihat Data Baru --}}
@@ -786,10 +952,10 @@
                                         @if (Auth::user()->is_atasan1 == true)
                                             <td class="px-6 py-4 text-right flex items-center justify-center">
                                                 {{-- Button Lihat Data Baru --}}
-                                                <button data-modal-target="modal1-{{ $suratTiketDinas->id }}" data-modal-toggle="modal1-{{ $suratTiketDinas->id }}" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 whitespace-nowrap">
-                                                    {{-- <svg class="flex-shrink w-3 h-3 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 20 14">
+                                                <button data-modal-target="modal1-{{ $suratTiketDinas->id }}" data-modal-toggle="modal1-{{ $suratTiketDinas->id }}" type="button" class="flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 whitespace-nowrap">
+                                                    <svg class="flex-shrink w-3 h-3 mr-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 20 14">
                                                         <path d="M10 0C4.612 0 0 5.336 0 7c0 1.742 3.546 7 10 7 6.454 0 10-5.258 10-7 0-1.664-4.612-7-10-7Zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z"/>
-                                                    </svg> --}}
+                                                    </svg>
                                                     Lihat Data
                                                 </button>
                                                 {{-- Modal Lihat Data Baru --}}
@@ -874,7 +1040,10 @@
                                                     </div>
                                                 </div>
                                                 {{-- Button Setuju --}}
-                                                <a data-modal-target="popup-modal1-approve" data-modal-toggle="popup-modal1-approve" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 whitespace-nowrap">
+                                                <a data-modal-target="popup-modal1-approve" data-modal-toggle="popup-modal1-approve" class="flex items-center focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-xs px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 whitespace-nowrap">
+                                                    <svg class="flex-shrink w-3 h-3 mr-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                                                    </svg>
                                                     Setuju
                                                 </a>
                                                 {{-- Modal Approve --}}
@@ -903,10 +1072,10 @@
                                                     </div>
                                                 </div>
                                                 {{-- Button Tolak --}}
-                                                <button data-modal-target="popup-modal1-tolak" data-modal-toggle="popup-modal1-tolak" type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 whitespace-nowrap">
-                                                    {{-- <svg class="flex-shrink w-3 h-3 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                                        <path stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                                                    </svg> --}}
+                                                <button data-modal-target="popup-modal1-tolak" data-modal-toggle="popup-modal1-tolak" type="button" class="flex items-center focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-xs px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 whitespace-nowrap">
+                                                    <svg class="flex-shrink w-2.5 h-2.5 mr-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                                      </svg>
                                                     Tolak
                                                 </button>
                                                 {{-- Modal Reject --}}
