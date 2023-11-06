@@ -13,7 +13,10 @@ class KendaraanController extends Controller
      */
     public function index()
     {
-        //
+        return view('dashboard.kendaraan.index', [
+            'kendaraans' => Kendaraan::all(),
+            'countKendaraan' => Kendaraan::all()->count(),
+        ]);
     }
 
     /**
@@ -29,7 +32,13 @@ class KendaraanController extends Controller
      */
     public function store(StoreKendaraanRequest $request)
     {
-        //
+
+        $validatedData = $request->validate([
+            'nama_kendaraan' => 'required',
+            'plat_nomor' => 'required',
+        ]);
+        Kendaraan::create($validatedData);
+        return redirect('/dashboard')->with('success', 'Kendaraan berhasil ditambahkan');
     }
 
     /**
@@ -51,11 +60,25 @@ class KendaraanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateKendaraanRequest $request, Kendaraan $kendaraan)
+    public function update(UpdateKendaraanRequest $request, $id)
     {
-        //
+        $kendaraan = Kendaraan::find($id);
+        $validatedData = $request->validate([
+            'nama_kendaraan' => 'required',
+            'plat_nomor' => 'required',
+        ]);
+        // dd($validatedData);
+        $kendaraan->update($validatedData);
+        // dd('anjay keupdate');
+        return redirect('/dashboard/kendaraan')->with('success', 'Kendaraan berhasil diupdate');
     }
 
+    public function deleteKendaraan($id)
+    {
+        $kendaraan = Kendaraan::find($id);
+        $kendaraan->delete();
+        return redirect('/dashboard/kendaraan')->with('success', 'Kendaraan berhasil dihapus');
+    }
     /**
      * Remove the specified resource from storage.
      */
