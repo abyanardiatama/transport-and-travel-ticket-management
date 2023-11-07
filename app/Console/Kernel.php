@@ -10,9 +10,18 @@ class Kernel extends ConsoleKernel
     /**
      * Define the application's command schedule.
      */
+    protected $commands = [
+        Commands\DatabaseBackup::class,
+    ];
     protected function schedule(Schedule $schedule): void
     {
         // $schedule->command('inspire')->hourly();
+        // everyminute
+
+        $schedule->command('database:backup')->daily();
+        // This will open the crontab, you have to add the CRON command
+        // * * * * * cd /. && php artisan schedule:run >> /dev/null 2>&1
+        
     }
 
     /**
