@@ -47,6 +47,8 @@ Route::get('/dashboard/permintaantransport/{id}/lengkapidata', [SuratPermintaanT
 Route::post('/dashboard/permintaantransport/{id}/lengkapidata', [SuratPermintaanTransportController::class, 'updateLengkapiData'])->middleware('auth');
 //Admin Buat Surat Perintah Kerja
 Route::post('/dashboard/perintahkerja/store', [SuratPerintahKerjaController::class, 'store'])->name('perintahkerja.store')->middleware('auth');
+//Admin Hapus Surat Perintah Kerja
+Route::get('/dashboard/perintahkerja/{id}/delete', [SuratPerintahKerjaController::class, 'deletePerintahKerja'])->middleware('auth');
 
 
 //Admin Delete Surat Transport
@@ -59,7 +61,7 @@ Route::get('/dashboard/permintaantiketdinas/{id}/atasanapprove', [SuratPermintaa
 //Atasan Tolak
 Route::get('/dashboard/permintaantiketdinas/{id}/atasantolak', [SuratPermintaanTiketDinasController::class, 'atasanTolak'])->middleware('auth');
 
-//Admin Review Data
+//Admin Review Data Tiket Dinas
 Route::get('/dashboard/permintaantiketdinas/{id}/review', [SuratPermintaanTiketDinasController::class, 'reviewData'])->middleware('auth');
 
 //User

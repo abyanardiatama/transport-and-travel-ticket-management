@@ -138,7 +138,7 @@
                 const backButton = document.getElementById('backButton');
                 backButton.addEventListener('click', function(){
                     //back to /dashboard
-                    window.location.href = '/dashboard';
+                    window.location.href = '{{ url()->previous() }}';
                 });
             </script>
             {{-- button submit --}}

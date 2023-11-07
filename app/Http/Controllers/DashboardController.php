@@ -67,8 +67,11 @@ class DashboardController extends Controller
 
             if ($IdsuratTransport) {
                 $id = $IdsuratTransport->id;
-                $suratPerintahKerja = SuratPerintahKerja::where('id_surat_permintaan_transport', $id)->get();
-                $countSuratPerintahKerja = SuratPerintahKerja::where('id_surat_permintaan_transport', $id)->count();
+                // $suratPerintahKerja = SuratPerintahKerja::where('id_surat_permintaan_transport', $id)->get();
+                // $countSuratPerintahKerja = SuratPerintahKerja::where('id_surat_permintaan_transport', $id)->count();
+                
+                $suratPerintahKerja = SuratPerintahKerja::all()->take(3)->sortByDesc('created_at');
+                $countSuratPerintahKerja = SuratPerintahKerja::all()->count();
                 //get nomor polisi from surat permintaan transport
                 $suratTransport = SuratPermintaanTransport::where('id', $id)->first();
                 $countSuratTransport = SuratPermintaanTransport::where('id', $id)->count();

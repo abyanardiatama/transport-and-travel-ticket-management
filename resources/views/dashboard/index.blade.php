@@ -52,7 +52,7 @@
                 </div> 
                 <div class="border-solid border-2 border-blue-500 border-opacity-75 pl-2 h-28 rounded-lg bg-gray-50 dark:bg-gray-800">
                     <div class="py-1 text-sm lg:text-lg font-medium dark:text-gray-400 whitespace-nowrap">Surat Perintah Kerja</div>
-                    <div class="text-6xl font-bold dark:text-gray-400">{{ $countSuratTransport }}</div>
+                    <div class="text-6xl font-bold dark:text-gray-400">{{ $countSuratPerintahKerja }}</div>
                 </div> 
             </div>
         @elseif(Auth::user()->is_pegawai==true || Auth::user()->is_atasan1==true || Auth::user()->is_atasan2==true)

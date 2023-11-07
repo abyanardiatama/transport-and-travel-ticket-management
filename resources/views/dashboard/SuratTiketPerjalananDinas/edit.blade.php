@@ -116,27 +116,26 @@
             <div class="col-span-2 sm:col-span-1">
                 <input type="text" name="perusahaan_angkutan" id="perusahaan_angkutan" value="{{ old('perusahaan_angkutan', $suratTiketDinas->perusahaan_angkutan) }}" placeholder="Perusahaan Angkutan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
             </div>  
+            {{-- Note bahwa surat akan diteruskan ke atasan untuk persetujuan --}}
+            <div class="col-span-2">
+                {{-- <p class="text-gray-500">* Dengan menekan submit Anda telah menyetujui dibuatnya surat permintaan dan akan dikirimkan ke atasan</p> --}}
+                <div class="flex p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
+                    <svg class="flex-shrink-0 inline w-4 h-4 mr-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                    </svg>
+                    <span class="sr-only">Info</span>
+                    <div>
+                      <span class="font-medium">Pastikan Semua kolom telah diisi dengan benar</span>
+                        <ul class="mt-1.5 list-disc list-inside">
+                          <li>Dengan menekan submit Anda telah menyetujui dibuatnya surat permintaan</li>
+                          <li>Surat akan dikirimkan ke atasan untuk disetujui</li>
+                      </ul>
+                    </div>
+                  </div>
+            </div>
         </form>
-        {{-- Note bahwa surat akan diteruskan ke atasan untuk persetujuan --}}
-        <div class="col-span-2">
-            {{-- <p class="text-gray-500">* Dengan menekan submit Anda telah menyetujui dibuatnya surat permintaan dan akan dikirimkan ke atasan</p> --}}
-            <div class="flex p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
-                <svg class="flex-shrink-0 inline w-4 h-4 mr-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
-                </svg>
-                <span class="sr-only">Info</span>
-                <div>
-                  <span class="font-medium">Pastikan Semua kolom telah diisi dengan benar</span>
-                    <ul class="mt-1.5 list-disc list-inside">
-                      <li>Dengan menekan submit Anda telah menyetujui dibuatnya surat permintaan</li>
-                      <li>Surat akan dikirimkan ke atasan untuk disetujui</li>
-                  </ul>
-                </div>
-              </div>
-        </div>
-        {{-- back button --}}
-        <div class="col-span-2 sm:col-span-1 sm:flex justify-start">
-            <button id="backButton" class="text-sm w-full bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-lg shadow-lg hover:shadow-xl transition duration-200">Kembali</a>
+        <div class="text-center w-full flex col-span-2 sm:col-span-1 sm:flex justify-start">
+            <a href="{{ url()->previous() }}" id="backButton" class="text-sm w-full bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-lg shadow-lg hover:shadow-xl transition duration-200">Kembali</a>
         </div>
         <script>
             const backButton = document.getElementById('backButton');
@@ -156,6 +155,7 @@
             @endif
         </div>
 </div>
+
 @if (Auth::user()->is_admin == true)
     <script>
         //readonly all input
