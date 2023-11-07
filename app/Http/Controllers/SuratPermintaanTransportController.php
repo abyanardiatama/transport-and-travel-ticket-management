@@ -28,7 +28,7 @@ class SuratPermintaanTransportController extends Controller
         elseif(Auth::user()->is_admin == 1){
             //display surat permintaan transport that is_approve_pegawai = 1 and is_approve_atasan = 1, and is_approve_admin = 0
             $suratPermintaanTransport = SuratPermintaanTransport::all();
-            $countSuratPermintaanTransport = SuratPermintaanTransport::where('isApprove_pegawai', true)->where('isApprove_atasan', true)->where('isApprove_admin', null)->count();
+            $countSuratPermintaanTransport = SuratPermintaanTransport::all()->count();
         }
 
         //cek auth user is_atasan and email_atasan == email user

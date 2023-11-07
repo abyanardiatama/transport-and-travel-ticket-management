@@ -237,7 +237,7 @@
                 <div class="h-fit rounded bg-gray-50 dark:bg-gray-800">
                     <div class="py-1 text-sm lg:text-lg font-medium pb-4 dark:text-gray-400 dark:bg-gray-900 whitespace-nowrap">Daftar Penggunaan Kendaraan</div>
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                        <table class="w-screen text-sm text-left text-gray-500 dark:text-gray-400">
+                        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
                                     <th scope="col" class="px-6 py-3 w-10">
@@ -402,7 +402,7 @@
                 <div class="h-fit rounded bg-gray-50 dark:bg-gray-800">
                     <div class="py-1 text-sm lg:text-lg font-medium pb-4 dark:text-gray-400 dark:bg-gray-900 whitespace-nowrap">Surat Permintaan Transport</div>
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                        <table class="w-screen text-sm text-left text-gray-500 dark:text-gray-400">
+                        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
                                     <th scope="col" class="px-6 py-3 w-10">
@@ -466,7 +466,7 @@
                                                         Download     
                                                     </a>
                                                 @elseif ($suratTransport->isApprove_atasan == true)
-                                                    {{-- Button Approve Admin --}}
+                                                    {{-- Button Lengkapi Data Admin --}}
                                                     <a href="/dashboard/permintaantransport/{{ $suratTransport->id }}/lengkapidata" class="flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
                                                         <svg class="flex-shrink w-3 h-3 mr-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 5h1v12a2 2 0 0 1-2 2m0 0a2 2 0 0 1-2-2V2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v15a2 2 0 0 0 2 2h14ZM10 4h2m-2 3h2m-8 3h8m-8 3h8m-8 3h8M4 4h3v3H4V4Z"/>
@@ -789,7 +789,7 @@
                 <div class="h-fit rounded bg-gray-50 dark:bg-gray-800">
                     <div class="py-1 text-sm lg:text-lg font-medium pb-4 dark:text-gray-400 dark:bg-gray-900">Surat Permintaan Pengurusan Tiket Dinas </div>
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                        <table class="w-screen text-sm text-left text-gray-500 dark:text-gray-400">
+                        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
                                     <th scope="col" class="px-6 py-3">
@@ -858,7 +858,7 @@
                                             </td>
                                         @endif
                                         @if (Auth::user()->is_admin == true)
-                                            <td class="px-6 py-4">
+                                            <td class="px-6 py-4 whitespace-nowrap flex items-end justify-end">
                                                 {{-- Button Lihat Data Baru --}}
                                                 <button data-modal-target="modal1-{{ $suratTiketDinas->id }}" data-modal-toggle="modal1-{{ $suratTiketDinas->id }}" type="button" class="flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 whitespace-nowrap">
                                                     <svg class="flex-shrink w-3 h-3 mr-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 20 14">
@@ -1132,7 +1132,7 @@
                 <div class="h-fit rounded bg-gray-50 dark:bg-gray-800">
                     <div class="py-1 text-sm lg:text-lg font-medium pb-4 dark:text-gray-400 dark:bg-gray-900">Surat Perintah Kerja </div>
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                        <table class="w-screen text-sm text-left text-gray-500 dark:text-gray-400">
+                        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
                                     <th scope="col" class="px-6 py-3">
@@ -1175,9 +1175,9 @@
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             {{ $surat->tanggal_berangkat }}
                                         </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
+                                        <td class="px-6 py-4 whitespace-nowrap flex items-end justify-end">
                                             {{-- Download Button --}}
-                                            <button type="button" class="flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                                            <button type="button" class="flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
                                                 <svg class="w-3 h-3 mr-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 19">
                                                     <path stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15h.01M4 12H2a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1h-3M9.5 1v10.93m4-3.93-4 4-4-4"/>
                                                 </svg>

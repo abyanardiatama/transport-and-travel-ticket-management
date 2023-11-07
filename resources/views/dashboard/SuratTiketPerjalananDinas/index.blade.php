@@ -34,7 +34,7 @@
             <div class="h-fit mt-5 mb-5 rounded bg-gray-50 dark:bg-gray-800">
                 <div class="h-fit rounded bg-gray-50 dark:bg-gray-800">
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                        <table id="default-table" class="w-screen text-sm text-left text-gray-500 dark:text-gray-400">
+                        <table id="default-table" class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
                                     <th scope="col" class="px-6 py-3">
@@ -111,7 +111,7 @@
                                                                                 Tidak, Batal
                                                                             </button>
 
-                                                                            <a href="/dashboard/permintaantiketdinas/{{ $suratTiketDinas->id }}/delete" data-modal-hide="popup-modal-delete" type="button" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">
+                                                                            <a href="/dashboard/permintaantiketdinas/{{ $suratTiketDinas->id }}/delete" data-modal-hide="popup-modal-delete-dinas" type="button" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">
                                                                                 Ya, Hapus
                                                                             </a>
                                                                         </div>
@@ -268,7 +268,7 @@
                                                                             Tidak, Batal
                                                                         </button>
 
-                                                                        <a href="/dashboard/permintaantiketdinas/{{ $suratTiketDinas->id }}/delete" data-modal-hide="popup-modal-delete" type="button" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">
+                                                                        <a href="/dashboard/permintaantiketdinas/{{ $suratTiketDinas->id }}/delete" data-modal-hide="popup-modal-delete-dinas3" type="button" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">
                                                                             Ya, Hapus
                                                                         </a>
                                                                     </div>
@@ -398,7 +398,7 @@
                                                                             Tidak, Batal
                                                                         </button>
 
-                                                                        <a href="/dashboard/permintaantiketdinas/{{ $suratTiketDinas->id }}/delete" data-modal-hide="popup-modal-delete" type="button" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">
+                                                                        <a href="/dashboard/permintaantiketdinas/{{ $suratTiketDinas->id }}/delete" data-modal-hide="popup-modal-delete-dinas2" type="button" class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">
                                                                             Ya, Hapus
                                                                         </a>
                                                                     </div>
