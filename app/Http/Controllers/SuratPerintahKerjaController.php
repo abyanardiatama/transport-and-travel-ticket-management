@@ -70,6 +70,8 @@ class SuratPerintahKerjaController extends Controller
             'alamat' => 'required',
             'tanggal_berangkat' => 'required',
             'tanggal_kembali' => 'required',
+            'jam_berangkat' => 'required',
+            'jam_kembali' => 'required',
             'lama_perjalanan' => 'required',
             'isApprove_admin' => 'required',
             'isApprove_atasan' => 'required',
@@ -91,9 +93,12 @@ class SuratPerintahKerjaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(SuratPerintahKerja $suratPerintahKerja)
-    {
-        //
+    public function edit($id)
+    {   
+        $suratPerintahKerja = SuratPerintahKerja::find($id);    
+        return view('dashboard.SuratPerintahKerja.edit', compact('suratPerintahKerja'),[
+            'suratPerintahKerja' => $suratPerintahKerja,
+        ]);
     }
 
     /**
@@ -101,9 +106,30 @@ class SuratPerintahKerjaController extends Controller
      */
     public function update(UpdateSuratPerintahKerjaRequest $request, SuratPerintahKerja $suratPerintahKerja)
     {
-        //
+        $validatedData = $request->validate([
+            'id_admin' => 'required',
+            'nama_driver' => 'required',
+            'jobdesc' => 'Driver',
+            'keperluan' => 'required',
+            'alamat' => 'required',
+            'tanggal_berangkat' => 'required',
+            'tanggal_kembali' => 'required',
+            'jam_berangkat' => 'required',
+            'jam_kembali' => 'required',
+            'lama_perjalanan' => 'required',
+        ]);
+        $suratPerintahKerja->update($validatedData);
+        Session::flash('success', 'Surat Perintah Kerja berhasil diupdate');
+        return redirect('/dashboard/perintahkerja');
     }
 
+    public function deletePerintahKerja($id){
+        $suratPerintahKerja = SuratPerintahKerja::find($id);
+        // dd('berhasil');
+        $suratPerintahKerja->delete();
+        Session::flash('success', 'Surat Perintah Kerja berhasil dihapus');
+        return redirect('/dashboard/perintahkerja');
+    }
     /**
      * Remove the specified resource from storage.
      */

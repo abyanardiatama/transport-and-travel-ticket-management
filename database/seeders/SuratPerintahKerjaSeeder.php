@@ -20,6 +20,8 @@ class SuratPerintahKerjaSeeder extends Seeder
             'alamat' => 'Semarang',
             'tanggal_berangkat' => '2021-10-25',
             'tanggal_kembali' => '2021-10-25',
+            'jam_berangkat' => '13:00',
+            'jam_kembali' => '16:00',
             'lama_perjalanan' => 1,
             'isApprove_admin' => true,
             'isApprove_atasan' => true,

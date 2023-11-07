@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('alamat');
             $table->date('tanggal_berangkat');
             $table->date('tanggal_kembali');
+            $table->string('jam_berangkat');
+            $table->string('jam_kembali');
             $table->integer('lama_perjalanan');
             $table->boolean('isApprove_admin')->default(false);
             $table->boolean('isApprove_atasan')->default(false);

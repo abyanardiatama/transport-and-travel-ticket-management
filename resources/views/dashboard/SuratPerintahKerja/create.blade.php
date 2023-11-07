@@ -61,15 +61,22 @@
                 <label for="tanggal_kembali" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal Kembali</label>
                 <input type="date" name="tanggal_kembali" id="tanggal_kembali" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ old('tanggal_kembali', $suratPermintaanTransport['tanggal_kembali']) }}" placeholder="Tanggal Kembali" required>
             </div>
+            {{-- field jam berangkat --}}
+            <div class="col-span-2 sm:col-span-1">
+                <label for="jam_berangkat" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jam Berangkat</label>
+                <input type="time" name="jam_berangkat" id="jam_berangkat" class="rounded-r-0 rounded-l-lg  bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="{{ old('jam_berangkat', $suratPermintaanTransport['jam_berangkat']) }}" placeholder="Jam Berangkat" required>
+            </div>
+            {{-- field jam kembali --}}
+            <div class="col-span-2 sm:col-span-1">
+                <label for="jam_kembali" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jam Kembali</label>
+                <input type="time" name="jam_kembali" id="jam_kembali" class="rounded-none rounded-r-lg bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="{{ old('jam_kembali', $suratPermintaanTransport['jam_kembali']) }}" placeholder="Jam Kembali" required>
+            </div>
             {{-- field lama perjalanan --}}
             <div class="col-span-2 sm:col-span-1">
                 <label for="lama_perjalanan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lama Perjalanan</label>
                 <div class="flex">
                     <input type="number" name="lama_perjalanan" id="lama_perjalanan" class="rounded-r-0 rounded-l-lg  bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ old('lama_perjalanan', $lama_perjalanan) }}" placeholder="Lama Perjalanan" required>
                     <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-r-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
-                        {{-- <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 2a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1M2 5h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Zm8 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z"/>
-                        </svg> --}}
                         Hari
                     </span>
                 </div>
@@ -79,9 +86,6 @@
                 <label for="biaya_perjalanan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Biaya Perjalanan</label>
                 <div class="flex">
                     <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-r-0 border-gray-300 rounded-l-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
-                        {{-- <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 2a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1M2 5h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Zm8 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z"/>
-                        </svg> --}}
                         Rp
                     </span>
                     <input type="text" name="biaya_perjalanan" id="biaya_perjalanan" class="rounded-none rounded-r-lg bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ old('biaya_perjalanan', $suratPermintaanTransport['biaya_perjalanan']) }}" placeholder="Biaya Perjalanan" required>
@@ -105,16 +109,14 @@
             </div>
             {{-- back button --}}
             <div class="col-span-2 sm:col-span-1 sm:flex justify-start">
-                {{-- back to dashboard --}}
-                {{-- back to surat permintaan transport --}}
-                {{-- <button id="backButton" class="text-sm w-full bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-lg shadow-lg hover:shadow-xl transition duration-200">Kembali</button> --}}
+                <button id="backButton" class="text-sm w-full bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-lg shadow-lg hover:shadow-xl transition duration-200">Kembali</button>
             </div>
             <script>
-                // const backButton = document.getElementById('backButton');
-                // backButton.addEventListener('click', function(){
-                //     //back to /dashboard
-                //     window.location.href = '/dashboard';
-                // });
+                const backButton = document.getElementById('backButton');
+                backButton.addEventListener('click', function(){
+                    //back to /dashboard
+                    window.location.href = '{{ url()->previous() }}';
+                });
             </script>
             {{-- button submit --}}
             <div class="col-span-2 sm:flex justify-end">
