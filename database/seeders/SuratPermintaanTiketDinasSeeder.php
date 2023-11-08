@@ -49,7 +49,7 @@ class SuratPermintaanTiketDinasSeeder extends Seeder
             'nama_pemohon' => 'Agus Riyanto',
             'id_pemohon' => '2',
             'unit' => 'PDO-4',
-            'email_atasan' => 'atasan@gmail.com',
+            'email_atasan' => 'atasan1@gmail.com',
             'beban_biaya' => 'PT. ABC',
             'jenis_transportasi' => 'Kapal Laut',
             'jenis_kelas' => 'Ekonomi',

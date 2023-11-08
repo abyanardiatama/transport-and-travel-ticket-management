@@ -52,6 +52,7 @@ class SuratPermintaanTransportSeeder extends Seeder
         ]);
         SuratPermintaanTransport::create([
             'nama_pemohon' => 'Pegawai SCI',
+            'id_admin' => '1',
             'id_pemohon' => '2',
             'unit' => 'PDO-4',
             'email_atasan' => 'atasan2@gmail.com',

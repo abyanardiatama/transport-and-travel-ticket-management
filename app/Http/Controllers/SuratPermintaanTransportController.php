@@ -11,6 +11,7 @@ use App\Models\Kendaraan;
 use App\Models\User;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
+use PhpOffice\PhpWord\PhpWord;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 class SuratPermintaanTransportController extends Controller
@@ -72,6 +73,7 @@ class SuratPermintaanTransportController extends Controller
         $validatedData = $request->validate([
             'nama_pemohon' => 'required',
             'unit' => 'required',
+            'id_admin' => 'required',
             'id_pemohon' => 'required',
             'email_atasan' => 'required|email:rfc,dns',
             'biaya_perjalanan' => 'required',
@@ -136,51 +138,6 @@ class SuratPermintaanTransportController extends Controller
             Session::flash('error', 'Waktu berangkat tidak valid');
             return redirect('/dashboard/permintaantransport/create');
         }
-        //check if any same data on database
-        // elseif(SuratPermintaanTransport::where('tanggal_berangkat', $validatedData['tanggal_berangkat'])
-        // ->where('tanggal_kembali', $validatedData['tanggal_kembali'])
-        // ->where('jam_berangkat', $validatedData['jam_berangkat'])
-        // ->where('jam_kembali', $validatedData['jam_kembali'])
-        // ->exists()){
-        //     Session::flash('error', 'Jadwal sudah sama dengan yang lain');
-        //     return redirect('/dashboard/permintaantransport/create');
-        // }
-        
-        //check if tanggal_berangkat and tanggal_kembali is same but jam_berangkat is overlap with other data in database
-        // elseif(SuratPermintaanTransport::where('tanggal_berangkat', $validatedData['tanggal_berangkat'])
-        // ->where('tanggal_kembali', $validatedData['tanggal_kembali'])
-        // ->where('jam_berangkat', '<=', $validatedData['jam_berangkat'])
-        // ->where('jam_kembali', '>=', $validatedData['jam_berangkat'])
-        // ->exists()){
-        //     Session::flash('error', 'Jadwal sudah terisi');
-        //     return redirect('/dashboard/permintaantransport/create');
-        // }
-        // elseif(SuratPermintaanTransport::where('tanggal_berangkat', $validatedData['tanggal_berangkat'])
-        // ->where('tanggal_kembali', $validatedData['tanggal_kembali'])
-        // ->where('jam_berangkat', '>=', $validatedData['jam_berangkat'])
-        // ->where('jam_berangkat', '<=', $validatedData['jam_kembali'])
-        // ->exists()){
-        //     Session::flash('error', 'Jadwal sudah terisi');
-        //     return redirect('/dashboard/permintaantransport/create');
-        // }
-        // elseif(SuratPermintaanTransport::where('tanggal_berangkat', $validatedData['tanggal_berangkat'])
-        // ->where('tanggal_kembali', $validatedData['tanggal_kembali'])
-        // ->where('jam_berangkat', '>=', $validatedData['jam_berangkat'])
-        // ->where('jam_kembali', '<=', $validatedData['jam_kembali'])
-        // ->exists()){
-        //     Session::flash('error', 'Mobil masih dipakai');
-        //     return redirect('/dashboard/permintaantransport/create');
-        // }
-        // //check if tanggal_berangkat and tanggal_kembali is new but jam_berangkat is overlap with other data in database
-        // elseif(SuratPermintaanTransport::where('tanggal_berangkat', '<=', $validatedData['tanggal_berangkat'])
-        // ->where('tanggal_kembali', '>=', $validatedData['tanggal_berangkat'])
-        // ->where('jam_berangkat', '<=', $validatedData['jam_berangkat'])
-        // ->where('jam_kembali', '>=', $validatedData['jam_berangkat'])
-        // ->exists()){
-        //     Session::flash('error', 'Jadwal sudah dipakai');
-        //     return redirect('/dashboard/permintaantransport/create');
-        // }
-
         else{
             //create new SuratPermintaanTransport
             SuratPermintaanTransport::create($validatedData);
@@ -497,7 +454,59 @@ class SuratPermintaanTransportController extends Controller
         }
         
     }
-
+    public function downloadTransport($id)
+    {
+        $suratTransport = SuratPermintaanTransport::find($id);
+        //split unit, example SCI-4 to SCI and 4
+        $unit = $suratTransport->unit;
+        $unit = explode('-', $unit);
+        $unit0 = $unit[0];
+        $unit1 = $unit[1];
+        //get nama atasan based email_atasan
+        $nama_atasan = User::where('email', $suratTransport->email_atasan)->first();
+        $nama_admin = User::where('id', $suratTransport->id_admin)->first();
+        $phpWord = new \PhpOffice\PhpWord\TemplateProcessor('templates/surat_permintaan_transportasi.docx');
+        $phpWord->setValue('nama_pemohon', $suratTransport->nama_pemohon);
+        $phpWord->setValue('nama_atasan', $nama_atasan->name);
+        $phpWord->setValue('nama_admin', $nama_admin->name);
+        $phpWord->setValue('portofolio', $unit0);
+        $phpWord->setValue('sub_portofolio', $unit1);
+        $phpWord->setValue('unit', $suratTransport->unit);
+        $phpWord->setValue('biaya_perjalanan', $suratTransport->biaya_perjalanan);
+        $phpWord->setValue('tujuan', $suratTransport->tujuan);
+        $phpWord->setValue('rute_pemakaian', $suratTransport->rute_pemakaian);
+        $phpWord->setValue('keperluan', $suratTransport->keperluan);
+        $phpWord->setValue('jumlah_penumpang', $suratTransport->jumlah_penumpang);
+        $phpWord->setValue('tglbrkt', $suratTransport->tanggal_berangkat);
+        $phpWord->setValue('tglkbl', $suratTransport->tanggal_kembali);
+        $phpWord->setValue('jambrkt', $suratTransport->jam_berangkat);
+        $phpWord->setValue('jamkbl', $suratTransport->jam_kembali);
+        //if nama driver and nomor polisi not null checked the checkbox
+        if($suratTransport->nama_driver != null && $suratTransport->nomor_polisi != null){
+            $phpWord->setValue('ada_kendaraan', 'v');
+            $phpWord->setValue('nama_driver', $suratTransport->nama_driver);
+            $phpWord->setValue('nomor_polisi', $suratTransport->nomor_polisi);
+            $phpWord->setValue('tglbrkt_admin', $suratTransport->tanggal_berangkat);
+            $phpWord->setValue('tglkbl_admin', $suratTransport->tanggal_kembali);
+            $phpWord->setValue('jambrkt_admin', $suratTransport->jam_berangkat);
+            $phpWord->setValue('jamkbl_admin', $suratTransport->jam_kembali);
+            $phpWord->setValue('kendaraan_lain', '');
+        }
+        else{
+            $phpWord->setValue('tidak_ada_kendaraan', 'v');
+            $phpWord->setValue('nama_driver', '');
+            $phpWord->setValue('nomor_polisi', '');
+            $phpWord->setValue('tglbrkt_admin', '');
+            $phpWord->setValue('tglkbl_admin', '');
+            $phpWord->setValue('kendaraan_lain', $suratTransport->kendaraan_lain);
+        }
+        // dd('lesgoo');
+        $filename = 'Surat Permintaan Transport - ' . $suratTransport->id . $suratTransport->nama_pemohon . '.docx';
+        //save into storage app/public/surat_permintaan_transport
+        // $phpWord->saveAs('surat_permintaan_transport/' . $filename);
+        $phpWord->saveAs($filename);
+        return response()->download($filename)->deleteFileAfterSend(true);
+    }
     public function deleteTransport($id)
     {
         $suratPermintaanTransport = SuratPermintaanTransport::find($id);

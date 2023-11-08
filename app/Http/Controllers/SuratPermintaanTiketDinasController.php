@@ -6,6 +6,7 @@ use App\Http\Requests\StoreSuratPermintaanTiketDinasRequest;
 use App\Http\Requests\UpdateSuratPermintaanTiketDinasRequest;
 use App\Models\SuratPermintaanTiketDinas;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
 
 class SuratPermintaanTiketDinasController extends Controller
@@ -187,7 +188,7 @@ class SuratPermintaanTiketDinasController extends Controller
             //update surat dinas
             $suratPermintaanTiketDinas->update($validatedData);
             Session::flash('success', 'Surat Permintaan Tiket Dinas Berhasil Diperbarui');
-            return redirect('/dashboard');
+            return redirect('/dashboard/');
         }
 
     }
@@ -203,6 +204,30 @@ class SuratPermintaanTiketDinasController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+    public function downloadTiketDinas($id)
+    {
+        $suratPermintaanTiketDinas = SuratPermintaanTiketDinas::find($id);
+        $nama_atasan = User::where('email', $suratPermintaanTiketDinas->email_atasan)->first();
+        
+        $phpWord = new \PhpOffice\PhpWord\TemplateProcessor('templates/surat_permintaan_pengurusan_tiket_perjalanan_dinas.docx');
+        $phpWord->setValue('nama_pemohon', $suratPermintaanTiketDinas->nama_pemohon);
+        $phpWord->setValue('nama_atasan', $nama_atasan->name);
+        $phpWord->setValue('unit', $suratPermintaanTiketDinas->unit);
+        $phpWord->setValue('email_atasan', $suratPermintaanTiketDinas->email_atasan);
+        $phpWord->setValue('beban_biaya', $suratPermintaanTiketDinas->beban_biaya);
+        $phpWord->setValue('jenis_transportasi', $suratPermintaanTiketDinas->jenis_transportasi);
+        $phpWord->setValue('jenis_kelas', $suratPermintaanTiketDinas->jenis_kelas);
+        $phpWord->setValue('rute_asal', $suratPermintaanTiketDinas->rute_asal);
+        $phpWord->setValue('rute_tujuan', $suratPermintaanTiketDinas->rute_tujuan);
+        $phpWord->setValue('tanggal_berangkat', Carbon::parse($suratPermintaanTiketDinas->tanggal_berangkat)->translatedFormat('d F Y'));
+        $phpWord->setValue('jam_berangkat', Carbon::parse($suratPermintaanTiketDinas->jam_berangkat)->format('H:i'));
+        $phpWord->setValue('perusahaan_angkutan', $suratPermintaanTiketDinas->perusahaan_angkutan);
+        $phpWord->setValue('created_at', $suratPermintaanTiketDinas->created_at->translatedFormat('d F Y'));
+        $filename = 'Surat Permintaan Pengurusan Tiket Perjalanan Dinas - ' . $suratPermintaanTiketDinas->nama_pemohon . '.docx';
+        $phpWord->saveAs($filename);
+        return response()->download($filename)->deleteFileAfterSend(true);
+
+    }
     public function destroy($id)
     {
         //

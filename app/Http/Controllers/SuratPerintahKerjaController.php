@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSuratPerintahKerjaRequest;
 use App\Http\Requests\UpdateSuratPerintahKerjaRequest;
+use PhpOffice\PhpWord\PhpWord;
 use App\Models\SuratPerintahKerja;
 use Illuminate\Support\Facades\Auth;
 use App\Models\SuratPermintaanTransport;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
 
 class SuratPerintahKerjaController extends Controller
@@ -129,6 +131,26 @@ class SuratPerintahKerjaController extends Controller
         $suratPerintahKerja->delete();
         Session::flash('success', 'Surat Perintah Kerja berhasil dihapus');
         return redirect('/dashboard/perintahkerja');
+    }
+    
+    public function downloadPerintahKerja($id){
+        $suratPerintahKerja = SuratPerintahKerja::find($id);
+        
+        $phpWord = new \PhpOffice\PhpWord\TemplateProcessor('templates/surat_perintah_kerja.docx');
+        $phpWord->setValue('nama_driver', $suratPerintahKerja->nama_driver);
+        $phpWord->setValue('jobdesc', $suratPerintahKerja->jobdesc);
+        $phpWord->setValue('keperluan', $suratPerintahKerja->keperluan);
+        $phpWord->setValue('alamat', $suratPerintahKerja->alamat);
+        $phpWord->setValue('tanggal_berangkat', Carbon::parse($suratPerintahKerja->tanggal_berangkat)->translatedFormat('d F Y'));
+        $phpWord->setValue('tanggal_kembali', Carbon::parse($suratPerintahKerja->tanggal_kembali)->translatedFormat('d F Y'));
+        $phpWord->setValue('jam_berangkat', $suratPerintahKerja->jam_berangkat);
+        $phpWord->setValue('jam_kembali', $suratPerintahKerja->jam_kembali);
+        $phpWord->setValue('lama_perjalanan', $suratPerintahKerja->lama_perjalanan);
+
+        $filename = 'Surat Perintah Kerja - '.$suratPerintahKerja->nama_driver.'.docx';
+        $phpWord->saveAs($filename);
+        return response()->download($filename)->deleteFileAfterSend(true);
+
     }
     /**
      * Remove the specified resource from storage.

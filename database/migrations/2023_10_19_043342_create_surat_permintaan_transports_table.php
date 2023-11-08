@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('surat_permintaan_transports', function (Blueprint $table) {
             $table->id();
             $table->string('id_pemohon');
+            $table->string('id_admin')->default('-1');
             $table->string('nama_pemohon');
             $table->string('unit');
             $table->string('email_atasan');

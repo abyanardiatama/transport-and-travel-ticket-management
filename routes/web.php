@@ -75,3 +75,10 @@ Route::put('/dashboard/kendaraan/{id}/edit', [KendaraanController::class, 'updat
 
 //Log Activity
 Route::get('/dashboard/log', [DashboardController::class, 'logActivity'])->middleware('auth');
+
+//Download Surat Permintaaan Transport
+Route::get('/dashboard/permintaantransport/{id}/download', [SuratPermintaanTransportController::class, 'downloadTransport'])->middleware('auth');
+//Download Surat Tiket Dinas
+Route::get('/dashboard/permintaantiketdinas/{id}/download', [SuratPermintaanTiketDinasController::class, 'downloadTiketDinas'])->middleware('auth');
+//Download Surat Perintah Kerja
+Route::get('/dashboard/perintahkerja/{id}/download', [SuratPerintahKerjaController::class, 'downloadPerintahKerja'])->middleware('auth');
