@@ -15,10 +15,10 @@
         </div>
         <div class="flex items-center">
 
-            <svg id="moon" class="hidden w-5 h-5 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 18 20">
+            <svg id="moon" class="hidden w-5 h-5 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="yellow" viewBox="0 0 18 20">
                 <path d="M17.8 13.75a1 1 0 0 0-.859-.5A7.488 7.488 0 0 1 10.52 2a1 1 0 0 0 0-.969A1.035 1.035 0 0 0 9.687.5h-.113a9.5 9.5 0 1 0 8.222 14.247 1 1 0 0 0 .004-.997Z"/>
             </svg>
-            <svg id="sun" class="hidden w-5 h-5 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="black" viewBox="0 0 20 20">
+            <svg id="sun" class="w-5 h-5 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="salmon" viewBox="0 0 20 20">
                 <path d="M10 15a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0-11a1 1 0 0 0 1-1V1a1 1 0 0 0-2 0v2a1 1 0 0 0 1 1Zm0 12a1 1 0 0 0-1 1v2a1 1 0 1 0 2 0v-2a1 1 0 0 0-1-1ZM4.343 5.757a1 1 0 0 0 1.414-1.414L4.343 2.929a1 1 0 0 0-1.414 1.414l1.414 1.414Zm11.314 8.486a1 1 0 0 0-1.414 1.414l1.414 1.414a1 1 0 0 0 1.414-1.414l-1.414-1.414ZM4 10a1 1 0 0 0-1-1H1a1 1 0 0 0 0 2h2a1 1 0 0 0 1-1Zm15-1h-2a1 1 0 1 0 0 2h2a1 1 0 0 0 0-2ZM4.343 14.243l-1.414 1.414a1 1 0 1 0 1.414 1.414l1.414-1.414a1 1 0 0 0-1.414-1.414ZM14.95 6.05a1 1 0 0 0 .707-.293l1.414-1.414a1 1 0 1 0-1.414-1.414l-1.414 1.414a1 1 0 0 0 .707 1.707Z"/>
             </svg>
             <label class="relative inline-flex items-center cursor-pointer">
@@ -31,19 +31,33 @@
                 const rootElement = document.documentElement;
                 const sun = document.getElementById('sun');
                 const moon = document.getElementById('moon');
-              
-                darkModeToggle.addEventListener('change', () => {
-                  if (darkModeToggle.checked) {
+            
+                // Check if dark mode is stored in localStorage
+                const isDarkMode = localStorage.getItem('darkMode') === 'true';
+            
+                // Set initial state based on localStorage
+                if (isDarkMode) {
+                    darkModeToggle.checked = true;
                     rootElement.classList.add('dark');
                     sun.classList.add('hidden');
                     moon.classList.remove('hidden');
-                  } else {
-                    rootElement.classList.remove('dark');
-                    sun.classList.remove('hidden');
-                    moon.classList.add('hidden');
-                  }
+                }
+            
+                darkModeToggle.addEventListener('change', () => {
+                    if (darkModeToggle.checked) {
+                        localStorage.setItem('darkMode', 'true');
+                        rootElement.classList.add('dark');
+                        sun.classList.add('hidden');
+                        moon.classList.remove('hidden');
+                    } else {
+                        localStorage.setItem('darkMode', 'false');
+                        rootElement.classList.remove('dark');
+                        sun.classList.remove('hidden');
+                        moon.classList.add('hidden');
+                    }
                 });
-              </script>
+            </script>
+            
               
             <div class="flex items-center ml-3">
                 <div>
