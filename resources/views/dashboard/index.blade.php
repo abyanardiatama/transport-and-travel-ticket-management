@@ -150,8 +150,7 @@
                                     <div class="text-left whitespace-normal">
                                         <span class="font-medium">Periksa data dengan benar</span>
                                         <ul class="mt-1.5 list-disc list-inside">
-                                            <li>Dengan menyetujui data ini, data akan diteruskan untuk dilengkapi</li>
-                                            <li>Data akan dikirimkan ke admin untuk disetujui</li>
+                                            <li>Dengan menekan submit, maka pengguna baru akan dibuat</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -209,8 +208,7 @@
                                     <div class="text-left whitespace-normal">
                                         <span class="font-medium">Periksa data dengan benar</span>
                                         <ul class="mt-1.5 list-disc list-inside">
-                                            <li>Dengan menyetujui data ini, data akan diteruskan untuk dilengkapi</li>
-                                            <li>Data akan dikirimkan ke admin untuk disetujui</li>
+                                            <li>Dengan menekan submit, maka data kendaraan baru akan dibuat</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -280,23 +278,23 @@
                                         <td class="px-6 py-4 text-right flex items-center justify-center">
                                             @if ($checkUser)
                                                 {{-- Button Lihat Data --}}
-                                                <button data-modal-target="defaultModal" data-modal-toggle="defaultModal" type="button" class="flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-5 py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 whitespace-nowrap">
+                                                <button data-modal-target="modal-lihat-data-{{ $suratTransport->id }}" data-modal-toggle="modal-lihat-data-{{ $suratTransport->id }}" type="button" class="flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-5 py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 whitespace-nowrap">
                                                     <svg class="flex-shrink w-3 h-3 mr-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 20 14">
                                                         <path d="M10 0C4.612 0 0 5.336 0 7c0 1.742 3.546 7 10 7 6.454 0 10-5.258 10-7 0-1.664-4.612-7-10-7Zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z"/>
                                                     </svg>
                                                     Lihat Data
                                                 </button>
                                                 {{-- Modal Lihat Data --}}
-                                                <div id="defaultModal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                                <div id="modal-lihat-data-{{ $suratTransport->id }}" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
                                                     <div class="relative w-full max-w-2xl max-h-full">
                                                         <!-- Modal content -->
                                                         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                                                             <!-- Modal header -->
                                                             <div class="flex items-start justify-start p-4 border-b rounded-t dark:border-gray-600">
                                                                 <h3 class="text-left text-md sm:text-lg font-medium text-gray-900 dark:text-white">
-                                                                    Surat Permintaan Sarana Transport
+                                                                    Data Penggunaan Kendaraan
                                                                 </h3>
-                                                                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="defaultModal">
+                                                                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="modal-lihat-data-{{ $suratTransport->id }}">
                                                                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                                                                     </svg>
@@ -356,10 +354,9 @@
                                                                     </svg>
                                                                     <span class="sr-only">Info</span>
                                                                     <div class="text-left whitespace-normal">
-                                                                        <span class="font-medium">Periksa data dengan benar</span>
+                                                                        <span class="font-medium">Periksa kembali data dengan benar</span>
                                                                         <ul class="mt-1.5 list-disc list-inside">
-                                                                            <li>Dengan menyetujui data ini, data akan diteruskan untuk dilengkapi</li>
-                                                                            <li>Data akan dikirimkan ke admin untuk disetujui</li>
+                                                                            <li>Pemohon dapat mengunduh surat permintaan yang telah diajukan</li> 
                                                                         </ul>
                                                                     </div>
                                                                 </div>
@@ -558,10 +555,10 @@
                                                                     </svg>
                                                                     <span class="sr-only">Info</span>
                                                                     <div class="text-left whitespace-normal">
-                                                                        <span class="font-medium">Periksa data dengan benar</span>
+                                                                        <span class="font-medium">Periksa kembali data dengan benar</span>
                                                                         <ul class="mt-1.5 list-disc list-inside">
-                                                                            <li>Dengan menyetujui data ini, data akan diteruskan untuk dilengkapi</li>
-                                                                            <li>Data akan dikirimkan ke admin untuk disetujui</li>
+                                                                            <li>Pengguna dapat menghubungi admin untuk data lebih lanjut </li>
+                                                                            <li>Pengguna dapat mengunduh surat perintah kerja</li>
                                                                         </ul>
                                                                     </div>
                                                                 </div>
@@ -650,10 +647,10 @@
                                                                     </svg>
                                                                     <span class="sr-only">Info</span>
                                                                     <div class="text-left whitespace-normal">
-                                                                        <span class="font-medium">Periksa data dengan benar</span>
+                                                                        <span class="font-medium"></span>
                                                                         <ul class="mt-1.5 list-disc list-inside">
                                                                             <li>Dengan menyetujui data ini, data akan diteruskan untuk dilengkapi</li>
-                                                                            <li>Data akan dikirimkan ke admin untuk disetujui</li>
+                                                                            <li>Data akan dikirimkan kepada pemohon apabila telah dilengkapi</li>
                                                                         </ul>
                                                                     </div>
                                                                 </div>
@@ -940,10 +937,10 @@
                                                                     </svg>
                                                                     <span class="sr-only">Info</span>
                                                                     <div class="text-left whitespace-normal">
-                                                                        <span class="font-medium">Periksa data dengan benar</span>
+                                                                        <span class="font-medium">Periksa kembali data dengan benar</span>
                                                                         <ul class="mt-1.5 list-disc list-inside">
-                                                                            <li>Dengan menyetujui data ini, data akan diteruskan untuk dilengkapi</li>
-                                                                            <li>Data akan dikirimkan ke admin untuk disetujui</li>
+                                                                            <li>Data yang telah disetujui akan dikirimkan kembali kepada pemohon</li>
+                                                                            <li>Pemohon dapat mengunduh data yang telah disetujui</li>
                                                                         </ul>
                                                                     </div>
                                                                 </div>
@@ -1034,8 +1031,8 @@
                                                                     <div class="text-left whitespace-normal">
                                                                         <span class="font-medium">Periksa data dengan benar</span>
                                                                         <ul class="mt-1.5 list-disc list-inside">
-                                                                            <li>Dengan menyetujui data ini, data akan diteruskan untuk dilengkapi</li>
-                                                                            <li>Data akan dikirimkan ke admin untuk disetujui</li>
+                                                                            <li>Dengan menyetujui data ini, data akan dikirimkan kembali kepada pemohon</li>
+                                                                            <li>Pemohon dapat mengunduh data yang telah disetujui</li>
                                                                         </ul>
                                                                     </div>
                                                                 </div>

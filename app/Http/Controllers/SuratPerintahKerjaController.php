@@ -110,11 +110,13 @@ class SuratPerintahKerjaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSuratPerintahKerjaRequest $request, SuratPerintahKerja $suratPerintahKerja)
+    public function update(UpdateSuratPerintahKerjaRequest $request, $id)
     {
+        $suratPerintahKerja = SuratPerintahKerja::find($id);
         $validatedData = $request->validate([
             'id_admin' => 'required',
             'nama_driver' => 'required',
+            'nomor_polisi' => 'required',
             'jobdesc' => 'Driver',
             'keperluan' => 'required',
             'alamat' => 'required',
@@ -124,6 +126,120 @@ class SuratPerintahKerjaController extends Controller
             'jam_kembali' => 'required',
             'lama_perjalanan' => 'required',
         ]);
+        //update surat permintaan transport only
+        $suratPermintaanTransport = SuratPermintaanTransport::where('id', $suratPerintahKerja->id_surat_permintaan_transport)->first();
+        //check ketersediaan kendaraan
+        if($validatedData['nama_driver'] != $suratPermintaanTransport['nama_driver'] &&
+         $validatedData['tanggal_berangkat'] != $suratPermintaanTransport['tanggal_berangkat'] &&
+          $validatedData['tanggal_kembali'] != $suratPermintaanTransport['tanggal_kembali'] &&
+           $validatedData['jam_berangkat'] != $suratPermintaanTransport['jam_berangkat'] &&
+            $validatedData['jam_kembali'] != $suratPermintaanTransport['jam_kembali']){
+            //Mengecek data yang sama
+            if(SuratPermintaanTransport::where('nama_driver', $validatedData['nama_driver'])
+            ->where('nomor_polisi', $validatedData['nomor_polisi'])
+            ->where('tanggal_berangkat', $validatedData['tanggal_berangkat'])
+            ->where('tanggal_kembali', $validatedData['tanggal_kembali'])
+            ->where('jam_berangkat', $validatedData['jam_berangkat'])
+            ->where('jam_kembali', $validatedData['jam_berangkat'])
+            ->exists()){
+                dd('sama1');
+                Session::flash('error', 'Jadwal sudah terisi, silahkan cek daftar penggunaan kendaraan');
+                return redirect('/dashboard/perintahkerja/'.$suratPerintahKerja->id.'/edit');
+            }
+            //Mengencek hari yang sama dimana jam berangkat berada diantara jam berangkat dan jam kembali di database 
+            elseif(SuratPermintaanTransport::where('nama_driver', $validatedData['nama_driver'])
+            ->where('nomor_polisi', $validatedData['nomor_polisi'])
+            ->where('tanggal_berangkat', $validatedData['tanggal_berangkat'])
+            ->where('tanggal_kembali', $validatedData['tanggal_kembali'])
+            ->where('jam_berangkat', '<=', $validatedData['jam_berangkat'])
+            ->where('jam_kembali', '>=', $validatedData['jam_berangkat'])
+            ->exists()){
+                dd('sama2');
+                Session::flash('error', 'Jadwal sudah terisi, silahkan cek daftar penggunaan kendaraan');
+                return redirect('/dashboard/perintahkerja/'.$suratPerintahKerja->id.'/edit');
+            }
+            //Mengencek hari yang sama dimana jam berangkat berada sebelum jam berangkat di database dan jam kembali berada setelah jam berangkat di database
+            elseif(SuratPermintaanTransport::where('nama_driver', $validatedData['nama_driver'])
+            ->where('nomor_polisi', $validatedData['nomor_polisi'])
+            ->where('tanggal_berangkat', $validatedData['tanggal_berangkat'])
+            ->where('tanggal_kembali', $validatedData['tanggal_kembali'])
+            ->where('jam_berangkat', '>=', $validatedData['jam_berangkat'])
+            ->where('jam_berangkat', '<=', $validatedData['jam_kembali'])
+            ->exists()){
+                dd('sama3');
+                Session::flash('error', 'Jadwal sudah terisi, silahkan cek daftar penggunaan kendaraan');
+                return redirect('/dashboard/perintahkerja/'.$suratPerintahKerja->id.'/edit');
+            }
+            //Mengencek dimana tanggal berangkat berada diantara tanggal berangkat dan tanggal kembali di database
+            elseif(SuratPermintaanTransport::where('nama_driver', $validatedData['nama_driver'])
+            ->where('nomor_polisi', $validatedData['nomor_polisi'])
+            ->where('tanggal_berangkat', '<=', $validatedData['tanggal_berangkat'])
+            ->where('tanggal_kembali', '>=', $validatedData['tanggal_berangkat'])
+            ->where('jam_kembali', '>=', $validatedData['jam_berangkat'])
+            ->exists()){
+                dd('sama4');
+                Session::flash('error', 'Jadwal sudah terisi, silahkan cek daftar penggunaan kendaraan');
+                return redirect('/dashboard/perintahkerja/'.$suratPerintahKerja->id.'/edit');
+            }
+            //Mengencek dimana tanggal berangkat berada sebelum tanggal berangkat di database dan tanggal kembali berada setelah tanggal berangkat di database
+            elseif(SuratPermintaanTransport::where('nama_driver', $validatedData['nama_driver'])
+            ->where('nomor_polisi', $validatedData['nomor_polisi'])
+            ->where('tanggal_berangkat', '>=', $validatedData['tanggal_berangkat'])
+            ->where('tanggal_berangkat', '>=', $validatedData['tanggal_kembali'])
+            ->where('jam_berangkat', '<=', $validatedData['jam_kembali'])
+            ->exists()){
+                dd('sama5');
+                Session::flash('error', 'Jadwal sudah terisi, silahkan cek daftar penggunaan kendaraan');
+                return redirect('/dashboard/perintahkerja/'.$suratPerintahKerja->id.'/edit');
+            }
+            elseif(SuratPermintaanTransport::where('nama_driver', $validatedData['nama_driver'])
+            ->where('nomor_polisi', $validatedData['nomor_polisi'])
+            ->where('tanggal_berangkat', '>=', $validatedData['tanggal_berangkat'])
+            ->where('tanggal_kembali', '<=', $validatedData['tanggal_kembali'])
+            ->exists()){;
+                dd('sama6');
+                Session::flash('error', 'Jadwal sudah terisi, silahkan cek daftar penggunaan kendaraan');
+                return redirect('/dashboard/perintahkerja/'.$suratPerintahKerja->id.'/edit');
+            }
+            else{
+                Session::flash('success', 'Surat Permintaan Transport berhasil dilengkapi');
+                //get data from surat permintaan transport
+                $suratPermintaanTransport = SuratPermintaanTransport::find($id);
+                //Count lama perjalanan based on tanggal berangkat and tanggal kembali
+                $tanggal_berangkat = $validatedData['tanggal_berangkat'];
+                $tanggal_kembali = $validatedData['tanggal_kembali'];
+                $lama_perjalanan = (strtotime($tanggal_kembali) - strtotime($tanggal_berangkat)) / (60 * 60 * 24);
+                $lama_perjalanan = $lama_perjalanan + 1;
+                $suratPermintaanTransport->update([
+                    'id_admin' => $request->id_admin,
+                    'keperluan' => $request->keperluan,
+                    'tujuan' => $request->alamat,
+                    'tanggal_berangkat' => $request->tanggal_berangkat,
+                    'tanggal_kembali' => $request->tanggal_kembali,
+                    'jam_berangkat' => $request->jam_berangkat,
+                    'jam_kembali' => $request->jam_kembali,
+                    'isApprove_admin' => $request->isApprove_admin,
+                    'isApprove_atasan' => $request->isApprove_atasan,
+                    'nomor_polisi' => $request->nomor_polisi,
+                    'nama_driver' => $request->nama_driver,
+                    'lama_perjalanan' => $lama_perjalanan,
+                ]);
+
+                $suratPerintahKerja->update($validatedData);
+                Session::flash('success', 'Surat Perintah Kerja berhasil diupdate');
+                return redirect('/dashboard/perintahkerja');
+            }
+        }
+        //update surat permintaan
+        dd($request->isApprove_admin);
+        $suratPermintaanTransport->update([
+            'id_admin' => $request->id_admin,
+            'keperluan' => $request->keperluan,
+            'tujuan' => $request->alamat,
+            'isApprove_admin' => 1,
+            'isApprove_atasan' => 1,
+        ]);
+        //update surat perintah kerja
         $suratPerintahKerja->update($validatedData);
         Session::flash('success', 'Surat Perintah Kerja berhasil diupdate');
         return redirect('/dashboard/perintahkerja');

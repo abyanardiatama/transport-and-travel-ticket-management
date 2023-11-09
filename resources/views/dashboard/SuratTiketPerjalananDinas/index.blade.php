@@ -198,10 +198,9 @@
                                                                             </svg>
                                                                             <span class="sr-only">Info</span>
                                                                             <div class="text-left whitespace-normal">
-                                                                                <span class="font-medium">Periksa data dengan benar</span>
+                                                                                <span class="font-medium">Periksa kembali data dengan benar</span>
                                                                                 <ul class="mt-1.5 list-disc list-inside">
-                                                                                    <li>Dengan menyetujui data ini, data akan diteruskan untuk dilengkapi</li>
-                                                                                    <li>Data akan dikirimkan ke admin untuk disetujui</li>
+                                                                                    <li>Pemohon dapat mengunduh surat yang telah disetujui</li>
                                                                                 </ul>
                                                                             </div>
                                                                         </div>
@@ -330,8 +329,7 @@
                                                                             <div class="text-left whitespace-normal">
                                                                                 <span class="font-medium">Periksa data dengan benar</span>
                                                                                 <ul class="mt-1.5 list-disc list-inside">
-                                                                                    <li>Dengan menyetujui data ini, data akan diteruskan untuk dilengkapi</li>
-                                                                                    <li>Data akan dikirimkan ke admin untuk disetujui</li>
+                                                                                    <li>Dengan mendedit data ini, maka data akan dikirimkan kembali untuk disetujui</li>
                                                                                 </ul>
                                                                             </div>
                                                                         </div>
@@ -455,10 +453,10 @@
                                                                     </svg>
                                                                     <span class="sr-only">Info</span>
                                                                     <div class="text-left whitespace-normal">
-                                                                        <span class="font-medium">Periksa data dengan benar</span>
+                                                                        <span class="font-medium">Periksa kembali data dengan benar</span>
                                                                         <ul class="mt-1.5 list-disc list-inside">
-                                                                            <li>Dengan menyetujui data ini, data akan diteruskan untuk dilengkapi</li>
-                                                                            <li>Data akan dikirimkan ke admin untuk disetujui</li>
+                                                                            <li>Dengan menyetujui data ini, surat permintaan pengurusan tiket untuk perjalanan dinas akan segera diproses</li>
+                                                                            <li>Data yang telah disetujui dapat diunduh oleh pemohon</li>
                                                                         </ul>
                                                                     </div>
                                                                 </div>

@@ -13,7 +13,10 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use PhpOffice\PhpWord\PhpWord;
 use PhpOffice\PhpWord\IOFactory;
+use PhpOffice\PhpWord\Settings;
 use Barryvdh\DomPDF\Facade\Pdf;
+use PhpOffice\PhpWord\Writer\PDF\MPDF;
+use PhpOffice\PhpWord\Writer\PDF\DomPDF;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 class SuratPermintaanTransportController extends Controller
@@ -504,12 +507,17 @@ class SuratPermintaanTransportController extends Controller
             $phpWord->setValue('jamkbl_admin', '');
             $phpWord->setValue('kendaraan_lain', $suratTransport->kendaraan_lain);
         }
-        // dd('lesgoo');
+        // $filename = 'Surat Permintaan Transport - ' . $suratTransport->id . $suratTransport->nama_pemohon;
+        // $phpWord->saveAs($filename . '.docx', 'Word2007');
+        // $rendererName = \PhpOffice\PhpWord\Settings::PDF_RENDERER_DOMPDF;
+        // $rendererLibraryPath = base_path('vendor/dompdf/dompdf');
+        // \PhpOffice\PhpWord\Settings::setPdfRenderer($rendererName, $rendererLibraryPath);
+        // $phpWord = \PhpOffice\PhpWord\IOFactory::load($filename . '.docx');
+        // $pdfWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'PDF');
+        // $pdfWriter->save($filename . '.pdf');
+        // return response()->download($filename . '.docx')->deleteFileAfterSend(true);
         $filename = 'Surat Permintaan Transport - ' . $suratTransport->id . $suratTransport->nama_pemohon . '.docx';
-        //save into storage app/public/surat_permintaan_transport
-        // $phpWord->saveAs('surat_permintaan_transport/' . $filename);
         $phpWord->saveAs($filename);
-
         return response()->download($filename)->deleteFileAfterSend(true);
     }
     public function deleteTransport($id)

@@ -107,7 +107,7 @@
                       <span class="font-medium">Periksa kembali data yang telah terisi</span>
                         <ul class="mt-1.5 list-disc list-inside">
                           <li>Dengan menekan submit maka surat perintah kerja akan dibuat</li>
-                          <li>Apabila terdapat kesalahan, surat perintah kerja dapat disunting lebih dulu</li>
+                          <li>Apabila terdapat kesalahan, surat perintah kerja dapat disunting oleh admin</li>
                       </ul>
                     </div>
                 </div>

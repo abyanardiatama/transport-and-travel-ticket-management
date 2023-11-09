@@ -119,10 +119,10 @@
                                                             </svg>
                                                             <span class="sr-only">Info</span>
                                                             <div class="text-left whitespace-normal">
-                                                                <span class="font-medium">Periksa data dengan benar</span>
+                                                                <span class="font-medium">Periksa data kembali dengan benar</span>
                                                                 <ul class="mt-1.5 list-disc list-inside">
-                                                                    <li>Dengan menyetujui data ini, data akan diteruskan untuk dilengkapi</li>
-                                                                    <li>Data akan dikirimkan ke admin untuk disetujui</li>
+                                                                    <li>Dengan menekan submit, data kendaraan akan diupdate</li>
+                                                                    <li>Data baru kendaraan tidak bisa berubah ke surat permintaan yang telah diproses</li>
                                                                 </ul>
                                                             </div>
                                                         </div>

@@ -15,10 +15,11 @@ class SuratPerintahKerjaSeeder extends Seeder
     {
         SuratPerintahKerja::create([
             'nama_driver' => 'Driver SCI',
+            'id_surat_permintaan_transport' => '3',
             'jobdesc' => 'Driver',
             'keperluan' => 'Ambil Dokumen',
-            'alamat' => 'Semarang',
-            'nomor_polisi' => 'H 1234 AB',
+            'alamat' => 'PT Kimia Firmindo',
+            'nomor_polisi' => 'H 1234 GHI',
             'tanggal_berangkat' => '2021-10-25',
             'tanggal_kembali' => '2021-10-25',
             'jam_berangkat' => '13:00',

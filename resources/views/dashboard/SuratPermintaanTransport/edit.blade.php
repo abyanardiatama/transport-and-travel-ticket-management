@@ -207,13 +207,24 @@
                             <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
                         </svg>
                         <span class="sr-only">Info</span>
-                        <div>
-                            <span class="font-medium">Pastikan Semua kolom telah diisi dengan benar</span>
-                            <ul class="mt-1.5 list-disc list-inside">
-                                <li>Dengan menekan submit Anda telah menyetujui dibuatnya surat permintaan</li>
-                                <li>Surat akan dikirimkan ke atasan untuk disetujui</li>
-                            </ul>
-                        </div>
+                        @if (Auth::user()->is_admin==true)
+                            <div>
+                                <span class="font-medium">Periksa kembali semua kolom pengisian</span>
+                                <ul class="mt-1.5 list-disc list-inside">
+                                    <li>Dengan menekan submit maka surat permintaan transport telah dilengkapi</li>
+                                    <li>Apabila kendaraan tersedia, surat perintah kerja akan otomatis diproses</li>
+                                    <li>Surat akan dikirimkan kembali ke pemohon untuk diunduh</li>
+                                </ul>
+                            </div>
+                        @else
+                            <div>
+                                <span class="font-medium">Pastikan Semua kolom telah diisi dengan benar</span>
+                                <ul class="mt-1.5 list-disc list-inside">
+                                    <li>Dengan menekan submit maka surat permintaan akan diedit</li>
+                                    <li>Surat akan dikirimkan kembali atasan untuk disetujui</li>
+                                </ul>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </form>
