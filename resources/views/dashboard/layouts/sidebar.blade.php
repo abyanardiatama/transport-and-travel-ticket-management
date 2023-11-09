@@ -8,18 +8,52 @@
                     <path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
                 </svg>
             </button>
-            <a href="https://pt-sucofindo-semarang.business.site" target="_blank" class="flex ml-2 md:mr-24">
-            <img src="/logo-nobg.png" class="h-8 mr-3" alt="FlowBite Logo" />
-            <span class="self-center text-lg font-medium sm:text-xl whitespace-nowrap dark:text-white">PT. Sucofindo</span>
+            <a href="/dashboard" class="flex ml-2 md:mr-24">
+            <img src="/logo-nobg.png" class="h-8 mr-3" alt="Logo Sucofindo" />
+            <span class="self-center invisible sm:visible text-lg font-medium sm:text-xl whitespace-nowrap dark:text-white">PT. Sucofindo</span>
             </a>
         </div>
         <div class="flex items-center">
+
+            <svg id="moon" class="hidden w-5 h-5 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 18 20">
+                <path d="M17.8 13.75a1 1 0 0 0-.859-.5A7.488 7.488 0 0 1 10.52 2a1 1 0 0 0 0-.969A1.035 1.035 0 0 0 9.687.5h-.113a9.5 9.5 0 1 0 8.222 14.247 1 1 0 0 0 .004-.997Z"/>
+            </svg>
+            <svg id="sun" class="hidden w-5 h-5 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="black" viewBox="0 0 20 20">
+                <path d="M10 15a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0-11a1 1 0 0 0 1-1V1a1 1 0 0 0-2 0v2a1 1 0 0 0 1 1Zm0 12a1 1 0 0 0-1 1v2a1 1 0 1 0 2 0v-2a1 1 0 0 0-1-1ZM4.343 5.757a1 1 0 0 0 1.414-1.414L4.343 2.929a1 1 0 0 0-1.414 1.414l1.414 1.414Zm11.314 8.486a1 1 0 0 0-1.414 1.414l1.414 1.414a1 1 0 0 0 1.414-1.414l-1.414-1.414ZM4 10a1 1 0 0 0-1-1H1a1 1 0 0 0 0 2h2a1 1 0 0 0 1-1Zm15-1h-2a1 1 0 1 0 0 2h2a1 1 0 0 0 0-2ZM4.343 14.243l-1.414 1.414a1 1 0 1 0 1.414 1.414l1.414-1.414a1 1 0 0 0-1.414-1.414ZM14.95 6.05a1 1 0 0 0 .707-.293l1.414-1.414a1 1 0 1 0-1.414-1.414l-1.414 1.414a1 1 0 0 0 .707 1.707Z"/>
+            </svg>
+            <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" id="dark-mode-toggle" value="" class="sr-only peer">
+                <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300"></span>
+            </label>
+            <script>
+                const darkModeToggle = document.getElementById('dark-mode-toggle');
+                const rootElement = document.documentElement;
+                const sun = document.getElementById('sun');
+                const moon = document.getElementById('moon');
+              
+                darkModeToggle.addEventListener('change', () => {
+                  if (darkModeToggle.checked) {
+                    rootElement.classList.add('dark');
+                    sun.classList.add('hidden');
+                    moon.classList.remove('hidden');
+                  } else {
+                    rootElement.classList.remove('dark');
+                    sun.classList.remove('hidden');
+                    moon.classList.add('hidden');
+                  }
+                });
+              </script>
+              
             <div class="flex items-center ml-3">
                 <div>
                 <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" aria-expanded="false" data-dropdown-toggle="dropdown-user">
                     <span class="sr-only">Open user menu</span>
-                    <svg class="w-8 h-8 bg-white rounded-full" fill="none" stroke="blue" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    {{-- <svg class="w-8 h-8 bg-white rounded-full" fill="none" stroke="blue" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    </svg> --}}
+                    <svg class="w-8 h-8 rounded-full text-white bg-blue-600 dark:bg-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 14 18">
+                        <path d="M7 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9Zm2 1H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z"/>
                     </svg>
                 </button>
                 </div>

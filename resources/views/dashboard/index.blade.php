@@ -141,14 +141,14 @@
                                 </div>
                             </form>
                             <!-- Modal footer -->
-                            <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                            <div class="grid grid-cols-1 p-4 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
                                 <div class="flex p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
                                     <svg class="flex-shrink-0 inline w-4 h-4 mr-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                                         <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
                                     </svg>
                                     <span class="sr-only">Info</span>
-                                    <div class="text-left">
-                                        <span class="font-medium">Pastikan data telah terisi dengan benar</span>
+                                    <div class="text-left whitespace-normal">
+                                        <span class="font-medium">Periksa data dengan benar</span>
                                         <ul class="mt-1.5 list-disc list-inside">
                                             <li>Dengan menyetujui data ini, data akan diteruskan untuk dilengkapi</li>
                                             <li>Data akan dikirimkan ke admin untuk disetujui</li>
@@ -200,14 +200,14 @@
                                 </div>
                             </form>
                             <!-- Modal footer -->
-                            <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                            <div class="grid grid-cols-1 p-4 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
                                 <div class="flex p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
                                     <svg class="flex-shrink-0 inline w-4 h-4 mr-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                                         <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
                                     </svg>
                                     <span class="sr-only">Info</span>
-                                    <div class="text-left">
-                                        <span class="font-medium">Pastikan data telah terisi dengan benar</span>
+                                    <div class="text-left whitespace-normal">
+                                        <span class="font-medium">Periksa data dengan benar</span>
                                         <ul class="mt-1.5 list-disc list-inside">
                                             <li>Dengan menyetujui data ini, data akan diteruskan untuk dilengkapi</li>
                                             <li>Data akan dikirimkan ke admin untuk disetujui</li>
@@ -349,14 +349,14 @@
                                                                 </div>
                                                             </form>
                                                             <!-- Modal footer -->
-                                                            <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                                                            <div class="grid grid-cols-1 p-4 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
                                                                 <div class="flex p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
                                                                     <svg class="flex-shrink-0 inline w-4 h-4 mr-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                                                                         <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
                                                                     </svg>
                                                                     <span class="sr-only">Info</span>
-                                                                    <div class="text-left">
-                                                                        <span class="font-medium">Pastikan data telah terisi dengan benar</span>
+                                                                    <div class="text-left whitespace-normal">
+                                                                        <span class="font-medium">Periksa data dengan benar</span>
                                                                         <ul class="mt-1.5 list-disc list-inside">
                                                                             <li>Dengan menyetujui data ini, data akan diteruskan untuk dilengkapi</li>
                                                                             <li>Data akan dikirimkan ke admin untuk disetujui</li>
@@ -469,7 +469,7 @@
                                                     {{-- Button Lengkapi Data Admin --}}
                                                     <a href="/dashboard/permintaantransport/{{ $suratTransport->id }}/lengkapidata" class="flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
                                                         <svg class="flex-shrink w-3 h-3 mr-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 5h1v12a2 2 0 0 1-2 2m0 0a2 2 0 0 1-2-2V2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v15a2 2 0 0 0 2 2h14ZM10 4h2m-2 3h2m-8 3h8m-8 3h8m-8 3h8M4 4h3v3H4V4Z"/>
+                                                            <path stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 5h1v12a2 2 0 0 1-2 2m0 0a2 2 0 0 1-2-2V2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v15a2 2 0 0 0 2 2h14ZM10 4h2m-2 3h2m-8 3h8m-8 3h8m-8 3h8M4 4h3v3H4V4Z"/>
                                                         </svg>
                                                         Lengkapi Data
                                                     </a>
@@ -551,14 +551,14 @@
                                                                 </div>
                                                             </form>
                                                             <!-- Modal footer -->
-                                                            <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                                                            <div class="grid grid-cols-1 p-4 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
                                                                 <div class="flex p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
                                                                     <svg class="flex-shrink-0 inline w-4 h-4 mr-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                                                                         <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
                                                                     </svg>
                                                                     <span class="sr-only">Info</span>
-                                                                    <div class="text-left">
-                                                                        <span class="font-medium">Pastikan data telah terisi dengan benar</span>
+                                                                    <div class="text-left whitespace-normal">
+                                                                        <span class="font-medium">Periksa data dengan benar</span>
                                                                         <ul class="mt-1.5 list-disc list-inside">
                                                                             <li>Dengan menyetujui data ini, data akan diteruskan untuk dilengkapi</li>
                                                                             <li>Data akan dikirimkan ke admin untuk disetujui</li>
@@ -643,14 +643,14 @@
                                                                 </div>
                                                             </form>
                                                             <!-- Modal footer -->
-                                                            <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                                                            <div class="grid grid-cols-1 p-4 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
                                                                 <div class="flex p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
                                                                     <svg class="flex-shrink-0 inline w-4 h-4 mr-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                                                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                                                                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
                                                                     </svg>
                                                                     <span class="sr-only">Info</span>
-                                                                    <div class="text-left">
-                                                                        <span class="font-medium">Pastikan data telah terisi dengan benar</span>
+                                                                    <div class="text-left whitespace-normal">
+                                                                        <span class="font-medium">Periksa data dengan benar</span>
                                                                         <ul class="mt-1.5 list-disc list-inside">
                                                                             <li>Dengan menyetujui data ini, data akan diteruskan untuk dilengkapi</li>
                                                                             <li>Data akan dikirimkan ke admin untuk disetujui</li>
@@ -664,7 +664,7 @@
                                                 {{-- Button Setuju --}}
                                                 <a data-modal-target="popup-modal-approve" data-modal-toggle="popup-modal-approve" class="flex items-center focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-xs px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 whitespace-nowrap">
                                                     <svg class="flex-shrink w-3 h-3 mr-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
-                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                                                        <path stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
                                                     </svg>
                                                     Setuju
                                                 </a>
@@ -696,7 +696,7 @@
                                                 {{-- Button Tolak --}}
                                                 <button data-modal-target="popup-modal-tolak" data-modal-toggle="popup-modal-tolak" type="button" class="flex items-center focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-xs px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 whitespace-nowrap">
                                                     <svg class="flex-shrink w-2.5 h-2.5 mr-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                                        <path stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                                                     </svg>
                                                     Tolak
                                                 </button>
@@ -754,12 +754,14 @@
                                                 @if (
                                                     $suratTransport->isApprove_pegawai == true && $suratTransport->isApprove_atasan === null && $suratTransport->isApprove_admin === null ||
                                                     $suratTransport->isApprove_pegawai == true && $suratTransport->isApprove_atasan == false && $suratTransport->isApprove_admin === null)
-                                                    <a href="/dashboard/permintaantransport/{{ $suratTransport->id }}/edit" class="flex items-center focus:outline-none text-gray-900 bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-xs px-5 py-2.5  dark:focus:ring-yellow-900">
-                                                        <svg class="w-3 h-3 mr-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                                            <path stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17v1a.97.97 0 0 1-.933 1H1.933A.97.97 0 0 1 1 18V5.828a2 2 0 0 1 .586-1.414l2.828-2.828A2 2 0 0 1 5.828 1h8.239A.97.97 0 0 1 15 2M6 1v4a1 1 0 0 1-1 1H1m13.14.772 2.745 2.746M18.1 5.612a2.086 2.086 0 0 1 0 2.953l-6.65 6.646-3.693.739.739-3.692 6.646-6.646a2.087 2.087 0 0 1 2.958 0Z"/>
-                                                        </svg>
-                                                        Edit
-                                                    </a>
+                                                    <div class="flex">
+                                                        <a href="/dashboard/permintaantransport/{{ $suratTransport->id }}/edit" class="flex items-center focus:outline-none text-gray-900 bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-xs px-5 py-2.5  dark:focus:ring-yellow-900">
+                                                            <svg class="w-3 h-3 mr-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                                                <path stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17v1a.97.97 0 0 1-.933 1H1.933A.97.97 0 0 1 1 18V5.828a2 2 0 0 1 .586-1.414l2.828-2.828A2 2 0 0 1 5.828 1h8.239A.97.97 0 0 1 15 2M6 1v4a1 1 0 0 1-1 1H1m13.14.772 2.745 2.746M18.1 5.612a2.086 2.086 0 0 1 0 2.953l-6.65 6.646-3.693.739.739-3.692 6.646-6.646a2.087 2.087 0 0 1 2.958 0Z"/>
+                                                            </svg>
+                                                            Edit
+                                                        </a>
+                                                    </div>
                                                 @endif
                                             </td>
                                         @endif
@@ -801,7 +803,7 @@
                                     <th scope="col" class="px-6 py-3 whitespace-nowrap">
                                         Asal - Tujuan
                                     </th>
-                                    <th scope="col" class="px-6 py-3">
+                                    <th scope="col" class="px-6 py-3 whitespace-nowrap">
                                         Jenis Tiket
                                     </th>
                                     @if(Auth::user()->is_pegawai == true)
@@ -848,12 +850,14 @@
                                             <td class="px-6 py-4 text-right">
                                                 {{-- not show button edit when it has only approve pegawai --}}
                                                 @if ($suratTiketDinas->isApprove_pegawai == true && !$suratTiketDinas->isApprove_atasan == true )
-                                                    <a href="/dashboard/permintaantiketdinas/{{ $suratTiketDinas->id }}/edit" class="flex items-center focus:outline-none text-gray-900 bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-xs px-5 py-2.5  dark:focus:ring-yellow-900">
-                                                        <svg class="w-3 h-3 mr-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                                            <path stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17v1a.97.97 0 0 1-.933 1H1.933A.97.97 0 0 1 1 18V5.828a2 2 0 0 1 .586-1.414l2.828-2.828A2 2 0 0 1 5.828 1h8.239A.97.97 0 0 1 15 2M6 1v4a1 1 0 0 1-1 1H1m13.14.772 2.745 2.746M18.1 5.612a2.086 2.086 0 0 1 0 2.953l-6.65 6.646-3.693.739.739-3.692 6.646-6.646a2.087 2.087 0 0 1 2.958 0Z"/>
-                                                        </svg>
-                                                        Edit
-                                                    </a>
+                                                    <div class="flex">
+                                                        <a href="/dashboard/permintaantiketdinas/{{ $suratTiketDinas->id }}/edit" class="flex items-center focus:outline-none text-gray-900 bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-xs px-5 py-2.5  dark:focus:ring-yellow-900">
+                                                            <svg class="w-3 h-3 mr-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                                                <path stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17v1a.97.97 0 0 1-.933 1H1.933A.97.97 0 0 1 1 18V5.828a2 2 0 0 1 .586-1.414l2.828-2.828A2 2 0 0 1 5.828 1h8.239A.97.97 0 0 1 15 2M6 1v4a1 1 0 0 1-1 1H1m13.14.772 2.745 2.746M18.1 5.612a2.086 2.086 0 0 1 0 2.953l-6.65 6.646-3.693.739.739-3.692 6.646-6.646a2.087 2.087 0 0 1 2.958 0Z"/>
+                                                            </svg>
+                                                            Edit
+                                                        </a>
+                                                    </div>
                                                 @endif
                                             </td>
                                         @endif
@@ -929,17 +933,17 @@
                                                                 </div>
                                                             </form>
                                                             <!-- Modal footer -->
-                                                            <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                                                            <div class="grid grid-cols-1 p-4 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
                                                                 <div class="flex p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
                                                                     <svg class="flex-shrink-0 inline w-4 h-4 mr-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                                                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                                                                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
                                                                     </svg>
                                                                     <span class="sr-only">Info</span>
-                                                                    <div class="text-left">
-                                                                        <span class="font-medium">Pastikan data telah terisi dengan benar</span>
+                                                                    <div class="text-left whitespace-normal">
+                                                                        <span class="font-medium">Periksa data dengan benar</span>
                                                                         <ul class="mt-1.5 list-disc list-inside">
-                                                                            <li>Dengan menyetujui data ini, data akan diteruskan kepada pemohon</li>
-                                                                            <li>Data akan dikirimkan ke admin untuk direview</li>
+                                                                            <li>Dengan menyetujui data ini, data akan diteruskan untuk dilengkapi</li>
+                                                                            <li>Data akan dikirimkan ke admin untuk disetujui</li>
                                                                         </ul>
                                                                     </div>
                                                                 </div>
@@ -949,7 +953,7 @@
                                                 </div>
                                             </td>
                                         @endif
-                                        @if (Auth::user()->is_atasan1 == true)
+                                        @if (Auth::user()->is_atasan1 == true || Auth::user()->is_atasan2 == true )
                                             <td class="px-6 py-4 text-right flex items-center justify-center">
                                                 {{-- Button Lihat Data Baru --}}
                                                 <button data-modal-target="modal1-{{ $suratTiketDinas->id }}" data-modal-toggle="modal1-{{ $suratTiketDinas->id }}" type="button" class="flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 whitespace-nowrap">
@@ -1021,17 +1025,17 @@
                                                                 </div>
                                                             </form>
                                                             <!-- Modal footer -->
-                                                            <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                                                            <div class="grid grid-cols-1 p-4 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
                                                                 <div class="flex p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
                                                                     <svg class="flex-shrink-0 inline w-4 h-4 mr-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                                                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                                                                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
                                                                     </svg>
                                                                     <span class="sr-only">Info</span>
-                                                                    <div class="text-left">
-                                                                        <span class="font-medium">Pastikan data telah terisi dengan benar</span>
+                                                                    <div class="text-left whitespace-normal">
+                                                                        <span class="font-medium">Periksa data dengan benar</span>
                                                                         <ul class="mt-1.5 list-disc list-inside">
-                                                                            <li>Dengan menyetujui data ini, data akan diteruskan kepada pemohon</li>
-                                                                            <li>Data akan dikirimkan ke admin untuk direview</li>
+                                                                            <li>Dengan menyetujui data ini, data akan diteruskan untuk dilengkapi</li>
+                                                                            <li>Data akan dikirimkan ke admin untuk disetujui</li>
                                                                         </ul>
                                                                     </div>
                                                                 </div>
@@ -1042,7 +1046,7 @@
                                                 {{-- Button Setuju --}}
                                                 <a data-modal-target="popup-modal1-approve" data-modal-toggle="popup-modal1-approve" class="flex items-center focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-xs px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 whitespace-nowrap">
                                                     <svg class="flex-shrink w-3 h-3 mr-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
-                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
+                                                        <path stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5.917 5.724 10.5 15 1.5"/>
                                                     </svg>
                                                     Setuju
                                                 </a>
@@ -1074,7 +1078,7 @@
                                                 {{-- Button Tolak --}}
                                                 <button data-modal-target="popup-modal1-tolak" data-modal-toggle="popup-modal1-tolak" type="button" class="flex items-center focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-xs px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 whitespace-nowrap">
                                                     <svg class="flex-shrink w-2.5 h-2.5 mr-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                                        <path stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                                                       </svg>
                                                     Tolak
                                                 </button>
@@ -1167,7 +1171,7 @@
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             {{-- get nomor_polisi from surat permintaan ransport --}}
 
-                                            {{ $nomor_polisi }}
+                                            {{ $surat->nomor_polisi }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             {{ $surat->alamat }}

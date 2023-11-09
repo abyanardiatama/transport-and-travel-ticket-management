@@ -23,7 +23,7 @@ class DashboardController extends Controller
         $countSuratPermintaanTransport = 0;
         $countSuratTiketDinas = 0;
 
-        $approvedSuratTransport = SuratPermintaanTransport::where('isApprove_pegawai', true)->where('isApprove_atasan', true)->where('isApprove_admin', true)->get()->sortByDesc('created_at');
+        $approvedSuratTransport = SuratPermintaanTransport::where('isApprove_pegawai', true)->where('isApprove_atasan', true)->where('isApprove_admin', true)->where('kendaraan_lain',null)->get()->sortByDesc('created_at');
         $countApprovedSuratTransport = $approvedSuratTransport->count();
         $checkUser = SuratPermintaanTransport::where('id_pemohon', Auth::user()->id)->first();
         //get kendaraan where approvedSuratTransport->nomor_polisi == kendaraan->nomor_polisi
@@ -64,20 +64,17 @@ class DashboardController extends Controller
                 ->where('isApprove_atasan', true)
                 ->where('isApprove_admin', true)
                 ->first();
-
+            $suratPerintahKerja = SuratPerintahKerja::all()->take(3)->sortByDesc('created_at');
+            $countSuratPerintahKerja = SuratPerintahKerja::all()->count();
+                
             if ($IdsuratTransport) {
                 $id = $IdsuratTransport->id;
-                // $suratPerintahKerja = SuratPerintahKerja::where('id_surat_permintaan_transport', $id)->get();
-                // $countSuratPerintahKerja = SuratPerintahKerja::where('id_surat_permintaan_transport', $id)->count();
-                
-                $suratPerintahKerja = SuratPerintahKerja::all()->take(3)->sortByDesc('created_at');
-                $countSuratPerintahKerja = SuratPerintahKerja::all()->count();
-                //get nomor polisi from surat permintaan transport
                 $suratTransport = SuratPermintaanTransport::where('id', $id)->first();
                 $countSuratTransport = SuratPermintaanTransport::where('id', $id)->count();
-                $nomor_polisi = $suratTransport->nomor_polisi;
+                // $nomor_polisi = $suratTransport->nomor_polisi;
             } else {
-                $suratPerintahKerja = null;
+                $suratTransport = null;
+                $countSuratTransport = 0;
             }
             activity()
                 ->withProperties([
@@ -96,7 +93,6 @@ class DashboardController extends Controller
                 'countSuratTiketDinas' => $countSuratTiketDinas,
                 'suratPerintahKerja' => $suratPerintahKerja,
                 'countSuratPerintahKerja' => $countSuratPerintahKerja,
-                'nomor_polisi' => $nomor_polisi,
                 'countSuratTransport' => $countSuratTransport,
                 'approvedSuratTransport' => $approvedSuratTransport,
                 'countApprovedSuratTransport' => $countApprovedSuratTransport,
@@ -206,16 +202,28 @@ class DashboardController extends Controller
         
     }
 
-    public function logActivity() {
-        $logActivity = Activity::all()->sortByDesc('created_at');
-        // $logActivity = DB::table('activity_log')->paginate(15);
+    public function logActivity(Request $request) {
+        
+        // $logActivity = Activity::latest()->orderBy('id', 'desc');
+        $query = $request['default-search'];
+        // dd($query);
+        // dd($query);
+        $logActivity = Activity::orderBy('id', 'desc');
         $countActivity = Activity::all()->count();
+
+        // dd($query);
+        if (!empty($query)) {
+            $logActivity->where('log_name', 'like', '%' . $query . '%')
+                ->orWhere('description', 'like', '%' . $query . '%');
+        }
+        $logActivity = $logActivity->paginate(10);
+
         return view('dashboard.log.index', [
             'title' => 'Log Activity',
             'active' => 'logActivity',
             'logActivity' => $logActivity ,
             'countActivity' => $countActivity,
+            
         ]);
-        // return response()->json($logActivity, 200, [], JSON_PRETTY_PRINT);
     }
 }

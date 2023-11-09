@@ -167,16 +167,34 @@
                                                                                 <label for="waktu_kembali" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Waktu Kembali</label>
                                                                                 <input name="waktu_kembali" id="waktu_kembali" type="datetime-local" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $suratTransport->tanggal_kembali }} {{ $suratTransport->jam_kembali }}" disabled></input>
                                                                             </div>
+                                                                            @if ($suratTransport->nomor_polisi!=null && $suratTransport->nama_driver!=null)
+                                                                                {{-- field nomor_polisi --}}
+                                                                                <div class="col-span-2 sm:col-span-1">
+                                                                                    <label for="nomor_polisi" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nomor Polisi</label>
+                                                                                    <input name="nomor_polisi" id="nomor_polisi" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $suratTransport->nomor_polisi }}" disabled></input>
+                                                                                </div>
+                                                                                {{-- field nama_driver --}}
+                                                                                <div class="col-span-2 sm:col-span-1">
+                                                                                    <label for="nama_driver" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Driver</label>
+                                                                                    <input name="nama_driver" id="nama_driver" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $suratTransport->nama_driver }}" disabled></input>
+                                                                                </div>
+                                                                            @else
+                                                                                {{-- field kendaraan lain --}}
+                                                                                <div class="col-span-2">
+                                                                                    <label for="kendaraan_lain" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kendaraan Lain</label>
+                                                                                    <input name="kendaraan_lain" id="kendaraan_lain" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Masukkan Kendaraan Lain" value="{{ $suratTransport->kendaraan_lain }}" disabled></input>
+                                                                                </div>
+                                                                            @endif
                                                                         </div>
                                                                     </form>
                                                                     <!-- Modal footer -->
-                                                                    <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                                                                    <div class="grid grid-cols-1 p-4 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
                                                                         <div class="flex p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
                                                                             <svg class="flex-shrink-0 inline w-4 h-4 mr-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                                                                                 <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
                                                                             </svg>
                                                                             <span class="sr-only">Info</span>
-                                                                            <div class="text-left">
+                                                                            <div class="text-left whitespace-normal">
                                                                                 <span class="font-medium">Pastikan data telah terisi dengan benar</span>
                                                                                 <ul class="mt-1.5 list-disc list-inside">
                                                                                     <li>Dengan menyetujui data ini, data akan diteruskan untuk dilengkapi</li>
@@ -191,7 +209,7 @@
                                                         {{-- Delete Button --}}
                                                         <button data-modal-target="modal-delete-{{ $suratTransport->id }}" data-modal-toggle="modal-delete-{{ $suratTransport->id }}" type="button" class="flex items-center text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-xs px-5 py-2.5 mr-2 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">
                                                             <svg class="w-3 h-3 mr-2 text-gray-800 dark:text-white"  aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
-                                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h16M7 8v8m4-8v8M7 1h4a1 1 0 0 1 1 1v3H6V2a1 1 0 0 1 1-1ZM3 5h12v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5Z"/>
+                                                                <path stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h16M7 8v8m4-8v8M7 1h4a1 1 0 0 1 1 1v3H6V2a1 1 0 0 1 1-1ZM3 5h12v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5Z"/>
                                                             </svg>
                                                             Hapus
                                                         </button>
@@ -228,7 +246,7 @@
                                                     <td class="px-6 py-4 flex items-end justify-end whitespace-nowrap">
                                                         <a href="/dashboard/permintaantransport/{{ $suratTransport->id }}/lengkapidata" class="flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
                                                             <svg class="flex-shrink w-3 h-3 mr-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 5h1v12a2 2 0 0 1-2 2m0 0a2 2 0 0 1-2-2V2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v15a2 2 0 0 0 2 2h14ZM10 4h2m-2 3h2m-8 3h8m-8 3h8m-8 3h8M4 4h3v3H4V4Z"/>
+                                                                <path stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 5h1v12a2 2 0 0 1-2 2m0 0a2 2 0 0 1-2-2V2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v15a2 2 0 0 0 2 2h14ZM10 4h2m-2 3h2m-8 3h8m-8 3h8m-8 3h8M4 4h3v3H4V4Z"/>
                                                             </svg>
                                                             Lengkapi Data
                                                         </a>
@@ -266,8 +284,8 @@
                                                                         </button>
                                                                     </div>
                                                                     <!-- Modal body -->
-                                                                    <form action="/dashboard/permintaantransport/{{ $suratTransport->id }}/approveatasan" class="max-w-3xl py-4 pb-8 px-3">
-                                                                        <div class="grid grid-cols-2 gap-4 p-4">
+                                                                    <div class="grid grid-cols-2 gap-4 p-4">
+                                                                        <form action="/dashboard/permintaantransport/{{ $suratTransport->id }}/approveatasan" class="max-w-3xl py-4 pb-8 px-3">
                                                                             {{-- nama pemohon --}}
                                                                             <div class="col-span-2 sm:col-span-1">
                                                                                 <label for="nama_pemohon" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Pemohon</label>
@@ -308,17 +326,17 @@
                                                                                 <label for="waktu_kembali" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Waktu Kembali</label>
                                                                                 <input name="waktu_kembali" id="waktu_kembali" type="datetime-local" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $suratTransport->tanggal_kembali }} {{ $suratTransport->jam_kembali }}" disabled></input>
                                                                             </div>
-                                                                        </div>
-                                                                    </form>
+                                                                        </form>
+                                                                    </div>
                                                                     <!-- Modal footer -->
-                                                                    <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                                                                    <div class="grid grid-cols-1 p-4 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
                                                                         <div class="flex p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
                                                                             <svg class="flex-shrink-0 inline w-4 h-4 mr-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                                                                                 <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
                                                                             </svg>
                                                                             <span class="sr-only">Info</span>
-                                                                            <div class="text-left">
-                                                                                <span class="font-medium">Pastikan data telah terisi dengan benar</span>
+                                                                            <div class="text-left whitespace-normal">
+                                                                                <span class="font-medium">Periksa data dengan benar</span>
                                                                                 <ul class="mt-1.5 list-disc list-inside">
                                                                                     <li>Dengan menyetujui data ini, data akan diteruskan untuk dilengkapi</li>
                                                                                     <li>Data akan dikirimkan ke admin untuk disetujui</li>
@@ -332,7 +350,7 @@
                                                         {{-- Delete Button --}}
                                                         <button data-modal-target="modal-delete2-{{ $suratTransport->id }}" data-modal-toggle="modal-delete2-{{ $suratTransport->id }}" type="button" class="flex items-center text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-xs px-5 py-2.5 mr-2 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">
                                                             <svg class="w-3 h-3 mr-2 text-gray-800 dark:text-white"  aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
-                                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h16M7 8v8m4-8v8M7 1h4a1 1 0 0 1 1 1v3H6V2a1 1 0 0 1 1-1ZM3 5h12v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5Z"/>
+                                                                <path stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h16M7 8v8m4-8v8M7 1h4a1 1 0 0 1 1 1v3H6V2a1 1 0 0 1 1-1ZM3 5h12v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5Z"/>
                                                             </svg>
                                                             Hapus
                                                         </button>
@@ -437,13 +455,13 @@
                                                                 </div>
                                                             </form>
                                                             <!-- Modal footer -->
-                                                            <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                                                            <div class="gridgrid-cols-1 items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
                                                                 <div class="flex p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
                                                                     <svg class="flex-shrink-0 inline w-4 h-4 mr-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                                                                       <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
                                                                     </svg>
                                                                     <span class="sr-only">Info</span>
-                                                                    <div class="text-left">
+                                                                    <div class="text-left whitespace-normal">
                                                                         <span class="font-medium">Pastikan data telah terisi dengan benar</span>
                                                                         <ul class="mt-1.5 list-disc list-inside">
                                                                             <li>Dengan menyetujui data ini, data akan diteruskan untuk dilengkapi</li>

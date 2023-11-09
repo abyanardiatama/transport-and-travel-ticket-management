@@ -12,6 +12,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use PhpOffice\PhpWord\PhpWord;
+use PhpOffice\PhpWord\IOFactory;
+use Barryvdh\DomPDF\Facade\Pdf;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 class SuratPermintaanTransportController extends Controller
@@ -73,7 +75,6 @@ class SuratPermintaanTransportController extends Controller
         $validatedData = $request->validate([
             'nama_pemohon' => 'required',
             'unit' => 'required',
-            'id_admin' => 'required',
             'id_pemohon' => 'required',
             'email_atasan' => 'required|email:rfc,dns',
             'biaya_perjalanan' => 'required',
@@ -115,6 +116,7 @@ class SuratPermintaanTransportController extends Controller
         //send error message if email_atasan not found
         $is_atasan2 = User::where('email', $email_atasan)->where('is_atasan2', true)->first();
         //check if email atasan is is_atasan1 or is atasan2
+        
         if(!$is_atasan1 && !$is_atasan2){
             //send error to name email_atasan
             Session::flash('error', 'Email atasan tidak ditemukan');
@@ -231,6 +233,7 @@ class SuratPermintaanTransportController extends Controller
         $validatedData = $request->validate([
             'nama_pemohon' => 'required',
             'id_pemohon' => 'required',
+            'id_admin'  => 'required',
             'unit' => 'required',
             'email_atasan' => 'required|email:rfc,dns',
             'biaya_perjalanan' => 'required',
@@ -269,7 +272,8 @@ class SuratPermintaanTransportController extends Controller
         $validatedData['isApprove_admin'] = true;
         if($validatedData['nama_driver'] == null && $validatedData['nomor_polisi'] == null){
             Session::flash('success', 'Surat Permintaan Transport berhasil dilengkapi');
-            SuratPermintaanTransport::where('id', $suratTransport->id)->update($validatedData);
+            // SuratPermintaanTransport::where('id', $suratTransport->id)->update($validatedData);
+            $suratTransport->update($validatedData);
             return redirect('/dashboard');
         }
         //check if nama driver and nomor polisi is not null
@@ -496,8 +500,8 @@ class SuratPermintaanTransportController extends Controller
             $phpWord->setValue('tidak_ada_kendaraan', 'v');
             $phpWord->setValue('nama_driver', '');
             $phpWord->setValue('nomor_polisi', '');
-            $phpWord->setValue('tglbrkt_admin', '');
-            $phpWord->setValue('tglkbl_admin', '');
+            $phpWord->setValue('jambrkt_admin', '');
+            $phpWord->setValue('jamkbl_admin', '');
             $phpWord->setValue('kendaraan_lain', $suratTransport->kendaraan_lain);
         }
         // dd('lesgoo');
@@ -505,6 +509,7 @@ class SuratPermintaanTransportController extends Controller
         //save into storage app/public/surat_permintaan_transport
         // $phpWord->saveAs('surat_permintaan_transport/' . $filename);
         $phpWord->saveAs($filename);
+
         return response()->download($filename)->deleteFileAfterSend(true);
     }
     public function deleteTransport($id)

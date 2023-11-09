@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreSuratPerintahKerjaRequest;
 use App\Http\Requests\UpdateSuratPerintahKerjaRequest;
 use PhpOffice\PhpWord\PhpWord;
+use App\Models\User;
 use App\Models\SuratPerintahKerja;
 use Illuminate\Support\Facades\Auth;
 use App\Models\SuratPermintaanTransport;
@@ -18,31 +19,30 @@ class SuratPerintahKerjaController extends Controller
      */
     public function index()
     {   
-        
-        $IdsuratTransport = SuratPermintaanTransport::where('isApprove_pegawai', true)
-        ->where('isApprove_atasan', true)
-        ->where('isApprove_admin', true)
-        ->first();
-        if ($IdsuratTransport) {
-            $id = $IdsuratTransport->id;
-            if(Auth::user()->is_driver == true){
-                $suratPerintahKerja = SuratPerintahKerja::where('nama_driver', Auth::user()->name)->get();
-                $countSuratPerintahKerja = SuratPerintahKerja::where('nama_driver', Auth::user()->name)->count();
-            }
-            elseif(Auth::user()->is_admin == true){
-                $suratPerintahKerja = SuratPerintahKerja::all();
-                $countSuratPerintahKerja = SuratPerintahKerja::all()->count();
-            }
-            //get nomor polisi from surat permintaan transport
-            $suratTransport = SuratPermintaanTransport::where('id', $id)->first();
-            $countSuratTransport = SuratPermintaanTransport::where('id', $id)->count();
-            $nomor_polisi = $suratTransport->nomor_polisi;
-        } else {
-            $suratPerintahKerja = null;
-        }
+        $suratPerintahKerja=SuratPerintahKerja::all();
+        $countSuratPerintahKerja = SuratPerintahKerja::all()->count();
+        // $IdsuratTransport = SuratPermintaanTransport::where('isApprove_pegawai', true)
+        // ->where('isApprove_atasan', true)
+        // ->where('isApprove_admin', true)
+        // ->first();
+        // if ($IdsuratTransport) {
+        //     $id = $IdsuratTransport->id;
+        //     if(Auth::user()->is_driver == true){
+        //         $suratPerintahKerja = SuratPerintahKerja::where('nama_driver', Auth::user()->name)->get();
+        //         $countSuratPerintahKerja = SuratPerintahKerja::where('nama_driver', Auth::user()->name)->count();
+        //     }
+        //     elseif(Auth::user()->is_admin == true){
+        //         $suratPerintahKerja = SuratPerintahKerja::all();
+        //         $countSuratPerintahKerja = SuratPerintahKerja::all()->count();
+        //     }
+        //     $suratTransport = SuratPermintaanTransport::where('id', $id)->first();
+        //     $countSuratTransport = SuratPermintaanTransport::where('id', $id)->count();
+        //     $nomor_polisi = $suratTransport->nomor_polisi;
+        // } else {
+        //     $suratPerintahKerja = null;
+        // }
         return view('dashboard.SuratPerintahKerja.index',[
             'suratPerintahKerja' => $suratPerintahKerja,
-            'nomor_polisi' => $nomor_polisi,
             'countSuratPerintahKerja' => $countSuratPerintahKerja,
         ]);
     }
@@ -66,6 +66,7 @@ class SuratPerintahKerjaController extends Controller
         $data = $request->validate([
             'id_surat_permintaan_transport' => 'required',
             'id_admin' => 'required',
+            'nomor_polisi' => 'required',
             'nama_driver' => 'required',
             'jobdesc' => 'required',
             'keperluan' => 'required',
@@ -97,9 +98,12 @@ class SuratPerintahKerjaController extends Controller
      */
     public function edit($id)
     {   
-        $suratPerintahKerja = SuratPerintahKerja::find($id);    
+        $suratPerintahKerja = SuratPerintahKerja::find($id);
+        //user driver
+        $user = User::where('is_driver', true)->get();    
         return view('dashboard.SuratPerintahKerja.edit', compact('suratPerintahKerja'),[
             'suratPerintahKerja' => $suratPerintahKerja,
+            'user' => $user,
         ]);
     }
 

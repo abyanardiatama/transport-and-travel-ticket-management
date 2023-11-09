@@ -121,7 +121,7 @@
                 </div>     
             </form>
             {{-- Note bahwa surat akan diteruskan ke atasan untuk persetujuan --}}
-            <div class="col-span-full">
+            <div class="col-span-2">
                 {{-- <p class="text-gray-500">* Dengan menekan submit Anda telah menyetujui dibuatnya surat permintaan dan akan dikirimkan ke atasan</p> --}}
                 <div class="flex p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
                     <svg class="flex-shrink-0 inline w-4 h-4 mr-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">

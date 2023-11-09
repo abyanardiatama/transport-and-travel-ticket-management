@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('id_admin')->default('1');
             $table->foreignId('id_surat_permintaan_transport')->nullable();
+            $table->string('nomor_polisi');
             $table->string('nama_driver');
             $table->string('jobdesc');
             $table->string('keperluan');

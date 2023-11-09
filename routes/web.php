@@ -74,7 +74,7 @@ Route::get('/dashboard/kendaraan/{id}/delete', [KendaraanController::class, 'del
 Route::put('/dashboard/kendaraan/{id}/edit', [KendaraanController::class, 'update'])->middleware('auth')->name('kendaraan.edit');
 
 //Log Activity
-Route::get('/dashboard/log', [DashboardController::class, 'logActivity'])->middleware('auth');
+Route::get('/dashboard/log', [DashboardController::class, 'logActivity'])->middleware('auth')->name('logActivity.index');
 
 //Download Surat Permintaaan Transport
 Route::get('/dashboard/permintaantransport/{id}/download', [SuratPermintaanTransportController::class, 'downloadTransport'])->middleware('auth');

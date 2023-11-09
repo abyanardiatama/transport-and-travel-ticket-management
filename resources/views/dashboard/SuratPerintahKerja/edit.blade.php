@@ -18,7 +18,13 @@
                 {{-- field nama driver --}}
                 <div class="col-span-2 sm:col-span-1">
                     <label for="nama_driver" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Driver</label>
-                    <input type="text" name="nama_driver" id="nama_driver" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ old('nama_driver',$suratPerintahKerja['nama_driver']) }}" placeholder="Nama Driver" required>
+                    {{-- <input type="text" name="nama_driver" id="nama_driver" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ old('nama_driver',$suratPerintahKerja['nama_driver']) }}" placeholder="Nama Driver" required> --}}
+                    <select name="nama_driver" id="nama_driver" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 px-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option value="">Pilih Driver</option>
+                        @foreach ($user as $user)
+                            <option value="{{ $user->name }}" {{ $suratPerintahKerja->nama_driver == $user->name ? 'selected' : '' }}>{{ $user->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
                 {{-- field keperluan --}}
                 <div class="col-span-2 sm:col-span-1">
