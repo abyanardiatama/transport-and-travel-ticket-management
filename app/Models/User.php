@@ -58,4 +58,14 @@ class User extends Authenticatable
             ->logOnly(['name', 'email', 'is_pegawai', 'password', 'is_atasan1', 'is_atasan2', 'is_admin', 'is_driver'])
             ->logOnlyDirty();
     }
+    public function hasAnyRole($user, $roles)
+    {
+        foreach ($roles as $role) {
+            if ($user->{"is_$role"}) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

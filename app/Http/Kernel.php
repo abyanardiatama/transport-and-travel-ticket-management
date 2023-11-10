@@ -3,6 +3,10 @@
 namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\AtasanMiddleware;
+use App\Http\Middleware\PegawaiMiddleware;
+use App\Http\Middleware\DriverMiddleware;
 
 class Kernel extends HttpKernel
 {
@@ -43,6 +47,22 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\ThrottleRequests::class.':api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
+        'admin' => [
+            AdminMiddleware::class,
+        ],
+        'atasan' => [
+            AtasanMiddleware::class,
+        ],
+        'driver' => [
+            DriverMiddleware::class,
+        ],
+        'pegawai' => [
+            PegawaiMiddleware::class,
+        ],
+        'role' => [
+            \App\Http\Middleware\CheckRole::class,
+        ],
+
     ];
 
     /**
@@ -64,5 +84,10 @@ class Kernel extends HttpKernel
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'admin'=> AdminMiddleware::class,
+        'atasan'=> AtasanMiddleware::class,
+        'driver' => DriverMiddleware::class,
+        'pegawai' => PegawaiMiddleware::class,
+        'role' => \App\Http\Middleware\CheckRole::class,
     ];
 }

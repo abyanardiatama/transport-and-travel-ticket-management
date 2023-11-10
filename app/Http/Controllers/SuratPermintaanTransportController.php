@@ -518,6 +518,15 @@ class SuratPermintaanTransportController extends Controller
         // return response()->download($filename . '.docx')->deleteFileAfterSend(true);
         $filename = 'Surat Permintaan Transport - ' . $suratTransport->id . $suratTransport->nama_pemohon . '.docx';
         $phpWord->saveAs($filename);
+        //log activity
+        activity()
+            ->withProperties([
+                'id'=>$suratTransport->id,
+                'nama_user'=>Auth::user()->name,
+                'email_user'=>Auth::user()->email,
+                'time'=>now()->toDateString(),
+            ])
+            ->log('download_surat_permintaan_transportasi');
         return response()->download($filename)->deleteFileAfterSend(true);
     }
     public function deleteTransport($id)
