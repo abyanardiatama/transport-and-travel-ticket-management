@@ -67,15 +67,15 @@ class UserController extends Controller
             $validatedData['is_admin'] = 0;
             $validatedData['is_pegawai'] = 0;
         }
-        // unset($validatedData['role']);
-        // dd($validatedData);
-        User::create($validatedData);
-        //dum and die last element
-        // dd(User::all()->last());
-        // dd(User::all());
-
-        Session::flash('success', 'User berhasil ditambahkan');
-        return redirect('/dashboard');
+        //email is not unique
+        if (User::where('email', $validatedData['email'])->exists()) {
+            return redirect('/dashboard')->with('error', 'Email pengguna sudah terdaftar');
+        }
+        else{
+            User::create($validatedData);
+            Session::flash('success', 'User berhasil ditambahkan');
+            return redirect('/dashboard');
+        }
     }
 
     /**

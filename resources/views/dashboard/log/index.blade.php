@@ -59,7 +59,7 @@
                                         {{ $logActivity->firstItem() + $loop->index }}
                                     </th>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        {{ $activity->log_name == 'default' ? 'user_login_log' : $activity->log_name }}
+                                        {{ $activity->log_name == 'default' ? 'user_activity_log' : $activity->log_name }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         {{ $activity->description }}

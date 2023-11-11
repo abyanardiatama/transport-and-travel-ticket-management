@@ -25,6 +25,8 @@ class DashboardController extends Controller
 
         $approvedSuratTransport = SuratPermintaanTransport::where('isApprove_pegawai', true)->where('isApprove_atasan', true)->where('isApprove_admin', true)->where('kendaraan_lain',null)->get()->sortByDesc('created_at');
         $countApprovedSuratTransport = $approvedSuratTransport->count();
+        $approvedSuratTiketDinas = SuratPermintaanTiketDinas::where('isApprove_pegawai', true)->where('isApprove_atasan', true)->get()->sortByDesc('created_at');
+        $countApprovedSuratTiketDinas = $approvedSuratTiketDinas->count();
         $checkUser = SuratPermintaanTransport::where('id_pemohon', Auth::user()->id)->first();
         //get kendaraan where approvedSuratTransport->nomor_polisi == kendaraan->nomor_polisi
 
@@ -33,12 +35,13 @@ class DashboardController extends Controller
             //show latest data
             $suratPermintaanTransport = SuratPermintaanTransport::where('id_pemohon', Auth::user()->id)->take(3)->get()->sortByDesc('updated_at');
             // $suratPermintaanTransport = SuratPermintaanTransport::where('id_pemohon', Auth::user()->id)->take(3)->get()->sortByDesc('created_at');
-            $countSuratPermintaanTransport = SuratPermintaanTransport::where('id_pemohon', Auth::user()->id)->where('isApprove_pegawai', true)->where('isApprove_atasan', true)->where('isApprove_admin', true)->count();
+            // $countSuratPermintaanTransport = SuratPermintaanTransport::where('id_pemohon', Auth::user()->id)->where('isApprove_pegawai', true)->where('isApprove_atasan', true)->where('isApprove_admin', true)->count();
+            $countSuratPermintaanTransport = SuratPermintaanTransport::where('id_pemohon', Auth::user()->id)->count();
 
             //sort by updated at or created at
-            $suratPermintaanTiketDinas = SuratPermintaanTiketDinas::where('id_pemohon', Auth::user()->id)->take(3)->get()->sortBy('updated_at');
+            $suratPermintaanTiketDinas = SuratPermintaanTiketDinas::where('id_pemohon', Auth::user()->id)->take(3)->get()->sortByDesc('updated_at');
             // $suratPermintaanTiketDinas = SuratPermintaanTiketDinas::where('id_pemohon', Auth::user()->id)->take(3)->get();
-            $countSuratTiketDinas = SuratPermintaanTiketDinas::where('id_pemohon', Auth::user()->id)->where('isApprove_pegawai', true)->where('isApprove_atasan', true)->count();
+            $countSuratTiketDinas = SuratPermintaanTiketDinas::where('id_pemohon', Auth::user()->id)->count();
             //logging activity and get his user name
             
             activity()
@@ -95,36 +98,15 @@ class DashboardController extends Controller
                 'countSuratPerintahKerja' => $countSuratPerintahKerja,
                 'countSuratTransport' => $countSuratTransport,
                 'approvedSuratTransport' => $approvedSuratTransport,
+                'approvedSuratTiketDinas' => $approvedSuratTiketDinas,
+                'countApprovedSuratTiketDinas' => $countApprovedSuratTiketDinas,
                 'countApprovedSuratTransport' => $countApprovedSuratTransport,
                 'checkUser' => $checkUser,
             ]);
         }
         elseif(Auth::user()->is_driver ==1 ){
-            //display surat permintaan transport that is_approve_pegawai = 1 and is_approve_atasan = 1, and is_approve_admin = 0 
-            $suratPermintaanTransport = SuratPermintaanTransport::where('isApprove_pegawai', true)
-            ->where('isApprove_atasan', true)
-            ->where('isApprove_admin', null)->take(3)->get();
-            $countSuratPermintaanTransport = SuratPermintaanTransport::where('isApprove_pegawai', true)->where('isApprove_atasan', true)->where('isApprove_admin', null)->count();
-
-            //surat perintah kerja based id surat permintaan transport
-            $IdsuratTransport = SuratPermintaanTransport::where('isApprove_pegawai', true)
-                ->where('isApprove_atasan', true)
-                ->where('isApprove_admin', true)
-                ->first();
-
-            if ($IdsuratTransport) {
-                $id = $IdsuratTransport->id;
-                //surat kerja where user name == nama driver
-                $suratPerintahKerja = SuratPerintahKerja::where('nama_driver', Auth::user()->name)->get();
-                $countSuratPerintahKerja = SuratPerintahKerja::where('nama_driver', Auth::user()->name)->count();
-                //get nomor polisi from surat permintaan transport
-
-                $suratTransport = SuratPermintaanTransport::where('id', $id)->first();
-                $countSuratTransport = SuratPermintaanTransport::where('id', $id)->count();
-                $nomor_polisi = $suratTransport->nomor_polisi;
-            } else {
-                $suratPerintahKerja = null;
-            }
+            $suratPerintahKerja = SuratPerintahKerja::where('nama_driver', Auth::user()->name)->get()->sortByDesc('created_at');
+            $countSuratPerintahKerja = SuratPerintahKerja::where('nama_driver', Auth::user()->name)->count();
             activity()
                 ->withProperties([
                     'nama_user'=>Auth::user()->name, 
@@ -136,15 +118,8 @@ class DashboardController extends Controller
             return view('dashboard.index', [
                 'title' => 'Dashboard',
                 'active' => 'dashboard',
-                'suratPermintaanTransport' => $suratPermintaanTransport,
-                'countSuratPermintaanTransport' => $countSuratPermintaanTransport,
-                'countSuratTiketDinas' => $countSuratTiketDinas,
                 'suratPerintahKerja' => $suratPerintahKerja,
                 'countSuratPerintahKerja' => $countSuratPerintahKerja,
-                'nomor_polisi' => $nomor_polisi,
-                'countSuratTransport' => $countSuratTransport,
-                'approvedSuratTransport' => $approvedSuratTransport,
-                'countApprovedSuratTransport' => $countApprovedSuratTransport,
                 'checkUser' => $checkUser,
             ]);
 
@@ -195,6 +170,8 @@ class DashboardController extends Controller
                 'countSuratPermintaanTransport' => $countSuratPermintaanTransport,
                 'countSuratTiketDinas' => $countSuratTiketDinas,
                 'approvedSuratTransport' => $approvedSuratTransport,
+                'approvedSuratTiketDinas' => $approvedSuratTiketDinas,
+                'countApprovedSuratTiketDinas' => $countApprovedSuratTiketDinas,
                 'countApprovedSuratTransport' => $countApprovedSuratTransport,
                 'checkUser' => $checkUser,
             ]);

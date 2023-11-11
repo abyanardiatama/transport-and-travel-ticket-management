@@ -18,29 +18,14 @@ class SuratPerintahKerjaController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {   
-        $suratPerintahKerja=SuratPerintahKerja::all();
-        $countSuratPerintahKerja = SuratPerintahKerja::all()->count();
-        // $IdsuratTransport = SuratPermintaanTransport::where('isApprove_pegawai', true)
-        // ->where('isApprove_atasan', true)
-        // ->where('isApprove_admin', true)
-        // ->first();
-        // if ($IdsuratTransport) {
-        //     $id = $IdsuratTransport->id;
-        //     if(Auth::user()->is_driver == true){
-        //         $suratPerintahKerja = SuratPerintahKerja::where('nama_driver', Auth::user()->name)->get();
-        //         $countSuratPerintahKerja = SuratPerintahKerja::where('nama_driver', Auth::user()->name)->count();
-        //     }
-        //     elseif(Auth::user()->is_admin == true){
-        //         $suratPerintahKerja = SuratPerintahKerja::all();
-        //         $countSuratPerintahKerja = SuratPerintahKerja::all()->count();
-        //     }
-        //     $suratTransport = SuratPermintaanTransport::where('id', $id)->first();
-        //     $countSuratTransport = SuratPermintaanTransport::where('id', $id)->count();
-        //     $nomor_polisi = $suratTransport->nomor_polisi;
-        // } else {
-        //     $suratPerintahKerja = null;
-        // }
+    {   if(Auth::user()->is_admin==true){
+            $suratPerintahKerja=SuratPerintahKerja::all();
+            $countSuratPerintahKerja = SuratPerintahKerja::all()->count();
+        }
+        elseif(Auth::user()->is_driver==true){
+            $suratPerintahKerja=SuratPerintahKerja::where('nama_driver', Auth::user()->name)->get();
+            $countSuratPerintahKerja = SuratPerintahKerja::where('nama_driver', Auth::user()->name)->get()->count();
+        }
         return view('dashboard.SuratPerintahKerja.index',[
             'suratPerintahKerja' => $suratPerintahKerja,
             'countSuratPerintahKerja' => $countSuratPerintahKerja,

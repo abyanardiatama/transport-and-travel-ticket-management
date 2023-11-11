@@ -39,55 +39,60 @@
             {{-- field nama driver --}}
             <div class="col-span-2 sm:col-span-1">
                 <label for="nama_driver" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Driver</label>
-                <input type="text" name="nama_driver" id="nama_driver" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ old('nama_driver',$suratPermintaanTransport['nama_driver']) }}" placeholder="Nama Driver" required>
+                <input type="text" name="nama_driver" id="nama_driver" value="{{ old('nama_driver', $suratPermintaanTransport['nama_driver']) }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full mt-2 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Nama Driver" required readonly>
+                {{-- <select name="nama_driver" id="nama_driver" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full mt-2 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" readonly>
+                    @foreach ($user as $driver)
+                        <option value="{{ $driver->name }}" {{ $suratPermintaanTransport->nama_driver == $driver->name ? 'selected' : '' }}>{{ $driver->name }}</option>
+                    @endforeach
+                </select> --}}
             </div>
             {{-- field unit --}}
             <div class="col-span-2 sm:col-span-1">
                 <label for="unit" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Unit</label>
-                <input type="text" name="unit" id="unit" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ old('unit', $suratPermintaanTransport['unit']) }}" placeholder="Unit" required>
+                <input type="text" name="unit" id="unit" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ old('unit', $suratPermintaanTransport['unit']) }}" placeholder="Unit" required readonly>
             </div>
             {{-- field keperluan --}}
             <div class="col-span-2 sm:col-span-1">
                 <label for="keperluan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Keperluan</label>
-                <input name="keperluan" id="keperluan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ old('keperluan', $suratPermintaanTransport['keperluan']) }}" placeholder="Keperluan" required>
+                <input name="keperluan" id="keperluan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ old('keperluan', $suratPermintaanTransport['keperluan']) }}" placeholder="Keperluan" required readonly>
             </div>
             {{-- field tujuan --}}
             <div class="col-span-2 sm:col-span-1">
                 <label for="tujuan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tujuan / Alamat</label>
-                <input name="tujuan" id="tujuan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ old('tujuan', $suratPermintaanTransport['tujuan']) }}" placeholder="Tujuan / Alamat" required>
+                <input name="tujuan" id="tujuan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ old('tujuan', $suratPermintaanTransport['tujuan']) }}" placeholder="Tujuan / Alamat" required readonly>
             </div>
             {{-- field tanggal berangkat --}}
             <div class="col-span-2 sm:col-span-1">
                 <label for="tanggal_berangkat" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal Berangkat</label>
-                <input type="date" name="tanggal_berangkat" id="tanggal_berangkat" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ old('tanggal_berangkat', $suratPermintaanTransport['tanggal_berangkat']) }}" placeholder="Tanggal Berangkat" required>
+                <input type="date" name="tanggal_berangkat" id="tanggal_berangkat" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ old('tanggal_berangkat', $suratPermintaanTransport['tanggal_berangkat']) }}" placeholder="Tanggal Berangkat" required readonly>
             </div>
             {{-- field tanggal kembali --}}
             <div class="col-span-2 sm:col-span-1">
                 <label for="tanggal_kembali" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal Kembali</label>
-                <input type="date" name="tanggal_kembali" id="tanggal_kembali" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ old('tanggal_kembali', $suratPermintaanTransport['tanggal_kembali']) }}" placeholder="Tanggal Kembali" required>
+                <input type="date" name="tanggal_kembali" id="tanggal_kembali" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ old('tanggal_kembali', $suratPermintaanTransport['tanggal_kembali']) }}" placeholder="Tanggal Kembali" required readonly>
             </div>
             {{-- field jam berangkat --}}
             <div class="col-span-2 sm:col-span-1">
                 <label for="jam_berangkat" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jam Berangkat</label>
-                <input type="time" name="jam_berangkat" id="jam_berangkat" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ old('jam_berangkat', $suratPermintaanTransport['jam_berangkat']) }}" placeholder="Jam Berangkat" required>
+                <input type="time" name="jam_berangkat" id="jam_berangkat" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ old('jam_berangkat', $suratPermintaanTransport['jam_berangkat']) }}" placeholder="Jam Berangkat" required readonly>
             </div>
             {{-- field jam kembali --}}
             <div class="col-span-2 sm:col-span-1">
                 <label for="jam_kembali" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jam Kembali</label>
-                <input type="time" name="jam_kembali" id="jam_kembali" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ old('jam_kembali', $suratPermintaanTransport['jam_kembali']) }}" placeholder="Jam Kembali" required>
+                <input type="time" name="jam_kembali" id="jam_kembali" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ old('jam_kembali', $suratPermintaanTransport['jam_kembali']) }}" placeholder="Jam Kembali" required readonly>
             </div>
             {{-- field lama perjalanan --}}
-            <div class="col-span-2 sm:col-span-1">
+            <div class="col-span-2">
                 <label for="lama_perjalanan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lama Perjalanan</label>
                 <div class="flex">
-                    <input type="number" name="lama_perjalanan" id="lama_perjalanan" class="rounded-r-0 rounded-l-lg  bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ old('lama_perjalanan', $lama_perjalanan) }}" placeholder="Lama Perjalanan" required>
+                    <input type="number" name="lama_perjalanan" id="lama_perjalanan" class="rounded-r-0 rounded-l-lg  bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ old('lama_perjalanan', $lama_perjalanan) }}" placeholder="Lama Perjalanan" required readonly>
                     <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-gray-300 rounded-r-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
                         Hari
                     </span>
                 </div>
             </div>
             {{-- field biaya perjalanan --}}
-            <div class="col-span-2 sm:col-span-1">
+            {{-- <div class="col-span-2 sm:col-span-1">
                 <label for="biaya_perjalanan" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Biaya Perjalanan</label>
                 <div class="flex">
                     <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-r-0 border-gray-300 rounded-l-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
@@ -95,7 +100,7 @@
                     </span>
                     <input type="text" name="biaya_perjalanan" id="biaya_perjalanan" class="rounded-none rounded-r-lg bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ old('biaya_perjalanan', $suratPermintaanTransport['biaya_perjalanan']) }}" placeholder="Biaya Perjalanan" required>
                 </div>
-            </div>
+            </div> --}}
             {{-- Note bahwa surat akan diteruskan ke atasan untuk persetujuan --}}
             <div class="col-span-2">
                 <div class="flex p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
@@ -107,13 +112,12 @@
                       <span class="font-medium">Periksa kembali data yang telah terisi</span>
                         <ul class="mt-1.5 list-disc list-inside">
                           <li>Dengan menekan submit maka surat perintah kerja akan dibuat</li>
-                          <li>Apabila terdapat kesalahan, surat perintah kerja dapat disunting oleh admin</li>
                       </ul>
                     </div>
                 </div>
             </div>
             {{-- back button --}}
-            <div class="col-span-2 sm:col-span-1 sm:flex justify-start">
+            {{-- <div class="col-span-2 sm:col-span-1 sm:flex justify-start">
                 <button id="backButton" class="text-sm w-full bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-lg shadow-lg hover:shadow-xl transition duration-200">Kembali</button>
             </div>
             <script>
@@ -122,9 +126,9 @@
                     //back to /dashboard
                     window.location.href = '{{ url()->previous() }}';
                 });
-            </script>
+            </script> --}}
             {{-- button submit --}}
-            <div class="col-span-2 sm:col-span-1 sm:flex justify-end">
+            <div class="col-span-2">
                 <button type="submit" class="text-sm w-full bg-blue-600 hover:bg-blue-800 text-white font-semibold py-2 px-4 rounded-lg shadow-lg hover:shadow-xl transition duration-200 py-2.5">Buat Surat Perintah Kerja</button>
             </div>
         </div>

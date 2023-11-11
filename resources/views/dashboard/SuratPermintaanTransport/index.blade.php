@@ -335,7 +335,7 @@
                                                                             </svg>
                                                                             <span class="sr-only">Info</span>
                                                                             <div class="text-left whitespace-normal">
-                                                                                <span class="font-medium">Periksa data dengan benar</span>
+                                                                                <span class="font-medium">Periksa kembali data dengan benar</span>
                                                                                 <ul class="mt-1.5 list-disc list-inside">
                                                                                     <li>Dengan menyetujui data ini, data akan diteruskan untuk dilengkapi</li>
                                                                                     <li>Data akan dikirimkan ke admin untuk disetujui</li>
@@ -461,7 +461,7 @@
                                                                     </svg>
                                                                     <span class="sr-only">Info</span>
                                                                     <div class="text-left whitespace-normal">
-                                                                        <span class="font-medium">Pastikan data telah terisi dengan benar</span>
+                                                                        <span class="font-medium">Periksa kembali data sebelum memberikan persetujuan</span>
                                                                         <ul class="mt-1.5 list-disc list-inside">
                                                                             <li>Dengan menyetujui data ini, data akan diteruskan untuk dilengkapi</li>
                                                                             <li>Data akan dikirimkan ke admin untuk disetujui</li>

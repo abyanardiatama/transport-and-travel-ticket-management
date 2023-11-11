@@ -29,7 +29,7 @@ class SuratPermintaanTransportController extends Controller
         if(Auth::user()->is_pegawai == 1){
             //display surat permintaan transport that id_pemohon == id user
             $suratPermintaanTransport = SuratPermintaanTransport::where('id_pemohon', Auth::user()->id)->get();
-            $countSuratPermintaanTransport = SuratPermintaanTransport::where('id_pemohon', Auth::user()->id)->where('isApprove_pegawai', true)->where('isApprove_atasan', true)->where('isApprove_admin', true)->count();
+            $countSuratPermintaanTransport = SuratPermintaanTransport::where('id_pemohon', Auth::user()->id)->count();
         }
         elseif(Auth::user()->is_admin == 1){
             //display surat permintaan transport that is_approve_pegawai = 1 and is_approve_atasan = 1, and is_approve_admin = 0
@@ -354,6 +354,18 @@ class SuratPermintaanTransportController extends Controller
                 Session::flash('error', 'Jadwal sudah terisi, silahkan cek daftar penggunaan kendaraan');
                 return redirect()->route('permintaantransport.lengkapidata', compact('id'));
             }
+            //mengecek apakah driver tersedia di tanggal dan jam yang diminta
+            elseif(SuratPermintaanTransport::where('nama_driver', $validatedData['nama_driver'])
+            ->where('tanggal_berangkat', $validatedData['tanggal_berangkat'])
+            ->where('tanggal_kembali', $validatedData['tanggal_kembali'])
+            ->where('jam_berangkat', $validatedData['jam_berangkat'])
+            ->where('jam_kembali', $validatedData['jam_kembali'])
+            ->exists()){
+                unset($validatedData['waktu_berangkat']);
+                unset($validatedData['waktu_kembali']);
+                Session::flash('error', 'Jadwal sudah terisi, silahkan cek daftar penggunaan kendaraan');
+                return redirect()->route('permintaantransport.lengkapidata', compact('id'));
+            }
             else{
                 Session::flash('success', 'Surat Permintaan Transport berhasil dilengkapi');
                 //update
@@ -372,6 +384,7 @@ class SuratPermintaanTransportController extends Controller
                 return view('dashboard.SuratPerintahKerja.create', [
                     'suratPermintaanTransport' => $suratPermintaanTransport,
                     'lama_perjalanan' => $lama_perjalanan,
+                    // 'user' => User::where('is_driver', true)->get(),
                 ]);
             }
         }
@@ -472,7 +485,12 @@ class SuratPermintaanTransportController extends Controller
         //get nama atasan based email_atasan
         $nama_atasan = User::where('email', $suratTransport->email_atasan)->first();
         $nama_admin = User::where('id', $suratTransport->id_admin)->first();
-        $phpWord = new \PhpOffice\PhpWord\TemplateProcessor('templates/surat_permintaan_transportasi.docx');
+        if($suratTransport->nama_driver != null && $suratTransport->nomor_polisi != null){
+            $phpWord = new \PhpOffice\PhpWord\TemplateProcessor('templates/surat_permintaan_transportasi_ada_kendaraan.docx');
+        }
+        else{
+            $phpWord = new \PhpOffice\PhpWord\TemplateProcessor('templates/surat_permintaan_transportasi_tidak_ada_kendaraan.docx');
+        }
         $phpWord->setValue('nama_pemohon', $suratTransport->nama_pemohon);
         $phpWord->setValue('nama_atasan', $nama_atasan->name);
         $phpWord->setValue('nama_admin', $nama_admin->name);

@@ -35,7 +35,7 @@
                 </div>
                 {{-- field unit --}}
                 <div class="col-span-2 sm:col-span-1">
-                    <input type="text" name="unit" id="unit" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Unit" value="{{ old('unit') }}" required> 
+                    <input type="text" name="unit" id="unit" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Unit (cth : SCI-AKL)" value="{{ old('unit') }}" required> 
                 </div>
                 {{-- email atasan --}}
                 <div class="col-span-2 sm:col-span-1">
@@ -61,7 +61,7 @@
                 </script>
                 {{-- biaya perjalanan --}}
                 <div class="col-span-2 sm:col-span-1">
-                    <input type="text" name="biaya_perjalanan" id="biaya_perjalanan" min="0" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ old('biaya_perjalanan') }}" placeholder="Biaya Perjalanan" required>
+                    <input type="text" name="biaya_perjalanan" id="biaya_perjalanan" min="0" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ old('biaya_perjalanan') }}" placeholder="Biaya Perjalanan (cth : 200.000)" required>
                 </div>
                 {{-- field tujuan --}}
                 <div class="col-span-2 sm:col-span-1">
@@ -124,6 +124,7 @@
                     <div>
                       <span class="font-medium">Pastikan semua kolom telah diisi dengan benar</span>
                         <ul class="mt-1.5 list-disc list-inside">
+                          <li>Pastikan untuk mengecek jadwal penggunaan kendaraan lebih dahulu</li>
                           <li>Dengan menekan submit Anda telah menyetujui dibuatnya surat permintaan</li>
                           <li>Surat akan dikirimkan ke atasan untuk disetujui sebelum akhirnya dilengkapi</li>
                       </ul>

@@ -37,8 +37,17 @@ class KendaraanController extends Controller
             'nama_kendaraan' => 'required',
             'plat_nomor' => 'required',
         ]);
-        Kendaraan::create($validatedData);
-        return redirect('/dashboard')->with('success', 'Kendaraan berhasil ditambahkan');
+        //if plat nomot not null
+        if ($validatedData['plat_nomor'] != null) {
+            $plat_nomor = strtoupper($validatedData['plat_nomor']);
+            if (Kendaraan::where('plat_nomor', $plat_nomor)->exists()) {
+                return redirect('/dashboard')->with('error', 'Plat nomor kendaraan sudah tersedia');
+            }
+            else{
+                Kendaraan::create($validatedData);
+                return redirect('/dashboard')->with('success', 'Kendaraan berhasil ditambahkan');
+            }
+        }
     }
 
     /**

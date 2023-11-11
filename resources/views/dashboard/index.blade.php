@@ -55,7 +55,7 @@
                     <div class="text-6xl font-bold dark:text-gray-400">{{ $countSuratPerintahKerja }}</div>
                 </div> 
             </div>
-        @elseif(Auth::user()->is_pegawai==true || Auth::user()->is_atasan1==true || Auth::user()->is_atasan2==true)
+        @elseif(Auth::user()->is_pegawai==true   || Auth::user()->is_atasan1==true || Auth::user()->is_atasan2==true)
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <div class="border-solid border-2 border-blue-500 border-opacity-75 pl-4 h-28 rounded-lg bg-gray-50 dark:bg-gray-800 gap-4">
                     <div class="py-1 text-sm lg:text-lg font-medium dark:text-gray-400">Permintaan Transport</div>
@@ -110,17 +110,17 @@
                                     {{-- nama pengguna --}}
                                     <div class="col-span-2 sm:col-span-1">
                                         <label for="name" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Pengguna</label>
-                                        <input type="text" id="name" name="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                                        <input type="text" id="name" name="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Masukkan nama user" required>
                                     </div>
                                     {{-- email --}}
                                     <div class="col-span-2 sm:col-span-1">
                                         <label for="email" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-                                        <input type="email" id="email" name="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                                        <input type="email" id="email" name="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Masukkan email" required>
                                     </div>
                                     {{-- password --}}
                                     <div class="col-span-2 sm:col-span-1">
                                         <label for="password" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                                        <input type="password" id="password" name="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                                        <input type="password" id="password" name="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Masukkan password" required>
                                     </div>
                                     {{-- role --}}
                                     <div class="col-span-2 sm:col-span-1">
@@ -129,8 +129,7 @@
                                             <option value="">Pilih Role</option>
                                             <option value="admin">Admin</option>
                                             <option value="pegawai">Pegawai</option>
-                                            <option value="atasan1">Atasan 1</option>
-                                            <option value="atasan2">Atasan 2</option>
+                                            <option value="atasan1">Atasan</option>
                                             <option value="driver">Driver</option>
                                         </select>
                                     </div>
@@ -184,12 +183,12 @@
                                     {{-- nama kendaraan --}}
                                     <div class="col-span-2 sm:col-span-1">
                                         <label for="nama_kendaraan" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Kendaraan</label>
-                                        <input type="text" id="nama_kendaraan" name="nama_kendaraan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                                        <input type="text" id="nama_kendaraan" name="nama_kendaraan" placeholder="Masukkan nama kendaraaan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                                     </div>
                                     {{-- nomor polisi --}}
                                     <div class="col-span-2 sm:col-span-1">
                                         <label for="plat_nomor" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nomor Polisi</label>
-                                        <input type="text" id="plat_nomor" name="plat_nomor" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                                        <input type="text" id="plat_nomor" name="plat_nomor" placeholder="Masukkan plat nomor kendaraan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                                     </div>
 
                                     {{-- Submit button --}}
@@ -244,6 +243,9 @@
                                     <th scope="col" class="px-6 py-3 whitespace-nowrap">
                                         Nomor Polisi
                                     </th>
+                                    <th scope="col" class="px-6 py-3 whitespace-nowrap">
+                                        Pengemudi
+                                    </th>
                                     <th scope="col" class="px-6 py-3">
                                         Berangkat
                                     </th>
@@ -267,10 +269,13 @@
                                             {{ $suratTransport->nomor_polisi }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            {{ $suratTransport->tanggal_berangkat }} {{ $suratTransport->jam_berangkat }}
+                                            {{ $suratTransport->nama_driver }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            {{ $suratTransport->tanggal_kembali }} {{ $suratTransport->jam_kembali }}
+                                            {{ $suratTransport->tanggal_berangkat }} / {{ $suratTransport->jam_berangkat }}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            {{ $suratTransport->tanggal_kembali }} / {{ $suratTransport->jam_kembali }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             {{ $suratTransport->nama_pemohon }}
@@ -647,7 +652,7 @@
                                                                     </svg>
                                                                     <span class="sr-only">Info</span>
                                                                     <div class="text-left whitespace-normal">
-                                                                        <span class="font-medium"></span>
+                                                                        <span class="font-medium">Periksa kembali data sebelum memberikan persetujuan</span>
                                                                         <ul class="mt-1.5 list-disc list-inside">
                                                                             <li>Dengan menyetujui data ini, data akan diteruskan untuk dilengkapi</li>
                                                                             <li>Data akan dikirimkan kepada pemohon apabila telah dilengkapi</li>
@@ -937,7 +942,8 @@
                                                                     </svg>
                                                                     <span class="sr-only">Info</span>
                                                                     <div class="text-left whitespace-normal">
-                                                                        <span class="font-medium">Periksa kembali data dengan benar</span>
+                                                                        
+                                                                        
                                                                         <ul class="mt-1.5 list-disc list-inside">
                                                                             <li>Data yang telah disetujui akan dikirimkan kembali kepada pemohon</li>
                                                                             <li>Pemohon dapat mengunduh data yang telah disetujui</li>
@@ -1029,7 +1035,7 @@
                                                                     </svg>
                                                                     <span class="sr-only">Info</span>
                                                                     <div class="text-left whitespace-normal">
-                                                                        <span class="font-medium">Periksa data dengan benar</span>
+                                                                        <span class="font-medium">Periksa kembali data sebelum memberikan persetujuan</span>
                                                                         <ul class="mt-1.5 list-disc list-inside">
                                                                             <li>Dengan menyetujui data ini, data akan dikirimkan kembali kepada pemohon</li>
                                                                             <li>Pemohon dapat mengunduh data yang telah disetujui</li>
@@ -1149,7 +1155,10 @@
                                         Tujuan
                                     </th>
                                     <th scope="col" class="px-6 py-3 whitespace-nowrap">
-                                        Tanggal Berangkat
+                                        Berangkat
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 whitespace-nowrap">
+                                        Kembali
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-right">
                                         <span class="sr-only">Edit</span>
@@ -1174,7 +1183,10 @@
                                             {{ $surat->alamat }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            {{ $surat->tanggal_berangkat }}
+                                            {{ $surat->tanggal_berangkat }} / {{ $surat->jam_berangkat }}
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            {{ $surat->tanggal_kembali }} / {{ $surat->jam_kembali }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap flex items-end justify-end">
                                             {{-- Download Button --}}
