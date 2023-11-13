@@ -21,7 +21,42 @@ class LoginController extends Controller
         ]);
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-
+            if(Auth::user()->is_pegawai == 1){
+                activity()
+                ->withProperties([
+                    'nama_user'=>Auth::user()->name, 
+                    'email_user'=>Auth::user()->email, 
+                    'role_user'=>'pegawai', 
+                    'login_at'=>now()->toDateTimeString()])
+                ->log('user_pegawai_login');
+            }
+            elseif(Auth::user()->is_admin == 1){
+                activity()
+                ->withProperties([
+                    'nama_user'=>Auth::user()->name, 
+                    'email_user'=>Auth::user()->email, 
+                    'role_user'=>'admin', 
+                    'login_at'=>now()->toDateTimeString()])
+                ->log('user_admin_login');
+            }
+            elseif(Auth::user()->is_atasan1 == 1 || Auth::user()->is_atasan2 == 1){
+                activity()
+                ->withProperties([
+                    'nama_user'=>Auth::user()->name, 
+                    'email_user'=>Auth::user()->email, 
+                    'role_user'=>'atasan', 
+                    'login_at'=>now()->toDateTimeString()])
+                ->log('user_atasan_login');
+            }
+            elseif(Auth::user()->is_driver == 1){
+                activity()
+                ->withProperties([
+                    'nama_user'=>Auth::user()->name, 
+                    'email_user'=>Auth::user()->email, 
+                    'role_user'=>'driver', 
+                    'login_at'=>now()->toDateTimeString()])
+                ->log('user_driver_login');
+            }
             return redirect()->intended('/dashboard');
         }
 

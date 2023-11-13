@@ -71,6 +71,10 @@ class UserController extends Controller
         if (User::where('email', $validatedData['email'])->exists()) {
             return redirect('/dashboard')->with('error', 'Email pengguna sudah terdaftar');
         }
+        //user name is not unique
+        elseif (User::where('name', $validatedData['name'])->exists()) {
+            return redirect('/dashboard')->with('error', 'Nama pengguna sudah terdaftar');
+        }
         else{
             User::create($validatedData);
             Session::flash('success', 'User berhasil ditambahkan');

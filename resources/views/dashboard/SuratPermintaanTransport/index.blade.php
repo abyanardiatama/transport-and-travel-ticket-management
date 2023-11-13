@@ -54,7 +54,6 @@
                                             Status
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-center">
-                                            Edit
                                         </th>
                                     @endif
                                     @if (Auth::user()->is_admin==true)

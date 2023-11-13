@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\SuratPermintaanTransport;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SuratPerintahKerjaCreated;
 
 class SuratPerintahKerjaController extends Controller
 {
@@ -64,7 +66,9 @@ class SuratPerintahKerjaController extends Controller
             'isApprove_admin' => 'required',
             'isApprove_atasan' => 'required',
         ]);
-        
+        //get driver email from nama driver
+        $driver = User::where('name', $data['nama_driver'])->first();
+        Mail::to($driver->email)->send(new SuratPerintahKerjaCreated($data));
         Session::flash('success', 'Surat Perintah Kerja berhasil dibuat');
         SuratPerintahKerja::create($data);
         return redirect('/dashboard');

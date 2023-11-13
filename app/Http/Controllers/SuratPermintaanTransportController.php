@@ -18,6 +18,13 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use PhpOffice\PhpWord\Writer\PDF\MPDF;
 use PhpOffice\PhpWord\Writer\PDF\DomPDF;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SuratPermintaanTransportMail;
+use App\Mail\SuratPermintaanTransportApproved;
+use App\Mail\SuratPermintaanTransportDitolak;
+use App\Mail\LengkapiSuratPermintaanTransport;
+use App\Mail\SuratPermintaanTransportLengkap;
+
 
 class SuratPermintaanTransportController extends Controller
 {
@@ -144,6 +151,8 @@ class SuratPermintaanTransportController extends Controller
             return redirect('/dashboard/permintaantransport/create');
         }
         else{
+            //Mail to atasan
+            Mail::to($validatedData['email_atasan'])->send(new SuratPermintaanTransportMail($validatedData));
             //create new SuratPermintaanTransport
             SuratPermintaanTransport::create($validatedData);
             //send success message to dashboard
@@ -183,12 +192,23 @@ class SuratPermintaanTransportController extends Controller
     {
         $data = SuratPermintaanTransport::find($id);
         //get isApprove_atasan from database
-        $data = $data->isApprove_atasan;
+        $approve_atasan = $data->isApprove_atasan;
         // change value to 1 in database
-        $data = 1;
+        $approve_atasan = 1;
         //update data
-        SuratPermintaanTransport::where('id', $id)->update(['isApprove_atasan' => $data]);
+        SuratPermintaanTransport::where('id', $id)->update(['isApprove_atasan' => $approve_atasan]);
         //send session success to dashboard
+        //get email nama pemohon
+        $id_pemohon = SuratPermintaanTransport::find($id);
+        $id_pemohon = $id_pemohon->id_pemohon;
+        $pemohon = User::find($id_pemohon);
+        // get to user with is_admin = true
+        $admin = User::where('is_admin', true)->get();
+        Mail::to($pemohon['email'])->send(new SuratPermintaanTransportApproved($data));
+        //send to admin
+        foreach($admin as $admin){
+            Mail::to($admin['email'])->send(new LengkapiSuratPermintaanTransport($data));
+        }
         Session::flash('success', 'Surat Permintaan Transport berhasil diapprove');
         return redirect('/dashboard');
         // dd('data berhasil kembali ke dashboard');
@@ -198,12 +218,14 @@ class SuratPermintaanTransportController extends Controller
     {
         $data = SuratPermintaanTransport::find($id);
         //get isApprove_atasan from database
-        $data = $data->isApprove_atasan;
+        $isApprove_atasan = $data->isApprove_atasan;
         // change value to 1 in database
-        $data = 0;
+        $isApprove_atasan = 0;
         //update data
-        SuratPermintaanTransport::where('id', $id)->update(['isApprove_atasan' => $data]);
+        SuratPermintaanTransport::where('id', $id)->update(['isApprove_atasan' => $isApprove_atasan]);
         //send session success to dashboard
+        $pemohon = User::find($data['id_pemohon']);
+        Mail::to($pemohon->email)->send(new SuratPermintaanTransportDitolak($data));
         Session::flash('success', 'Surat Permintaan Transport berhasil ditolak');
         return redirect('/dashboard');
         // dd('data berhasil kembali ke dashboard');
@@ -373,8 +395,12 @@ class SuratPermintaanTransportController extends Controller
                 unset($validatedData['waktu_berangkat']);
                 unset($validatedData['waktu_kembali']);
                 SuratPermintaanTransport::where('id', $suratTransport->id)->update($validatedData);
-                //go to perintah kerja create
-                //get data from surat permintaan transport
+                //email nama pemohon from id_pemohon
+                $id_pemohon = SuratPermintaanTransport::find($id);
+                $id_pemohon = $id_pemohon->id_pemohon;
+                $pemohon = User::find($id_pemohon);
+                $email_pemohon = $pemohon->email;
+                Mail::to($email_pemohon)->send(new SuratPermintaanTransportLengkap($validatedData));
                 $suratPermintaanTransport = SuratPermintaanTransport::find($id);
                 //Count lama perjalanan based on tanggal berangkat and tanggal kembali
                 $tanggal_berangkat = $validatedData['tanggal_berangkat'];
@@ -467,6 +493,7 @@ class SuratPermintaanTransportController extends Controller
         else{
             //update SuratPermintaanTransport
             SuratPermintaanTransport::where('id', $suratPermintaanTransport->id)->update($validatedData);
+            Mail::to($validatedData['email_atasan'])->send(new SuratPermintaanTransportMail($validatedData));
             //send success message to dashboard
             Session::flash('success', 'Surat Permintaan Transport berhasil diedit');
             //redirect to dashboard

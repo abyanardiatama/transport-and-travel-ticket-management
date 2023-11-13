@@ -8,6 +8,10 @@ use App\Models\SuratPermintaanTiketDinas;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SuratPermintaanTiketDinasCreated;
+use App\Mail\SuratPermintaanTiketDinasApproved;
+use App\Mail\SuratPermintaanTiketDinasDitolak;
 
 class SuratPermintaanTiketDinasController extends Controller
 {
@@ -84,6 +88,7 @@ class SuratPermintaanTiketDinasController extends Controller
             return redirect('/dashboard/permintaantiketdinas/create');
         }
         else{
+            Mail::to($validatedData['email_atasan'])->send(new SuratPermintaanTiketDinasCreated($validatedData));
             SuratPermintaanTiketDinas::create($validatedData);
             Session::flash('success', 'Surat Permintaan Tiket Dinas Berhasil Dibuat');
             return redirect('/dashboard');
@@ -105,6 +110,8 @@ class SuratPermintaanTiketDinasController extends Controller
     public function atasanApprove($id)
     {
         $suratPermintaanTiketDinas = SuratPermintaanTiketDinas::find($id);
+        $pemohon = User::find($suratPermintaanTiketDinas->id_pemohon);
+        Mail::to($pemohon->email)->send(new SuratPermintaanTiketDinasApproved($suratPermintaanTiketDinas));
         $suratPermintaanTiketDinas->isApprove_atasan = true;
         $suratPermintaanTiketDinas->save();
         Session::flash('success', 'Surat Permintaan Tiket Dinas Berhasil Disetujui');
@@ -114,6 +121,8 @@ class SuratPermintaanTiketDinasController extends Controller
     public function atasanTolak($id)
     {
         $suratPermintaanTiketDinas = SuratPermintaanTiketDinas::find($id);
+        $pemohon = User::find($suratPermintaanTiketDinas->id_pemohon);
+        Mail::to($pemohon->email)->send(new SuratPermintaanTiketDinasDitolak($suratPermintaanTiketDinas));
         $suratPermintaanTiketDinas->isApprove_atasan = false;
         $suratPermintaanTiketDinas->save();
         Session::flash('success', 'Surat Permintaan Tiket Dinas Berhasil Ditolak');
@@ -186,6 +195,7 @@ class SuratPermintaanTiketDinasController extends Controller
         }
         else{
             //update surat dinas
+            Mail::to($validatedData['email_atasan'])->send(new SuratPermintaanTiketDinasCreated($validatedData));
             $suratPermintaanTiketDinas->update($validatedData);
             Session::flash('success', 'Surat Permintaan Tiket Dinas Berhasil Diperbarui');
             return redirect('/dashboard/');

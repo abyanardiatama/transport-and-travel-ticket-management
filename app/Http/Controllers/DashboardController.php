@@ -42,17 +42,6 @@ class DashboardController extends Controller
             $suratPermintaanTiketDinas = SuratPermintaanTiketDinas::where('id_pemohon', Auth::user()->id)->take(3)->get()->sortByDesc('updated_at');
             // $suratPermintaanTiketDinas = SuratPermintaanTiketDinas::where('id_pemohon', Auth::user()->id)->take(3)->get();
             $countSuratTiketDinas = SuratPermintaanTiketDinas::where('id_pemohon', Auth::user()->id)->count();
-            //logging activity and get his user name
-            
-            activity()
-                ->withProperties([
-                    'nama_user'=>Auth::user()->name, 
-                    'email_user'=>Auth::user()->email, 
-                    'role_user'=>'pegawai', 
-                    'login_at'=>now()->toDateTimeString()])
-                ->log('user_pegawai_login');
-
-
         }
         elseif(Auth::user()->is_admin == 1){
             //display surat permintaan transport that is_approve_pegawai = 1 and is_approve_atasan = 1, and is_approve_admin = 0
@@ -79,14 +68,6 @@ class DashboardController extends Controller
                 $suratTransport = null;
                 $countSuratTransport = 0;
             }
-            activity()
-                ->withProperties([
-                    'nama_user'=>Auth::user()->name, 
-                    'email_user'=>Auth::user()->email, 
-                    'role_user'=>'admin', 
-                    'login_at'=>now()->toDateTimeString()])
-                ->log('user_admin_login');
-
             return view('dashboard.index', [
                 'title' => 'Dashboard',
                 'active' => 'dashboard',
@@ -107,14 +88,6 @@ class DashboardController extends Controller
         elseif(Auth::user()->is_driver ==1 ){
             $suratPerintahKerja = SuratPerintahKerja::where('nama_driver', Auth::user()->name)->get()->sortByDesc('created_at');
             $countSuratPerintahKerja = SuratPerintahKerja::where('nama_driver', Auth::user()->name)->count();
-            activity()
-                ->withProperties([
-                    'nama_user'=>Auth::user()->name, 
-                    'email_user'=>Auth::user()->email, 
-                    'role_user'=>'driver', 
-                    'login_at'=>now()->toDateTimeString()])
-                ->log('user_driver_login');
-
             return view('dashboard.index', [
                 'title' => 'Dashboard',
                 'active' => 'dashboard',
@@ -132,13 +105,6 @@ class DashboardController extends Controller
             
             $suratPermintaanTiketDinas = SuratPermintaanTiketDinas::where('isApprove_pegawai', true)->where('isApprove_atasan', null)->where('email_atasan', Auth::user()->email)->take(3)->get();
             $countSuratTiketDinas = SuratPermintaanTiketDinas::where('isApprove_pegawai', true)->where('isApprove_atasan', null)->where('email_atasan', Auth::user()->email)->count();
-            activity()
-                ->withProperties([
-                    'nama_user'=>Auth::user()->name, 
-                    'email_user'=>Auth::user()->email, 
-                    'role_user'=>'atasan', 
-                    'login_at'=>now()->toDateTimeString()])
-                ->log('user_atasan_login');
         }
         elseif(Auth::user()->is_atasan2 == 1){
             //display surat permintaan transport that is_approve_pegawai = 1 and is_approve_atasan = 0, and is_approve_admin = 0, and email_atasan == email user
@@ -147,13 +113,6 @@ class DashboardController extends Controller
             
             $suratPermintaanTiketDinas = SuratPermintaanTiketDinas::where('isApprove_pegawai', 1)->where('isApprove_atasan', null)->where('email_atasan', Auth::user()->email)->take(3)->get();
             $countSuratTiketDinas = SuratPermintaanTiketDinas::where('isApprove_pegawai', 1)->where('isApprove_atasan', null)->where('email_atasan', Auth::user()->email)->count();
-            activity()
-                ->withProperties([
-                    'nama_user'=>Auth::user()->name, 
-                    'email_user'=>Auth::user()->email, 
-                    'role_user'=>'atasan', 
-                    'login_at'=>now()->toDateTimeString()])
-                ->log('user_atasan_login');
         }
         
         
