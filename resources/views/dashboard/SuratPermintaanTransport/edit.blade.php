@@ -55,13 +55,13 @@
                     <input type="text" name="unit" id="unit" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Unit" value="{{ old('unit', $suratTransport->unit) }}" required> 
                 </div>
                 {{-- email atasan --}}
-                <div class="col-span-2 sm:col-span-1">
+                <div class="col-span-2">
                     <input type="email" name="email_atasan" id="email_atasan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ old('email_atasan', $suratTransport->email_atasan) }}" placeholder="Email Atasan" required>
                 </div>
                 {{-- biaya perjalanan --}}
-                <div class="col-span-2 sm:col-span-1">
+                {{-- <div class="col-span-2 sm:col-span-1">
                     <input type="text" name="biaya_perjalanan" id="biaya_perjalanan" min="0" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ old('biaya_perjalanan', $suratTransport->biaya_perjalanan) }}" placeholder="Biaya Perjalanan" required>
-                </div>
+                </div> --}}
                 {{-- field tujuan --}}
                 <div class="col-span-2 sm:col-span-1">
                     <input type="text" name="tujuan" id="tujuan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Tujuan" value="{{ old('tujuan', $suratTransport->tujuan) }}" required>
@@ -118,13 +118,12 @@
                     </div>
                 </div>
                 @if (Auth::user()->is_admin==true)
+                    {{-- biaya perjalanan --}}
+                    <div class="col-span-2">
+                        <input type="text" name="biaya_perjalanan" id="biaya_perjalanan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  placeholder="Biaya Perjalanan" autofocus required>
+                    </div>
                     {{-- Checkbox ada kendaraan --}}
-                    <div class="col-span-2 pt-5">
-                        {{-- <label class="relative inline-flex items-center mb-4 cursor-pointer">
-                            <input type="checkbox" id="checkbox" nama="isKendaraan_available" value="" class="sr-only peer">
-                            <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-                            <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Ada kendaraan tersedia?</span>
-                        </label> --}}
+                    <div class="col-span-2 pt-5"> 
                         <div class="flex items-center mb-4">
                             <input id="checkbox" type="checkbox" name="isKendaraan_available" value="false" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                             {{-- <label for="checkbox" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Ada kendaraan tersedia? </label> --}}
@@ -264,7 +263,7 @@
             nama_pemohon.readOnly = true;
             unit.readOnly = true;
             email_atasan.readOnly = true;
-            biaya_perjalanan.readOnly = true;
+            // biaya_perjalanan.readOnly = true;
             tujuan.readOnly = true;
             rute_pemakaian.readOnly = true;
             // rute_pemakaian.disabled = true;

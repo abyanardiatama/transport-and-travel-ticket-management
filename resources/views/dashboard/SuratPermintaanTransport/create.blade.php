@@ -38,7 +38,7 @@
                     <input type="text" name="unit" id="unit" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Unit (cth : SCI-AKL)" value="{{ old('unit') }}" required> 
                 </div>
                 {{-- email atasan --}}
-                <div class="col-span-2 sm:col-span-1">
+                <div class="col-span-2">
                     <input type="email" name="email_atasan" id="email_atasan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ old('email_atasan') }}" placeholder="Email Atasan" required>
                     {{-- all email atasan --}}
                     <datalist id="email_atasan_data">
@@ -55,14 +55,6 @@
                     });
                     //if there is no email_atasan_data, focus on email_atasan field with red border
                 </script>
-                {{-- check if email atasan is valid --}}
-                <script>
-                    
-                </script>
-                {{-- biaya perjalanan --}}
-                <div class="col-span-2 sm:col-span-1">
-                    <input type="text" name="biaya_perjalanan" id="biaya_perjalanan" min="0" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ old('biaya_perjalanan') }}" placeholder="Biaya Perjalanan (cth : 200.000)" required>
-                </div>
                 {{-- field tujuan --}}
                 <div class="col-span-2 sm:col-span-1">
                     <input type="text" name="tujuan" id="tujuan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Tujuan" value="{{ old('tujuan') }}" required>

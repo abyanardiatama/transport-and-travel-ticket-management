@@ -39,16 +39,19 @@
                     <input type="text" name="unit" id="unit" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Unit" required>
                 </div>
                 {{-- email atasan --}}
-                <div class="col-span-2 sm:col-span-1">
+                <div class="col-span-2">
                     <input type="email" name="email_atasan" id="email_atasan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Email Atasan" required>
                 </div>
                 {{-- beban biaya --}}
-                <div class="col-span-2 sm:col-span-1">
+                {{-- <div class="col-span-2 sm:col-span-1">
                     <input type="text" name="beban_biaya" id="beban_biaya" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Beban Biaya" required>
+                </div> --}}
+                <div class="col-span-2">
+                    <label class="text-left block text-sm font-medium text-gray-900 dark:text-white">Keberangkatan</label>
                 </div>
                 {{-- jenis transportasi --}}
                 <div class="col-span-2 sm:col-span-1">
-                    <select name="jenis_transportasi" id="jenis_transportasi" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                    <select name="jenis_transportasi_berangkat" id="jenis_transportasi_berangkat" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                         <option value="">Jenis Transportasi</option>
                         <option value="Penerbangan">Penerbangan</option>
                         <option value="Kereta Api">Kereta Api</option>
@@ -57,23 +60,23 @@
                 </div>
                 {{-- jenis kelas --}}
                 <div class="col-span-2 sm:col-span-1">
-                    <select name="jenis_kelas" id="jenis_kelas" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                    <select name="jenis_kelas_berangkat" id="jenis_kelas_berangkat" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                         <option value="">Jenis Kelas</option>  
                     </select>
                     <script>
-                        const jenis_transportasi = document.getElementById('jenis_transportasi');
-                        const jenis_kelas = document.getElementById('jenis_kelas');
-                        jenis_transportasi.addEventListener('change', function(){
-                            if(jenis_transportasi.value == 'Penerbangan'){
-                                jenis_kelas.innerHTML = `
+                        const jenis_transportasi_berangkat = document.getElementById('jenis_transportasi_berangkat');
+                        const jenis_kelas_berangkat = document.getElementById('jenis_kelas_berangkat');
+                        jenis_transportasi_berangkat.addEventListener('change', function(){
+                            if(jenis_transportasi_berangkat.value == 'Penerbangan'){
+                                jenis_kelas_berangkat.innerHTML = `
                                     <option value="">Jenis Kelas</option>  
                                     <option value="Ekonomi">Ekonomi</option>
                                     <option value="Ekonomi Premium">Ekonomi Premium</option>
                                     <option value="Bisnis">Bisnis</option>
                                     <option value="Eksekutif">First Class</option>
                                 `;
-                            }else if(jenis_transportasi.value == 'Kereta Api'){
-                                jenis_kelas.innerHTML = `
+                            }else if(jenis_transportasi_berangkat.value == 'Kereta Api'){
+                                jenis_kelas_berangkat.innerHTML = `
                                     <option value="">Jenis Kelas</option>  
                                     <option value="Ekonomi">Ekonomi</option>
                                     <option value="Bisnis">Bisnis</option>
@@ -81,8 +84,8 @@
                                     <option value="Luxury">Luxury</option>
                                 `;
                             }
-                            if(jenis_transportasi.value == 'Kapal Laut'){
-                                jenis_kelas.innerHTML = `
+                            if(jenis_transportasi_berangkat.value == 'Kapal Laut'){
+                                jenis_kelas_berangkat.innerHTML = `
                                     <option value="Disesuaikan">Disesuaikan</option>
                                 `;
                             }
@@ -91,14 +94,14 @@
                 </div>
                 {{-- rute asal --}}
                 <div class="col-span-2 sm:col-span-1">
-                    <input type="text" name="rute_asal" id="rute_asal" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Rute Asal" required>
+                    <input type="text" name="rute_asal_berangkat" id="rute_asal_berangkat" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Rute Asal" required>
                 </div>
                 {{-- rute tujuan --}}
                 <div class="col-span-2 sm:col-span-1">
-                    <input type="text" name="rute_tujuan" id="rute_tujuan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Rute Tujuan" required>
+                    <input type="text" name="rute_tujuan_berangkat" id="rute_tujuan_berangkat" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Rute Tujuan" required>
                 </div>
                 {{-- waktu dan jam berangkat --}}
-                <div class="col-span-2 sm:col-span-1">
+                <div class="col-span-2">
                     <div class="relative">
                         <svg class="absolute ml-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
@@ -114,11 +117,89 @@
                     </div>
                 </div>
                 {{-- perusahaan angkutan --}}
-                <div class="col-span-2 sm:col-span-1">
+                <div class="col-span-2">
                     <div class="col-span-2 sm:col-span-1">
-                        <input type="text" name="perusahaan_angkutan" id="perusahaan_angkutan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Perusahaan Angkutan" required>
+                        <input type="text" name="perusahaan_angkutan_berangkat" id="perusahaan_angkutan_berangkat" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Perusahaan Angkutan" required>
                     </div>
-                </div>     
+                </div>  
+
+                <div class="col-span-2">
+                    <label class="text-left block text-sm font-medium text-gray-900 dark:text-white">Kedatangan</label>
+                </div>
+                {{-- jenis transportasi --}}
+                <div class="col-span-2 sm:col-span-1">
+                    <select name="jenis_transportasi_kembali" id="jenis_transportasi_kembali" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                        <option value="">Jenis Transportasi</option>
+                        <option value="Penerbangan">Penerbangan</option>
+                        <option value="Kereta Api">Kereta Api</option>
+                        <option value="Kapal Laut">Kapal Laut</option>
+                    </select>
+                </div>
+                {{-- jenis kelas --}}
+                <div class="col-span-2 sm:col-span-1">
+                    <select name="jenis_kelas_kembali" id="jenis_kelas_kembali" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                        <option value="">Jenis Kelas</option>  
+                    </select>
+                    <script>
+                        const jenis_transportasi_kembali = document.getElementById('jenis_transportasi_kembali');
+                        const jenis_kelas_kembali = document.getElementById('jenis_kelas_kembali');
+                        jenis_transportasi_kembali.addEventListener('change', function(){
+                            if(jenis_transportasi_kembali.value == 'Penerbangan'){
+                                jenis_kelas_kembali.innerHTML = `
+                                    <option value="">Jenis Kelas</option>  
+                                    <option value="Ekonomi">Ekonomi</option>
+                                    <option value="Ekonomi Premium">Ekonomi Premium</option>
+                                    <option value="Bisnis">Bisnis</option>
+                                    <option value="Eksekutif">First Class</option>
+                                `;
+                            }else if(jenis_transportasi_kembali.value == 'Kereta Api'){
+                                jenis_kelas_kembali.innerHTML = `
+                                    <option value="">Jenis Kelas</option>  
+                                    <option value="Ekonomi">Ekonomi</option>
+                                    <option value="Bisnis">Bisnis</option>
+                                    <option value="Eksekutif">Eksekutif</option>
+                                    <option value="Luxury">Luxury</option>
+                                `;
+                            }
+                            if(jenis_transportasi_kembali.value == 'Kapal Laut'){
+                                jenis_kelas_kembali.innerHTML = `
+                                    <option value="Disesuaikan">Disesuaikan</option>
+                                `;
+                            }
+                        });
+                    </script>
+                </div>
+                {{-- rute asal --}}
+                <div class="col-span-2 sm:col-span-1">
+                    <input type="text" name="rute_asal_kembali" id="rute_asal_kembali" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Rute Asal" required>
+                </div>
+                {{-- rute tujuan --}}
+                <div class="col-span-2 sm:col-span-1">
+                    <input type="text" name="rute_tujuan_kembali" id="rute_tujuan_kembali" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Rute Tujuan" required>
+                </div>
+                {{-- waktu dan jam berangkat --}}
+                <div class="col-span-2">
+                    <div class="relative">
+                        <svg class="absolute ml-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                        </svg>
+                        <input type="text" id="waktu_kembali" name="waktu_kembali" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Waktu Kembali" required>
+                        <script>
+                            const waktu_kembali = document.getElementById('waktu_kembali');
+                            //change type to datetime-local when focus
+                            waktu_kembali.addEventListener('focus', function(){
+                                this.type = 'datetime-local';
+                            });
+                        </script>
+                    </div>
+                </div>
+                {{-- perusahaan angkutan --}}
+                <div class="col-span-2">
+                    <div class="col-span-2 sm:col-span-1">
+                        <input type="text" name="perusahaan_angkutan_kembali" id="perusahaan_angkutan_kembali" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Perusahaan Angkutan" required>
+                    </div>
+                </div>  
+                   
             </form>
             {{-- Note bahwa surat akan diteruskan ke atasan untuk persetujuan --}}
             <div class="col-span-2">

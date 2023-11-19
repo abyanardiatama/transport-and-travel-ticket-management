@@ -9,7 +9,7 @@
                 </svg>
             </button>
             <a href="/dashboard" class="flex ml-2 md:mr-24">
-            <img src="/logo-nobg.png" class="h-8 mr-3" alt="Logo Sucofindo" />
+            <img src="/logo_utama.png" class="h-8 mr-2" alt="Logo Sucofindo" />
             <span class="self-center invisible sm:visible text-lg font-medium sm:text-xl whitespace-nowrap dark:text-white">PT. Sucofindo</span>
             </a>
         </div>

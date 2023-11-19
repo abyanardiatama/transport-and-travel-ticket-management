@@ -52,6 +52,12 @@ Route::post('/dashboard/perintahkerja/store', [SuratPerintahKerjaController::cla
 Route::get('/dashboard/perintahkerja/{id}/delete', [SuratPerintahKerjaController::class, 'deletePerintahKerja'])
     ->middleware(['auth','role:admin']);
 
+//Admin Lengkapi data surat permintaan tiket dinas
+Route::get('/dashboard/permintaantiketdinas/{id}/lengkapidata', [SuratPermintaanTiketDinasController::class, 'lengkapiDataDinas'])->name('permintaantiketdinas.lengkapidata')
+    ->middleware(['auth','role:admin']);
+Route::post('/dashboard/permintaantiketdinas/{id}/lengkapidata', [SuratPermintaanTiketDinasController::class, 'updateLengkapiDataDinas'])
+    ->middleware(['auth','role:admin']);
+    
 //Admin Delete Surat Transport
 Route::get('/dashboard/permintaantransport/{id}/delete', [SuratPermintaanTransportController::class, 'deleteTransport'])
     ->middleware(['auth','role:admin']);

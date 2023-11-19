@@ -14,11 +14,11 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         //Include SuratPerintahKerjaSeeder
-        $this->call(SuratPerintahKerjaSeeder::class);
+        // $this->call(SuratPerintahKerjaSeeder::class);
         //Include SuratPermintaanTiketDinasSeeder
-        $this->call(SuratPermintaanTiketDinasSeeder::class);
+        // $this->call(SuratPermintaanTiketDinasSeeder::class);
         //Include SuratPermintaanTransportSeeder
-        $this->call(SuratPermintaanTransportSeeder::class);
+        // $this->call(SuratPermintaanTransportSeeder::class);
         //Include KendaraanSeeder
         $this->call(KendaraanSeeder::class);
         

@@ -7,11 +7,14 @@ Anda memiliki Surat Permintaan Pengurusan Tiket untuk Perjalanan Dinas baru yang
 Details:
 - Nama Pemohon      : {{ $validatedData['nama_pemohon'] }}
 - Unit              : {{ $validatedData['unit'] }}
-- Beban Biaya       : {{ $validatedData['beban_biaya'] }}
-- Transportasi      : {{ $validatedData['jenis_transportasi'] }} / {{ $validatedData['jenis_kelas'] }}
-- Rute              : {{ $validatedData['rute_asal'] }} ke {{ $validatedData['rute_tujuan'] }}
-- Tanggal Berangkat : {{ $validatedData['tanggal_berangkat'] }}  {{ $validatedData['jam_berangkat'] }}  
-
+Keberangkatan:
+- Rute Asal         : {{ $validatedData['rute_asal_berangkat'] }}
+- Rute Tujuan       : {{ $validatedData['rute_tujuan_berangkat'] }}
+- Tanggal Berangkat : {{ $validatedData['tanggal_berangkat'] }} {{ $validatedData['jam_berangkat'] }}
+Kepulangan:
+- Rute Asal         : {{ $validatedData['rute_asal_kembali'] }}
+- Rute Tujuan       : {{ $validatedData['rute_tujuan_kembali'] }}
+- Tanggal Kembali   : {{ $validatedData['tanggal_kembali'] }} {{ $validatedData['jam_kembali'] }}
 
 @component('mail::button', ['url' => url('/dashboard/permintaantiketdinas/')])
 View Surat Permintaan

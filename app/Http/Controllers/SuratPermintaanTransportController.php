@@ -87,7 +87,7 @@ class SuratPermintaanTransportController extends Controller
             'unit' => 'required',
             'id_pemohon' => 'required',
             'email_atasan' => 'required|email:rfc,dns',
-            'biaya_perjalanan' => 'required',
+            // 'biaya_perjalanan' => 'required',
             'tujuan' => 'required',
             'rute_pemakaian' => 'required',
             'keperluan' => 'required',
@@ -209,6 +209,14 @@ class SuratPermintaanTransportController extends Controller
         foreach($admin as $admin){
             Mail::to($admin['email'])->send(new LengkapiSuratPermintaanTransport($data));
         }
+        activity()
+            ->withProperties([
+                'id'=>$data->id,
+                'nama_user'=>Auth::user()->name,
+                'email_user'=>Auth::user()->email,
+                'time'=>now()->toDateString(),
+            ])
+            ->log('approve_surat_permintaan_transport');
         Session::flash('success', 'Surat Permintaan Transport berhasil diapprove');
         return redirect('/dashboard');
         // dd('data berhasil kembali ke dashboard');
@@ -226,6 +234,14 @@ class SuratPermintaanTransportController extends Controller
         //send session success to dashboard
         $pemohon = User::find($data['id_pemohon']);
         Mail::to($pemohon->email)->send(new SuratPermintaanTransportDitolak($data));
+        activity()
+            ->withProperties([
+                'id'=>$data->id,
+                'nama_user'=>Auth::user()->name,
+                'email_user'=>Auth::user()->email,
+                'time'=>now()->toDateString(),
+            ])
+            ->log('tolak_surat_permintaan_transport');
         Session::flash('success', 'Surat Permintaan Transport berhasil ditolak');
         return redirect('/dashboard');
         // dd('data berhasil kembali ke dashboard');
@@ -268,6 +284,7 @@ class SuratPermintaanTransportController extends Controller
             'jumlah_penumpang' => 'required',
             'waktu_berangkat' => 'required',
             'waktu_kembali' => 'required',
+            'biaya_perjalanan' => 'required',
             'kendaraan_lain' => '',
             'nomor_polisi' => '',
             'nama_driver' => '',
@@ -376,12 +393,119 @@ class SuratPermintaanTransportController extends Controller
                 Session::flash('error', 'Jadwal sudah terisi, silahkan cek daftar penggunaan kendaraan');
                 return redirect()->route('permintaantransport.lengkapidata', compact('id'));
             }
+            
+            //mengecek apakah kendaraan tersedia di tanggal dan jam yang diminta
+            elseif(SuratPermintaanTransport::where('nomor_polisi', $validatedData['nomor_polisi'])
+            ->where('tanggal_berangkat', $validatedData['tanggal_berangkat'])
+            ->where('tanggal_kembali', $validatedData['tanggal_kembali'])
+            ->where('jam_berangkat', '<=', $validatedData['jam_berangkat'])
+            ->where('jam_kembali', '>=', $validatedData['jam_berangkat'])
+            ->exists()){
+                unset($validatedData['waktu_berangkat']);
+                unset($validatedData['waktu_kembali']);
+                Session::flash('error', 'Jadwal sudah terisi, silahkan cek daftar penggunaan kendaraan');
+                return redirect()->route('permintaantransport.lengkapidata', compact('id'));
+            }
+            elseif(SuratPermintaanTransport::where('nomor_polisi', $validatedData['nomor_polisi'])
+            ->where('tanggal_berangkat', $validatedData['tanggal_berangkat'])
+            ->where('tanggal_kembali', $validatedData['tanggal_kembali'])
+            ->where('jam_berangkat', '>=', $validatedData['jam_berangkat'])
+            ->where('jam_berangkat', '<=', $validatedData['jam_kembali'])
+            ->exists()){
+                unset($validatedData['waktu_berangkat']);
+                unset($validatedData['waktu_kembali']);
+                Session::flash('error', 'Jadwal sudah terisi, silahkan cek daftar penggunaan kendaraan');
+                return redirect()->route('permintaantransport.lengkapidata', compact('id'));
+            }
+            elseif(SuratPermintaanTransport::where('nomor_polisi', $validatedData['nomor_polisi'])
+            ->where('tanggal_berangkat', '<=', $validatedData['tanggal_berangkat'])
+            ->where('tanggal_kembali', '>=', $validatedData['tanggal_berangkat'])
+            ->where('jam_kembali', '>=', $validatedData['jam_berangkat'])
+            ->exists()){
+                unset($validatedData['waktu_berangkat']);
+                unset($validatedData['waktu_kembali']);
+                Session::flash('error', 'Jadwal sudah terisi, silahkan cek daftar penggunaan kendaraan');
+                return redirect()->route('permintaantransport.lengkapidata', compact('id'));
+            }
+            //Mengencek dimana tanggal berangkat berada sebelum tanggal berangkat di database dan tanggal kembali berada setelah tanggal berangkat di database
+            elseif(SuratPermintaanTransport::where('nomor_polisi', $validatedData['nomor_polisi'])
+            ->where('tanggal_berangkat', '>=', $validatedData['tanggal_berangkat'])
+            ->where('tanggal_berangkat', '>=', $validatedData['tanggal_kembali'])
+            ->where('jam_berangkat', '<=', $validatedData['jam_kembali'])
+            ->exists()){
+                unset($validatedData['waktu_berangkat']);
+                unset($validatedData['waktu_kembali']);
+                Session::flash('error', 'Jadwal sudah terisi, silahkan cek daftar penggunaan kendaraan');
+                return redirect()->route('permintaantransport.lengkapidata', compact('id'));
+            }
+            elseif(SuratPermintaanTransport::where('nomor_polisi', $validatedData['nomor_polisi'])
+            ->where('tanggal_berangkat', '>=', $validatedData['tanggal_berangkat'])
+            ->where('tanggal_kembali', '<=', $validatedData['tanggal_kembali'])
+            ->exists()){
+                unset($validatedData['waktu_berangkat']);
+                unset($validatedData['waktu_kembali']);
+                Session::flash('error', 'Jadwal sudah terisi, silahkan cek daftar penggunaan kendaraan');
+                return redirect()->route('permintaantransport.lengkapidata', compact('id'));
+            }
+            
             //mengecek apakah driver tersedia di tanggal dan jam yang diminta
             elseif(SuratPermintaanTransport::where('nama_driver', $validatedData['nama_driver'])
             ->where('tanggal_berangkat', $validatedData['tanggal_berangkat'])
             ->where('tanggal_kembali', $validatedData['tanggal_kembali'])
             ->where('jam_berangkat', $validatedData['jam_berangkat'])
             ->where('jam_kembali', $validatedData['jam_kembali'])
+            ->exists()){
+                unset($validatedData['waktu_berangkat']);
+                unset($validatedData['waktu_kembali']);
+                Session::flash('error', 'Jadwal sudah terisi, silahkan cek daftar penggunaan kendaraan');
+                return redirect()->route('permintaantransport.lengkapidata', compact('id'));
+            }
+            elseif(SuratPermintaanTransport::where('nama_driver', $validatedData['nama_driver'])
+            ->where('tanggal_berangkat', $validatedData['tanggal_berangkat'])
+            ->where('tanggal_kembali', $validatedData['tanggal_kembali'])
+            ->where('jam_berangkat', '<=', $validatedData['jam_berangkat'])
+            ->where('jam_kembali', '>=', $validatedData['jam_berangkat'])
+            ->exists()){
+                unset($validatedData['waktu_berangkat']);
+                unset($validatedData['waktu_kembali']);
+                Session::flash('error', 'Jadwal sudah terisi, silahkan cek daftar penggunaan kendaraan');
+                return redirect()->route('permintaantransport.lengkapidata', compact('id'));
+            }
+            elseif(SuratPermintaanTransport::where('nama_driver', $validatedData['nama_driver'])
+            ->where('tanggal_berangkat', $validatedData['tanggal_berangkat'])
+            ->where('tanggal_kembali', $validatedData['tanggal_kembali'])
+            ->where('jam_berangkat', '>=', $validatedData['jam_berangkat'])
+            ->where('jam_berangkat', '<=', $validatedData['jam_kembali'])
+            ->exists()){
+                unset($validatedData['waktu_berangkat']);
+                unset($validatedData['waktu_kembali']);
+                Session::flash('error', 'Jadwal sudah terisi, silahkan cek daftar penggunaan kendaraan');
+                return redirect()->route('permintaantransport.lengkapidata', compact('id'));
+            }
+            elseif(SuratPermintaanTransport::where('nama_driver', $validatedData['nama_driver'])
+            ->where('tanggal_berangkat', '<=', $validatedData['tanggal_berangkat'])
+            ->where('tanggal_kembali', '>=', $validatedData['tanggal_berangkat'])
+            ->where('jam_kembali', '>=', $validatedData['jam_berangkat'])
+            ->exists()){
+                unset($validatedData['waktu_berangkat']);
+                unset($validatedData['waktu_kembali']);
+                Session::flash('error', 'Jadwal sudah terisi, silahkan cek daftar penggunaan kendaraan');
+                return redirect()->route('permintaantransport.lengkapidata', compact('id'));
+            }
+            elseif(SuratPermintaanTransport::where('nama_driver', $validatedData['nama_driver'])
+            ->where('tanggal_berangkat', '>=', $validatedData['tanggal_berangkat'])
+            ->where('tanggal_berangkat', '>=', $validatedData['tanggal_kembali'])
+            ->where('jam_berangkat', '<=', $validatedData['jam_kembali'])
+            ->exists()){
+                unset($validatedData['waktu_berangkat']);
+                unset($validatedData['waktu_kembali']);
+                Session::flash('error', 'Jadwal sudah terisi, silahkan cek daftar penggunaan kendaraan');
+                return redirect()->route('permintaantransport.lengkapidata', compact('id'));
+            }
+            elseif(SuratPermintaanTransport::where('nama_driver', $validatedData['nama_driver'])
+            ->where('tanggal_berangkat', '>=', $validatedData['tanggal_berangkat'])
+            ->where('tanggal_berangkat', '>=', $validatedData['tanggal_berangkat'])
+            ->where('tanggal_kembali', '<=', $validatedData['tanggal_kembali'])
             ->exists()){
                 unset($validatedData['waktu_berangkat']);
                 unset($validatedData['waktu_kembali']);
@@ -407,6 +531,15 @@ class SuratPermintaanTransportController extends Controller
                 $tanggal_kembali = $validatedData['tanggal_kembali'];
                 $lama_perjalanan = (strtotime($tanggal_kembali) - strtotime($tanggal_berangkat)) / (60 * 60 * 24);
                 $lama_perjalanan = $lama_perjalanan + 1;
+                Session::flash('success', 'Surat Permintaan Transport berhasil dilengkapi');
+                activity()
+                    ->withProperties([
+                        'id'=>$suratTransport->id,
+                        'nama_user'=>Auth::user()->name,
+                        'email_user'=>Auth::user()->email,
+                        'time'=>now()->toDateString(),
+                    ])
+                    ->log('lengkapi_surat_permintaan_transport');
                 return view('dashboard.SuratPerintahKerja.create', [
                     'suratPermintaanTransport' => $suratPermintaanTransport,
                     'lama_perjalanan' => $lama_perjalanan,
@@ -427,7 +560,7 @@ class SuratPermintaanTransportController extends Controller
             'nama_pemohon' => 'required',
             'unit' => 'required',
             'email_atasan' => 'required|email:rfc,dns',
-            'biaya_perjalanan' => 'required',
+            // 'biaya_perjalanan' => 'required',
             'tujuan' => 'required',
             'rute_pemakaian' => 'required',
             'keperluan' => 'required',

@@ -7,7 +7,7 @@ Surat Permintaan Transport Anda telah dilengkapi.
 Details:
 - Nama Pemohon      : {{ $validatedData['nama_pemohon'] }}
 - Unit              : {{ $validatedData['unit'] }}
-- Tujua             : {{ $validatedData['tujuan'] }}
+- Tujuan            : {{ $validatedData['tujuan'] }}
 - Keperluan         : {{ $validatedData['keperluan'] }}
 - Tanggal Berangkat : {{ $validatedData['tanggal_berangkat'] }}  {{ $validatedData['jam_berangkat'] }}
 - Tanggal Kembali   : {{ $validatedData['tanggal_kembali'] }}  {{ $validatedData['jam_kembali'] }}
