@@ -131,7 +131,7 @@ class SuratPerintahKerjaController extends Controller
             ->where('jam_berangkat', $validatedData['jam_berangkat'])
             ->where('jam_kembali', $validatedData['jam_berangkat'])
             ->exists()){
-                dd('sama1');
+                
                 Session::flash('error', 'Jadwal sudah terisi, silahkan cek daftar penggunaan kendaraan');
                 return redirect('/dashboard/perintahkerja/'.$suratPerintahKerja->id.'/edit');
             }
@@ -143,7 +143,7 @@ class SuratPerintahKerjaController extends Controller
             ->where('jam_berangkat', '<=', $validatedData['jam_berangkat'])
             ->where('jam_kembali', '>=', $validatedData['jam_berangkat'])
             ->exists()){
-                dd('sama2');
+                
                 Session::flash('error', 'Jadwal sudah terisi, silahkan cek daftar penggunaan kendaraan');
                 return redirect('/dashboard/perintahkerja/'.$suratPerintahKerja->id.'/edit');
             }
@@ -155,7 +155,7 @@ class SuratPerintahKerjaController extends Controller
             ->where('jam_berangkat', '>=', $validatedData['jam_berangkat'])
             ->where('jam_berangkat', '<=', $validatedData['jam_kembali'])
             ->exists()){
-                dd('sama3');
+                
                 Session::flash('error', 'Jadwal sudah terisi, silahkan cek daftar penggunaan kendaraan');
                 return redirect('/dashboard/perintahkerja/'.$suratPerintahKerja->id.'/edit');
             }
@@ -166,7 +166,7 @@ class SuratPerintahKerjaController extends Controller
             ->where('tanggal_kembali', '>=', $validatedData['tanggal_berangkat'])
             ->where('jam_kembali', '>=', $validatedData['jam_berangkat'])
             ->exists()){
-                dd('sama4');
+                
                 Session::flash('error', 'Jadwal sudah terisi, silahkan cek daftar penggunaan kendaraan');
                 return redirect('/dashboard/perintahkerja/'.$suratPerintahKerja->id.'/edit');
             }
@@ -177,7 +177,7 @@ class SuratPerintahKerjaController extends Controller
             ->where('tanggal_berangkat', '>=', $validatedData['tanggal_kembali'])
             ->where('jam_berangkat', '<=', $validatedData['jam_kembali'])
             ->exists()){
-                dd('sama5');
+                
                 Session::flash('error', 'Jadwal sudah terisi, silahkan cek daftar penggunaan kendaraan');
                 return redirect('/dashboard/perintahkerja/'.$suratPerintahKerja->id.'/edit');
             }
@@ -186,7 +186,7 @@ class SuratPerintahKerjaController extends Controller
             ->where('tanggal_berangkat', '>=', $validatedData['tanggal_berangkat'])
             ->where('tanggal_kembali', '<=', $validatedData['tanggal_kembali'])
             ->exists()){;
-                dd('sama6');
+                
                 Session::flash('error', 'Jadwal sudah terisi, silahkan cek daftar penggunaan kendaraan');
                 return redirect('/dashboard/perintahkerja/'.$suratPerintahKerja->id.'/edit');
             }

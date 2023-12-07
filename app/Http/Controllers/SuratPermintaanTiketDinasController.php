@@ -78,6 +78,38 @@ class SuratPermintaanTiketDinasController extends Controller
             'perusahaan_angkutan_kembali' => 'required',
 
         ]);
+        
+        //make sure $validatedData['unit'] is contain "-" as separator
+        if(!str_contains($validatedData['unit'], '-')){
+            Session::flash('error', 'Unit tidak valid, gunakan tanda "-" sebagai pemisah portoflio dan sub portofolio');
+            return redirect('/dashboard/permintaantiketdinas/create');
+        }
+        // if after "-" is null
+        elseif(str_contains($validatedData['unit'], '-') && substr($validatedData['unit'], -1) == '-'){
+            Session::flash('error', 'Unit tidak valid, sub portofolio tidak boleh kosong');
+            return redirect('/dashboard/permintaantiketdinas/create');
+        }
+        // if before "-" is null
+        elseif(str_contains($validatedData['unit'], '-') && substr($validatedData['unit'], 0, 1) == '-'){
+            Session::flash('error', 'Unit tidak valid, portofolio tidak boleh kosong');
+            return redirect('/dashboard/permintaantiketdinas/create');
+        }
+        // if "-" is first character
+        elseif(str_contains($validatedData['unit'], '-') && substr($validatedData['unit'], 0, 1) == '-'){
+            Session::flash('error', 'Unit tidak valid, portofolio tidak boleh kosong');
+            return redirect('/dashboard/permintaantiketdinas/create');
+        }
+        // if "-" is last character
+        elseif(str_contains($validatedData['unit'], '-') && substr($validatedData['unit'], -1) == '-'){
+            Session::flash('error', 'Unit tidak valid, sub portofolio tidak boleh kosong');
+            return redirect('/dashboard/permintaantiketdinas/create');
+        }
+        // if "-" is first and last character
+        elseif(str_contains($validatedData['unit'], '-') && substr($validatedData['unit'], 0, 1) == '-' && substr($validatedData['unit'], -1) == '-'){
+            Session::flash('error', 'Unit tidak valid, portofolio dan sub portofolio tidak boleh kosong');
+            return redirect('/dashboard/permintaantiketdinas/create');
+        }
+
         $tanggal_berangkat = $request->waktu_berangkat;
         $tanggal_berangkat = date('Y-m-d', strtotime($tanggal_berangkat));
         $tanggal_berangkat = str_replace('00', '', $tanggal_berangkat);
@@ -211,6 +243,39 @@ class SuratPermintaanTiketDinasController extends Controller
             'waktu_kembali' => 'required',
             'perusahaan_angkutan_kembali' => 'required',
         ]);
+        
+        //make sure $validatedData['unit'] is contain "-" as separator
+        if(!str_contains($validatedData['unit'], '-')){
+            Session::flash('error', 'Unit tidak valid, gunakan tanda "-" sebagai pemisah portoflio dan sub portofolio');
+            return redirect('/dashboard/permintaantiketdinas/' . $id . '/edit');
+        }
+        // if after "-" is null
+        elseif(str_contains($validatedData['unit'], '-') && substr($validatedData['unit'], -1) == '-'){
+            Session::flash('error', 'Unit tidak valid, sub portofolio tidak boleh kosong');
+            return redirect('/dashboard/permintaantiketdinas/' . $id . '/edit');
+        }
+        // if before "-" is null
+        elseif(str_contains($validatedData['unit'], '-') && substr($validatedData['unit'], 0, 1) == '-'){
+            Session::flash('error', 'Unit tidak valid, portofolio tidak boleh kosong');
+            return redirect('/dashboard/permintaantiketdinas/' . $id . '/edit');
+        }
+        // if "-" is first character
+        elseif(str_contains($validatedData['unit'], '-') && substr($validatedData['unit'], 0, 1) == '-'){
+            Session::flash('error', 'Unit tidak valid, portofolio tidak boleh kosong');
+            return redirect('/dashboard/permintaantiketdinas/' . $id . '/edit');
+        }
+        // if "-" is last character
+        elseif(str_contains($validatedData['unit'], '-') && substr($validatedData['unit'], -1) == '-'){
+            Session::flash('error', 'Unit tidak valid, sub portofolio tidak boleh kosong');
+            return redirect('/dashboard/permintaantiketdinas/' . $id . '/edit');
+        }
+        // if "-" is first and last character
+        elseif(str_contains($validatedData['unit'], '-') && substr($validatedData['unit'], 0, 1) == '-' && substr($validatedData['unit'], -1) == '-'){
+            Session::flash('error', 'Unit tidak valid, portofolio dan sub portofolio tidak boleh kosong');
+            return redirect('/dashboard/permintaantiketdinas/' . $id . '/edit');
+        }
+
+
         //get date from tanggal_berangkat
         $tanggal_berangkat = $request->waktu_berangkat;
         $tanggal_berangkat = date('Y-m-d', strtotime($tanggal_berangkat));

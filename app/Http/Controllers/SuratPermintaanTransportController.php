@@ -97,8 +97,36 @@ class SuratPermintaanTransportController extends Controller
             'waktu_kembali' => 'required',
             'waktu_kembali' => 'required',
         ]);
-        //make sure $validatedData['unit'] is fill with "-" like "SCI-AKL" or "SCI-PLG" or "SCI-BPN"
-        
+        //make sure $validatedData['unit'] is contain "-" as separator
+        if(!str_contains($validatedData['unit'], '-')){
+            Session::flash('error', 'Unit tidak valid, gunakan tanda "-" sebagai pemisah portoflio dan sub portofolio');
+            return redirect('/dashboard/permintaantransport/create');
+        }
+        // if after "-" is null
+        elseif(str_contains($validatedData['unit'], '-') && substr($validatedData['unit'], -1) == '-'){
+            Session::flash('error', 'Unit tidak valid, sub portofolio tidak boleh kosong');
+            return redirect('/dashboard/permintaantransport/create');
+        }
+        // if before "-" is null
+        elseif(str_contains($validatedData['unit'], '-') && substr($validatedData['unit'], 0, 1) == '-'){
+            Session::flash('error', 'Unit tidak valid, portofolio tidak boleh kosong');
+            return redirect('/dashboard/permintaantransport/create');
+        }
+        // if "-" is first character
+        elseif(str_contains($validatedData['unit'], '-') && substr($validatedData['unit'], 0, 1) == '-'){
+            Session::flash('error', 'Unit tidak valid, portofolio tidak boleh kosong');
+            return redirect('/dashboard/permintaantransport/create');
+        }
+        // if "-" is last character
+        elseif(str_contains($validatedData['unit'], '-') && substr($validatedData['unit'], -1) == '-'){
+            Session::flash('error', 'Unit tidak valid, sub portofolio tidak boleh kosong');
+            return redirect('/dashboard/permintaantransport/create');
+        }
+        // if "-" is first and last character
+        elseif(str_contains($validatedData['unit'], '-') && substr($validatedData['unit'], 0, 1) == '-' && substr($validatedData['unit'], -1) == '-'){
+            Session::flash('error', 'Unit tidak valid, portofolio dan sub portofolio tidak boleh kosong');
+            return redirect('/dashboard/permintaantransport/create');
+        }
 
 
         //get date from waktu_berangkat
@@ -573,6 +601,40 @@ class SuratPermintaanTransportController extends Controller
             'waktu_berangkat' => 'required',
             'waktu_kembali' => 'required',
         ]);
+
+        //make sure $validatedData['unit'] is contain "-" as separator
+        //make sure $validatedData['unit'] is contain "-" as separator
+        if(!str_contains($validatedData['unit'], '-')){
+            Session::flash('error', 'Unit tidak valid, gunakan tanda "-" sebagai pemisah portoflio dan sub portofolio');
+            return redirect('/dashboard/permintaantransport/' . $id . '/edit');
+        }
+        // if after "-" is null
+        elseif(str_contains($validatedData['unit'], '-') && substr($validatedData['unit'], -1) == '-'){
+            Session::flash('error', 'Unit tidak valid, sub portofolio tidak boleh kosong');
+            return redirect('/dashboard/permintaantransport/' . $id . '/edit');
+        }
+        // if before "-" is null
+        elseif(str_contains($validatedData['unit'], '-') && substr($validatedData['unit'], 0, 1) == '-'){
+            Session::flash('error', 'Unit tidak valid, portofolio tidak boleh kosong');
+            return redirect('/dashboard/permintaantransport/' . $id . '/edit');
+        }
+        // if "-" is first character
+        elseif(str_contains($validatedData['unit'], '-') && substr($validatedData['unit'], 0, 1) == '-'){
+            Session::flash('error', 'Unit tidak valid, portofolio tidak boleh kosong');
+            return redirect('/dashboard/permintaantransport/' . $id . '/edit');
+        }
+        // if "-" is last character
+        elseif(str_contains($validatedData['unit'], '-') && substr($validatedData['unit'], -1) == '-'){
+            Session::flash('error', 'Unit tidak valid, sub portofolio tidak boleh kosong');
+            return redirect('/dashboard/permintaantransport/' . $id . '/edit');
+        }
+        // if "-" is first and last character
+        elseif(str_contains($validatedData['unit'], '-') && substr($validatedData['unit'], 0, 1) == '-' && substr($validatedData['unit'], -1) == '-'){
+            Session::flash('error', 'Unit tidak valid, portofolio dan sub portofolio tidak boleh kosong');
+            return redirect('/dashboard/permintaantransport/' . $id . '/edit');
+        }
+
+
         //get date from waktu_berangkat
         $tanggal_berangkat = $request->waktu_berangkat;
         $tanggal_kembali = $request->waktu_kembali;
@@ -608,25 +670,25 @@ class SuratPermintaanTransportController extends Controller
         if(!$is_atasan1 && !$is_atasan2){
             //send error to name email_atasan
             Session::flash('error', 'Email atasan tidak ditemukan');
-            return redirect('/dashboard/permintaantransport/create');
+            return redirect('/dashboard/permintaantransport/' . $id . '/edit');
         }
         //tanggal berangkat must be less than tanggal kembali
         elseif($validatedData['tanggal_berangkat'] > $validatedData['tanggal_kembali']){
             //send error message
             Session::flash('error', 'Tanggal berangkat tidak valid');
-            return redirect('/dashboard/permintaantransport/create');
+            return redirect('/dashboard/permintaantransport/' . $id . '/edit');
         }
         //check if tanggal_berangkat and tanggal_kembali is same but jam_berangkat is more than jam_kembali
         elseif($validatedData['tanggal_berangkat'] == $validatedData['tanggal_kembali'] && $validatedData['jam_berangkat'] > $validatedData['jam_kembali']){
             //send error message
             Session::flash('error', 'Jam berangkat tidak valid');
-            return redirect('/dashboard/permintaantransport/create');
+            return redirect('/dashboard/permintaantransport/' . $id . '/edit');
         }
         //check if tanggal_berangkat and tanggal_kembali is same but jam_berangkat is same with jam_kembali
         elseif($validatedData['tanggal_berangkat'] == $validatedData['tanggal_kembali'] && $validatedData['jam_berangkat'] == $validatedData['jam_kembali']){
             //send error message
             Session::flash('error', 'Waktu berangkat tidak valid');
-            return redirect('/dashboard/permintaantransport/create');
+            return redirect('/dashboard/permintaantransport/' . $id . '/edit');
         }
         else{
             //update SuratPermintaanTransport
