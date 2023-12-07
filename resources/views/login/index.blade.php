@@ -24,9 +24,9 @@
             Aplikasi Manajemen Transportasi dan Urursan Tiket Dinas
         </div>
 
-        <form class="space-y-6" action="/login" method="POST">
+        <form class="space-y-6 font-montserrat" action="/login" method="POST">
             @csrf
-            <h5 class="text-xl font-medium text-gray-900 dark:text-white">Sign in ke akun Anda</h5>
+            <h5 class="text-sm font-semibold text-gray-900 dark:text-white">Masuk ke akun Anda</h5>
             <div>
                 <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
                 <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Alamat email" autocomplete="email" autofocus value="{{ old('email') }}" required>

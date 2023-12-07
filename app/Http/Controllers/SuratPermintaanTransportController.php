@@ -24,6 +24,7 @@ use App\Mail\SuratPermintaanTransportApproved;
 use App\Mail\SuratPermintaanTransportDitolak;
 use App\Mail\LengkapiSuratPermintaanTransport;
 use App\Mail\SuratPermintaanTransportLengkap;
+use Illuminate\Support\Facades\Validator;
 
 
 class SuratPermintaanTransportController extends Controller
@@ -96,6 +97,10 @@ class SuratPermintaanTransportController extends Controller
             'waktu_kembali' => 'required',
             'waktu_kembali' => 'required',
         ]);
+        //make sure $validatedData['unit'] is fill with "-" like "SCI-AKL" or "SCI-PLG" or "SCI-BPN"
+        
+
+
         //get date from waktu_berangkat
         $tanggal_berangkat = $request->waktu_berangkat;
         $tanggal_kembali = $request->waktu_kembali;
