@@ -41,10 +41,6 @@ class DatabaseBackup extends Command
             config('database.connections.mysql.database'),
             $storageAt
         );
-        $command = sprintf('/Applications/MAMP/Library/bin/mysqldump -u%s -p%s %s > %s',
-        env('DB_USERNAME'),
-        env('DB_PASSWORD'),
-        env('DB_DATABASE'), $storageAt);
         $returnVar = NULL;
         $output  = NULL;
         exec($command, $output, $returnVar);
