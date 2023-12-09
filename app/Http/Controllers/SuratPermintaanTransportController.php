@@ -761,7 +761,7 @@ class SuratPermintaanTransportController extends Controller
         // $pdfWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'PDF');
         // $pdfWriter->save($filename . '.pdf');
         // return response()->download($filename . '.docx')->deleteFileAfterSend(true);
-        $filename = 'Surat Permintaan Transport - ' . $suratTransport->id . $suratTransport->nama_pemohon . '.docx';
+        $filename = 'Surat Permintaan Transport - ' . $suratTransport->nama_pemohon . '.docx';
         $phpWord->saveAs($filename);
         //log activity
         activity()
