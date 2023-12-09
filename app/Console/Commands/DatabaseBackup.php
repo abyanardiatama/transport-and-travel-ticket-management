@@ -34,7 +34,17 @@ class DatabaseBackup extends Command
         if(!File::exists(storage_path('app/backup'))) {
             File::makeDirectory(storage_path('app/backup'));
         }
-        $command = sprintf('/Applications/MAMP/Library/bin/mysqldump -u%s -p%s %s > %s', env('DB_USERNAME'), env('DB_PASSWORD'), env('DB_DATABASE'), $storageAt);
+        $command = sprintf(
+            'mysqldump -u%s -p%s %s > %s',
+            config('database.connections.mysql.username'),
+            config('database.connections.mysql.password'),
+            config('database.connections.mysql.database'),
+            $storageAt
+        );
+        $command = sprintf('/Applications/MAMP/Library/bin/mysqldump -u%s -p%s %s > %s',
+        env('DB_USERNAME'),
+        env('DB_PASSWORD'),
+        env('DB_DATABASE'), $storageAt);
         $returnVar = NULL;
         $output  = NULL;
         exec($command, $output, $returnVar);
