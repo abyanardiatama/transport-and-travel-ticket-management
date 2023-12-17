@@ -29,7 +29,7 @@ class DatabaseBackup extends Command
     {
         $this->info('Starting backup');
 
-        $filename = 'backup-' . strtotime(now()) . '.sql';
+        $filename = 'backup-' . Carbon::now()->translatedFormat('dmY-His') . '.sql';
         $storageAt = storage_path('app/backup/' . $filename);
         if(!File::exists(storage_path('app/backup'))) {
             File::makeDirectory(storage_path('app/backup'));
