@@ -332,7 +332,7 @@ class SuratPermintaanTiketDinasController extends Controller
         $suratTiketDinas->update($validatedData);
         $pemohon = User::find($suratTiketDinas->id_pemohon);
         Mail::to($pemohon->email)->send(new SuratPermintaanTiketDinasLengkap($suratTiketDinas));
-        Session::flash('success', 'Surat Permintaan Tiket Dinas berhasil Dilengkapi');
+        Session::flash('success', 'Surat Permintaan Tiket Dinas Berhasil Dilengkapi');
         activity()
             ->withProperties([
                 'id'=>$suratTiketDinas->id,

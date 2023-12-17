@@ -189,7 +189,7 @@ class SuratPermintaanTransportController extends Controller
             //create new SuratPermintaanTransport
             SuratPermintaanTransport::create($validatedData);
             //send success message to dashboard
-            Session::flash('success', 'Surat Permintaan Transport berhasil dibuat');
+            Session::flash('success', 'Surat Permintaan Transport Berhasil Dibuat');
             //redirect to dashboard
             return redirect('/dashboard');
         }
@@ -250,7 +250,7 @@ class SuratPermintaanTransportController extends Controller
                 'time'=>now()->toDateString(),
             ])
             ->log('approve_surat_permintaan_transport');
-        Session::flash('success', 'Surat Permintaan Transport berhasil diapprove');
+        Session::flash('success', 'Surat Permintaan Transport Berhasil Disetujui');
         return redirect('/dashboard');
         // dd('data berhasil kembali ke dashboard');
     }
@@ -275,7 +275,7 @@ class SuratPermintaanTransportController extends Controller
                 'time'=>now()->toDateString(),
             ])
             ->log('tolak_surat_permintaan_transport');
-        Session::flash('success', 'Surat Permintaan Transport berhasil ditolak');
+        Session::flash('success', 'Surat Permintaan Transport Berhasil Ditolak');
         return redirect('/dashboard');
         // dd('data berhasil kembali ke dashboard');
     }
@@ -346,7 +346,7 @@ class SuratPermintaanTransportController extends Controller
          //add isApprove_admin
         $validatedData['isApprove_admin'] = true;
         if($validatedData['nama_driver'] == null && $validatedData['nomor_polisi'] == null){
-            Session::flash('success', 'Surat Permintaan Transport berhasil dilengkapi');
+            Session::flash('success', 'Surat Permintaan Transport Berhasil Dilengkapi');
             // SuratPermintaanTransport::where('id', $suratTransport->id)->update($validatedData);
             $suratTransport->update($validatedData);
             return redirect('/dashboard');
@@ -546,7 +546,7 @@ class SuratPermintaanTransportController extends Controller
                 return redirect()->route('permintaantransport.lengkapidata', compact('id'));
             }
             else{
-                Session::flash('success', 'Surat Permintaan Transport berhasil dilengkapi');
+                Session::flash('success', 'Surat Permintaan Transport Berhasil Dilengkapi');
                 //update
                 //delete column waktu_berangkat
                 unset($validatedData['waktu_berangkat']);
@@ -695,7 +695,7 @@ class SuratPermintaanTransportController extends Controller
             SuratPermintaanTransport::where('id', $suratPermintaanTransport->id)->update($validatedData);
             Mail::to($validatedData['email_atasan'])->send(new SuratPermintaanTransportMail($validatedData));
             //send success message to dashboard
-            Session::flash('success', 'Surat Permintaan Transport berhasil diedit');
+            Session::flash('success', 'Surat Permintaan Transport berhasil Diperbarui');
             //redirect to dashboard
             return redirect('/dashboard');
         }
@@ -778,7 +778,7 @@ class SuratPermintaanTransportController extends Controller
     {
         $suratPermintaanTransport = SuratPermintaanTransport::find($id);
         $suratPermintaanTransport->delete();
-        Session::flash('success', 'Data berhasil dihapus');
+        Session::flash('success', 'Data Berhasil Dihapus');
         return redirect('/dashboard/permintaantransport');
     }
     /**
