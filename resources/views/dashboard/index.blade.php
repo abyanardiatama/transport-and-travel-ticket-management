@@ -468,6 +468,97 @@
                                                         Download     
                                                     </a>
                                                 @elseif ($suratTransport->isApprove_atasan == true)
+                                                    {{-- Button Lihat Data Admin --}}
+                                                    <button data-modal-target="modal-lihat-data-transport-admin{{ $suratTransport->id }}" data-modal-toggle="modal-lihat-data-transport-admin{{ $suratTransport->id }}" type="button" class="flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                                                        <svg class="flex-shrink w-3 h-3 mr-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 20 14">
+                                                            <path d="M10 0C4.612 0 0 5.336 0 7c0 1.742 3.546 7 10 7 6.454 0 10-5.258 10-7 0-1.664-4.612-7-10-7Zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z"/>
+                                                        </svg>
+                                                        Lihat Data
+                                                    </button>
+                                                    {{-- Modal Lihat Data Admin --}}
+                                                    {{-- Modal Lihat Data --}}
+                                                    <div id="modal-lihat-data-transport-admin{{ $suratTransport->id }}" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                                        <div class="relative w-full max-w-2xl max-h-full">
+                                                            <!-- Modal content -->
+                                                            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                                                <!-- Modal header -->
+                                                                <div class="flex items-start justify-start p-4 border-b rounded-t dark:border-gray-600">
+                                                                    <h3 class="text-left text-md sm:text-lg font-medium text-gray-900 dark:text-white">
+                                                                        Permintaaan Transport
+                                                                    </h3>
+                                                                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="modal-lihat-data-transport-admin{{ $suratTransport->id }}">
+                                                                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                                                        </svg>
+                                                                        <span class="sr-only">Close modal</span>
+                                                                    </button>
+                                                                </div>
+                                                                <!-- Modal body -->
+                                                                <form action="/dashboard/permintaantransport/{{ $suratTransport->id }}/approveatasan" class="max-w-3xl py-4 pb-8 px-3">
+                                                                    <div class="grid grid-cols-2 gap-4 p-4">
+                                                                        {{-- nama pemohon --}}
+                                                                        <div class="col-span-2 sm:col-span-1">
+                                                                            <label for="nama_pemohon" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Pemohon</label>
+                                                                            <input type="text" id="nama_pemohon" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $suratTransport->nama_pemohon }}" disabled>
+                                                                        </div>
+                                                                        {{-- unit --}}
+                                                                        <div class="col-span-2 sm:col-span-1">
+                                                                            <label for="unit" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Unit</label>
+                                                                            <input type="text" id="unit" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $suratTransport->unit }}" disabled>
+                                                                        </div>
+                                                                        {{-- biaya perjalanan --}}
+                                                                        <div class="col-span-2 sm:col-span-1">
+                                                                            <label for="biaya_perjalanan" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Biaya Perjalanan</label>
+                                                                            <input type="text" id="biaya_perjalanan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Belum Dilengkapi" value="{{ $suratTransport->biaya_perjalanan }}" disabled>
+                                                                        </div>
+                                                                        {{-- keperluan --}}
+                                                                        <div class="col-span-2 sm:col-span-1">
+                                                                            <label for="keperluan" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Keperluan</label>
+                                                                            <input name="keperluan" id="keperluan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $suratTransport->keperluan }}" disabled></input>
+                                                                        </div>
+                                                                        {{-- tujuan --}}
+                                                                        <div class="col-span-2 sm:col-span-1">
+                                                                            <label for="tujuan" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tujuan</label>
+                                                                            <input name="tujuan" id="tujuan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $suratTransport->tujuan }}" disabled></input>
+                                                                        </div>
+                                                                        {{-- rute pemakaian --}}
+                                                                        <div class="col-span-2 sm:col-span-1">
+                                                                            <label for="rute_pemakaian" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Rute Pemakaian</label>
+                                                                            <input name="rute_pemakaian" id="rute_pemakaian" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $suratTransport->rute_pemakaian }}" disabled></input>
+                                                                        </div>
+                                                                        {{-- waktu berangkat --}}
+                                                                        <div class="col-span-2 sm:col-span-1">
+                                                                            <label for="waktu_berangkat" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Waktu Berangkat</label>
+                                                                            <input name="waktu_berangkat" id="waktu_berangkat" type="datetime-local" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $suratTransport->tanggal_berangkat }} {{ $suratTransport->jam_berangkat }}" readonly>
+                                                                        </div>
+                                                                        {{-- waktu kembali --}}
+                                                                        <div class="col-span-2 sm:col-span-1">
+                                                                            <label for="waktu_kembali" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Waktu Kembali</label>
+                                                                            <input name="waktu_kembali" id="waktu_kembali" type="datetime-local" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $suratTransport->tanggal_kembali }} {{ $suratTransport->jam_kembali }}" readonly>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                                <!-- Modal footer -->
+                                                                <div class="grid grid-cols-1 p-4 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                                                                    <div class="flex p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
+                                                                        <svg class="flex-shrink-0 inline w-4 h-4 mr-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                                                            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                                                                        </svg>
+                                                                        <span class="sr-only">Info</span>
+                                                                        <div class="text-left whitespace-normal">
+                                                                            <span class="font-medium">Periksa kembali data dengan benar</span>
+                                                                            <ul class="mt-1.5 list-disc list-inside">
+                                                                                <li>Admin perlu melengkapi surat permintaan yang diajukan sebelumnya</li>
+                                                                                <li>Pemohon dapat mengunduh surat permintaan yang telah diajukan</li> 
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
                                                     {{-- Button Lengkapi Data Admin --}}
                                                     <a href="/dashboard/permintaantransport/{{ $suratTransport->id }}/lengkapidata" class="flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
                                                         <svg class="flex-shrink w-3 h-3 mr-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
