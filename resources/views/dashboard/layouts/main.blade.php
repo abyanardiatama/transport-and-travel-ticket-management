@@ -12,7 +12,7 @@
   {{-- JS Flowbite --}}
   <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css" rel="stylesheet" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/datepicker.min.js"></script>
+  {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/datepicker.min.js"></script> --}}
   @vite(['resources/css/app.css','resources/js/app.js'])
   <title>Manajemen Transportasi SCI</title>
   <link rel="icon" type="/logo-nobg.png" href="/logo-nobg.png">

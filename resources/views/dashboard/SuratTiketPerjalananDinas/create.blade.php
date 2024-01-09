@@ -56,6 +56,7 @@
                         <option value="Penerbangan">Penerbangan</option>
                         <option value="Kereta Api">Kereta Api</option>
                         <option value="Kapal Laut">Kapal Laut</option>
+                        <option value="Kendaraan Pribadi">Kendaraan Pribadi</option>
                     </select>
                 </div>
                 {{-- jenis kelas --}}
@@ -84,10 +85,13 @@
                                     <option value="Luxury">Luxury</option>
                                 `;
                             }
-                            if(jenis_transportasi_berangkat.value == 'Kapal Laut'){
+                            if(jenis_transportasi_berangkat.value == 'Kapal Laut' || jenis_transportasi_berangkat.value == 'Kendaraan Pribadi'){
                                 jenis_kelas_berangkat.innerHTML = `
                                     <option value="Disesuaikan">Disesuaikan</option>
                                 `;
+                                const perusahaan_angkutan_berangkat = document.getElementById('perusahaan_angkutan_berangkat');
+                                perusahaan_angkutan_berangkat.value = 'Disesuaikan';
+                                perusahaan_angkutan_berangkat.setAttribute('readonly', 'readonly');
                             }
                         });
                     </script>
@@ -121,7 +125,8 @@
                     <div class="col-span-2 sm:col-span-1">
                         <input type="text" name="perusahaan_angkutan_berangkat" id="perusahaan_angkutan_berangkat" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Perusahaan Angkutan" required>
                     </div>
-                </div>  
+                </div>
+                
 
                 <div class="col-span-2">
                     <label class="text-left block text-sm font-medium text-gray-900 dark:text-white">Kedatangan</label>
@@ -133,6 +138,7 @@
                         <option value="Penerbangan">Penerbangan</option>
                         <option value="Kereta Api">Kereta Api</option>
                         <option value="Kapal Laut">Kapal Laut</option>
+                        <option value="Kendaraan Pribadi">Kendaraan Pribadi</option>
                     </select>
                 </div>
                 {{-- jenis kelas --}}
@@ -161,10 +167,13 @@
                                     <option value="Luxury">Luxury</option>
                                 `;
                             }
-                            if(jenis_transportasi_kembali.value == 'Kapal Laut'){
+                            if(jenis_transportasi_kembali.value == 'Kapal Laut' || jenis_transportasi_kembali.value == 'Kendaraan Pribadi'){
                                 jenis_kelas_kembali.innerHTML = `
                                     <option value="Disesuaikan">Disesuaikan</option>
                                 `;
+                                const perusahaan_angkutan_kembali = document.getElementById('perusahaan_angkutan_kembali');
+                                perusahaan_angkutan_kembali.value = 'Disesuaikan';
+                                perusahaan_angkutan_kembali.setAttribute('readonly', 'readonly');
                             }
                         });
                     </script>

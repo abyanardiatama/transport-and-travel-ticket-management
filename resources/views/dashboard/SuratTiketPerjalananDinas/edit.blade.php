@@ -63,11 +63,16 @@
             </div>
             {{-- jenis transportasi --}}
             <div class="col-span-2 sm:col-span-1">
-                <select name="jenis_transportasi_berangkat" id="jenis_transportasi_berangkat" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                <select name="jenis_transportasi_berangkat" id="jenis_transportasi_berangkat" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required @readonly(true)>
                     <option value="">Jenis Transportasi</option>
-                    <option value="Penerbangan" {{ $suratTiketDinas->jenis_transportasi_berangkat == 'Penerbangan' ? 'selected' : '' }}>Penerbangan</option>
-                    <option value="Kereta Api" {{ $suratTiketDinas->jenis_transportasi_berangkat == 'Kereta Api' ? 'selected' : '' }}>Kereta Api</option>
-                    <option value="Kapal Laut" {{ $suratTiketDinas->jenis_transportasi_berangkat == 'Kapal Laut' ? 'selected' : '' }}>Kapal Laut</option>
+                    @if (Auth::user()->is_admin==true)
+                        <option value="{{ $suratTiketDinas->jenis_transportasi_berangkat }}" selected>{{ $suratTiketDinas->jenis_transportasi_berangkat }}</option>
+                    @else
+                        <option value="Penerbangan" {{ $suratTiketDinas->jenis_transportasi_berangkat == 'Penerbangan' ? 'selected' : '' }}>Penerbangan</option>
+                        <option value="Kereta Api" {{ $suratTiketDinas->jenis_transportasi_berangkat == 'Kereta Api' ? 'selected' : '' }}>Kereta Api</option>
+                        <option value="Kapal Laut" {{ $suratTiketDinas->jenis_transportasi_berangkat == 'Kapal Laut' ? 'selected' : '' }}>Kapal Laut</option>
+                        <option value="Kendaraan Pribadi" {{ $suratTiketDinas->jenis_transportasi_berangkat == 'Kendaraan Pribadi' ? 'selected' : '' }}>Kendaraan Pribadi</option>
+                    @endif
                 </select>
             </div>
             {{-- jenis kelas --}}
@@ -96,10 +101,13 @@
                                     <option value="Luxury">Luxury</option>
                                 `;
                             }
-                            else if(jenisTransportasiBerangkat.value == 'Kapal Laut'){
+                            else if(jenisTransportasiBerangkat.value == 'Kapal Laut' || jenisTransportasiBerangkat.value == 'Kendaraan Pribadi'){
                                 jenisKelasBerangkat.innerHTML = `
                                     <option value="Disesuaikan">Disesuaikan</option>
                                 `;
+                                const perusahaanAngkutanBerangkat = document.getElementById('perusahaan_angkutan_berangkat');
+                                perusahaanAngkutanBerangkat.value = 'Disesuaikan';
+                                perusahaan_angkutan_berangkat.setAttribute('readonly', 'readonly');
                             }
                     });
 
@@ -128,9 +136,14 @@
             <div class="col-span-2 sm:col-span-1">
                 <select name="jenis_transportasi_kembali" id="jenis_transportasi_kembali" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                     <option value="">Jenis Transportasi</option>
-                    <option value="Penerbangan" {{ $suratTiketDinas->jenis_transportasi_kembali == 'Penerbangan' ? 'selected' : '' }}>Penerbangan</option>
-                    <option value="Kereta Api" {{ $suratTiketDinas->jenis_transportasi_kembali == 'Kereta Api' ? 'selected' : '' }}>Kereta Api</option>
-                    <option value="Kapal Laut" {{ $suratTiketDinas->jenis_transportasi_kembali == 'Kapal Laut' ? 'selected' : '' }}>Kapal Laut</option>
+                    @if (Auth::user()->is_admin==true)
+                        <option value="{{ $suratTiketDinas->jenis_transportasi_kembali }}" selected>{{ $suratTiketDinas->jenis_transportasi_kembali }}</option>
+                    @else
+                        <option value="Penerbangan" {{ $suratTiketDinas->jenis_transportasi_kembali == 'Penerbangan' ? 'selected' : '' }}>Penerbangan</option>
+                        <option value="Kereta Api" {{ $suratTiketDinas->jenis_transportasi_kembali == 'Kereta Api' ? 'selected' : '' }}>Kereta Api</option>
+                        <option value="Kapal Laut" {{ $suratTiketDinas->jenis_transportasi_kembali == 'Kapal Laut' ? 'selected' : '' }}>Kapal Laut</option>
+                        <option value="Kendaraan Pribadi" {{ $suratTiketDinas->jenis_transportasi_kembali == 'Kendaraan Pribadi' ? 'selected' : '' }}>Kendaraan Pribadi</option>
+                    @endif
                 </select>
             </div>
             {{-- jenis kelas --}}
@@ -159,10 +172,13 @@
                                     <option value="Luxury">Luxury</option>
                                 `;
                             }
-                            else if(jenisTransportasiKembali.value == 'Kapal Laut'){
-                                jenisKelasBerangkat.innerHTML = `
+                            else if(jenisTransportasiKembali.value == 'Kapal Laut' || jenisTransportasiKembali.value == 'Kendaraan Pribadi'){
+                                jenisKelasKembali.innerHTML = `
                                     <option value="Disesuaikan">Disesuaikan</option>
                                 `;
+                                const perusahaanAngkutanKembali = document.getElementById('perusahaan_angkutan_kembali');
+                                perusahaanAngkutanKembali.value = 'Disesuaikan';
+                                perusahaan_angkutan_kembali.setAttribute('readonly', 'readonly');
                             }
                     });
 
