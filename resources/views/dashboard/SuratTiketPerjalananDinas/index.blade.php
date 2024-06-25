@@ -452,7 +452,7 @@
                                             </td>
                                         @endif
                                         @if (Auth::user()->is_atasan1 == true || Auth::user()->is_atasan2 == true)
-                                            <td class="px-6 py-4 text-right flex items-center justify-center">
+                                            <td class="px-6 py-4 text-right flex items-center">
                                                 {{-- Button Lihat Data --}}
                                                 <button data-modal-target="modal-lihat-data6-{{ $suratTiketDinas->id }}" data-modal-toggle="modal-lihat-data6-{{ $suratTiketDinas->id }}" type="button" class="flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 whitespace-nowrap">
                                                     <svg class="flex-shrink w-3 h-3 mr-2 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 20 14">
@@ -490,35 +490,61 @@
                                                                         <label for="unit" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Unit</label>
                                                                         <input type="text" id="unit" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $suratTiketDinas->unit }}" disabled>
                                                                     </div>
-                                                                    {{-- beban_biaya --}}
-                                                                    <div class="col-span-2 sm:col-span-1">
-                                                                        <label for="beban_biaya" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Beban Biaya</label>
-                                                                        <input type="text" id="beban_biaya" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $suratTiketDinas->beban_biaya }}" disabled>
+                                                                    {{-- keberangkatan --}}
+                                                                    <div class="col-span-2 uppercase">
+                                                                        <label class="text-left block text-sm font-medium text-gray-900 dark:text-white">Keberangkatan</label>
                                                                     </div>
                                                                     {{-- jenis transportasi --}}
-                                                                    <div class="col-span-2 sm:col-span-1">
-                                                                        <label for="jenis_transportasi" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Jenis Transportasi</label>
-                                                                        <input type="text" id="jenis_transportasi" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $suratTiketDinas->jenis_transportasi }} - {{ $suratTiketDinas->jenis_kelas }}" disabled>
+                                                                    <div class="col-span-2">
+                                                                        <input type="text" id="jenis_transportasi_berangkat" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $suratTiketDinas->jenis_transportasi_berangkat }} - {{ $suratTiketDinas->jenis_kelas_berangkat }}" disabled>
                                                                     </div>
                                                                     {{-- rute asal --}}
                                                                     <div class="col-span-2 sm:col-span-1">
-                                                                        <label for="rute_asal" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Rute Asal</label>
-                                                                        <input type="text" id="rute_asal" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $suratTiketDinas->rute_asal }}" disabled>
+                                                                        <label for="rute_asal_berangkat" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Rute Asal</label>
+                                                                        <input type="text" id="rute_asal_berangkat" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $suratTiketDinas->rute_asal_berangkat }}" disabled>
                                                                     </div>
                                                                     {{-- rute tujuan --}}
                                                                     <div class="col-span-2 sm:col-span-1">
-                                                                        <label for="rute_tujuan" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Rute Tujuan</label>
-                                                                        <input type="text" id="rute_tujuan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $suratTiketDinas->rute_tujuan }}" disabled>
+                                                                        <label for="rute_tujuan_berangkat" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Rute Tujuan</label>
+                                                                        <input type="text" id="rute_tujuan_berangkat" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $suratTiketDinas->rute_tujuan_berangkat }}" disabled>
                                                                     </div>
                                                                     {{-- tanggal dan jam berangkat --}}
                                                                     <div class="col-span-2 sm:col-span-1">
                                                                         <label for="tanggal_berangkat" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal dan Jam Berangkat</label>
-                                                                        <input type="text" id="tanggal_berangkat" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 datetimepicker" value="{{ $suratTiketDinas->tanggal_berangkat }} {{ $suratTiketDinas->jam_berangkat }}" disabled>
+                                                                        <input type="text" id="tanggal_berangkat" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 datetimepicker block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $suratTiketDinas->tanggal_berangkat }} {{ $suratTiketDinas->jam_berangkat }}" disabled>
                                                                     </div>
                                                                     {{-- perusahaan angkutan --}}
                                                                     <div class="col-span-2 sm:col-span-1">
-                                                                        <label for="perusahaan_angkutan" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Perusahaan Angkutan</label>
-                                                                        <input type="text" id="perusahaan_angkutan" name="perusahaan_angkutan" value="{{ $suratTiketDinas->perusahaan_angkutan }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-300 dark:focus:ring-blue-500 dark:focus:border-blue-500" disabled>
+                                                                        <label for="perusahaan_angkutan_berangkat" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Perusahaan Angkutan</label>
+                                                                        <input type="text" id="perusahaan_angkutan_berangkat" name="perusahaan_angkutan_berangkat" value="{{ $suratTiketDinas->perusahaan_angkutan_berangkat }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-300 dark:focus:ring-blue-500 dark:focus:border-blue-500" disabled>
+                                                                    </div>
+                                                                    {{-- kedatangan --}}
+                                                                    <div class="col-span-2 uppercase">
+                                                                        <label class="text-left block text-sm font-medium text-gray-900 dark:text-white">Kedatangan</label>
+                                                                    </div>
+                                                                    {{-- jenis transportasi --}}
+                                                                    <div class="col-span-2">
+                                                                        <input type="text" id="jenis_transportasi_kembali" name="jenis_transportasi_kembali" value="{{ $suratTiketDinas->jenis_transportasi_kembali }} - {{ $suratTiketDinas->jenis_kelas_kembali }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-300 dark:focus:ring-blue-500 dark:focus:border-blue-500" disabled>
+                                                                    </div>
+                                                                    {{-- rute asal --}}
+                                                                    <div class="col-span-2 sm:col-span-1">
+                                                                        <label for="rute_asal_kembali" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Rute Asal</label>
+                                                                        <input type="text" id="rute_asal_kembali" name="rute_asal_kembali" value="{{ $suratTiketDinas->rute_asal_kembali }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 datetimepicker block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-300 dark:focus:ring-blue-500 dark:focus:border-blue-500" disabled>
+                                                                    </div>
+                                                                    {{-- rute tujuan --}}
+                                                                    <div class="col-span-2 sm:col-span-1">
+                                                                        <label for="rute_tujuan_kembali" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Rute Tujuan</label>
+                                                                        <input type="text" id="rute_tujuan_kembali" name="rute_tujuan_kembali" value="{{ $suratTiketDinas->rute_tujuan_kembali }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 datetimepicker block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-300 dark:focus:ring-blue-500 dark:focus:border-blue-500" disabled>
+                                                                    </div>
+                                                                    {{-- tanggal dan jam berangkat --}}
+                                                                    <div class="col-span-2 sm:col-span-1">
+                                                                        <label for="tanggal_kembali" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tanggal dan Jam Kedatangan</label>
+                                                                        <input type="text" id="tanggal_kembali" name="tanggal_kembali" value="{{ $suratTiketDinas->tanggal_kembali }} {{ $suratTiketDinas->jam_kembali }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 datetimepicker block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-300 dark:focus:ring-blue-500 dark:focus:border-blue-500" readonly>
+                                                                    </div>
+                                                                    {{-- perusahaan angkutan --}}
+                                                                    <div class="col-span-2 sm:col-span-1">
+                                                                        <label for="perusahaan_angkutan_kembali" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Perusahaan Angkutan</label>
+                                                                        <input type="text" id="perusahaan_angkutan_kembali" name="perusahaan_angkutan_kembali" value="{{ $suratTiketDinas->perusahaan_angkutan_kembali }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 datetimepicker block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-300 dark:focus:ring-blue-500 dark:focus:border-blue-500" readonly>
                                                                     </div>
                                                                 </div>
                                                             </form>

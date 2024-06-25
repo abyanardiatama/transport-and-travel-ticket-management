@@ -75,6 +75,11 @@ class UserController extends Controller
         elseif (User::where('name', $validatedData['name'])->exists()) {
             return redirect('/dashboard')->with('error', 'Nama pengguna sudah terdaftar');
         }
+        // email rfcdns validation
+        elseif (!filter_var($validatedData['email'], FILTER_VALIDATE_EMAIL)) {
+            dd("gagal");
+            return redirect('/dashboard')->with('error', 'Email tidak valid');
+        }
         else{
             User::create($validatedData);
             Session::flash('success', 'User berhasil ditambahkan');

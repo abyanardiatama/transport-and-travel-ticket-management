@@ -32,50 +32,74 @@
                 {{-- field nama --}}
                 <div class="col-span-2 sm:col-span-1">
                     {{-- validation --}}
-                    <input type="text" name="nama_pemohon" id="nama_pemohon" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Nama Pemohon" required>
+                    <input type="text" name="nama_pemohon" id="nama_pemohon" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Nama Pemohon" value="{{ old('nama_pemohon') }}">
+                    @error('nama_pemohon')
+                        <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                    @enderror
                 </div>
                 {{-- field unit --}}
                 <div class="col-span-2 sm:col-span-1">
-                    <input type="text" name="unit" id="unit" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Unit" required>
+                    <input type="text" name="unit" id="unit" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Unit" value="{{ old('unit') }}">
+                    @error('unit')
+                        <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                    @enderror
                 </div>
                 {{-- email atasan --}}
                 <div class="col-span-2">
-                    <input type="email" name="email_atasan" id="email_atasan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Email Atasan" required>
+                    <input type="email" name="email_atasan" id="email_atasan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Email Atasan" value="{{ old('email_atasan') }}">
+                    @error('email_atasan')
+                        <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                    @enderror
                 </div>
                 {{-- beban biaya --}}
                 {{-- <div class="col-span-2 sm:col-span-1">
-                    <input type="text" name="beban_biaya" id="beban_biaya" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Beban Biaya" required>
+                    <input type="text" name="beban_biaya" id="beban_biaya" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Beban Biaya">
                 </div> --}}
                 <div class="col-span-2">
                     <label class="text-left block text-sm font-medium text-gray-900 dark:text-white">Keberangkatan</label>
                 </div>
                 {{-- jenis transportasi --}}
                 <div class="col-span-2 sm:col-span-1">
-                    <select name="jenis_transportasi_berangkat" id="jenis_transportasi_berangkat" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                    <select name="jenis_transportasi_berangkat" id="jenis_transportasi_berangkat" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ old('jenis_transportasi_berangkat') }}">
                         <option value="">Jenis Transportasi</option>
                         <option value="Penerbangan">Penerbangan</option>
                         <option value="Kereta Api">Kereta Api</option>
                         <option value="Kapal Laut">Kapal Laut</option>
                         <option value="Kendaraan Pribadi">Kendaraan Pribadi</option>
                     </select>
+                    @error('jenis_transportasi_berangkat')
+                        <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                    @enderror
                 </div>
                 {{-- jenis kelas --}}
                 <div class="col-span-2 sm:col-span-1">
-                    <select name="jenis_kelas_berangkat" id="jenis_kelas_berangkat" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                    <select name="jenis_kelas_berangkat" id="jenis_kelas_berangkat" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ old('jenis_kelas_berangkat') }}">
                         <option value="">Jenis Kelas</option>  
                     </select>
+                    @error('jenis_kelas_berangkat')
+                        <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                    @enderror
                     <script>
                         const jenis_transportasi_berangkat = document.getElementById('jenis_transportasi_berangkat');
                         const jenis_kelas_berangkat = document.getElementById('jenis_kelas_berangkat');
                         jenis_transportasi_berangkat.addEventListener('change', function(){
-                            if(jenis_transportasi_berangkat.value == 'Penerbangan'){
+                            const perusahaan_angkutan_berangkat = document.getElementById('perusahaan_angkutan_berangkat');
+                            perusahaan_angkutan_berangkat.removeAttribute('readonly');
+                            if(jenis_transportasi_berangkat.value == ""){
+                                jenis_kelas_berangkat.innerHTML = `
+                                    <option value="">Jenis Kelas</option>  
+                                `;
+                                perusahaan_angkutan_berangkat.value = '';
+                            }
+                            else if(jenis_transportasi_berangkat.value == 'Penerbangan'){
                                 jenis_kelas_berangkat.innerHTML = `
                                     <option value="">Jenis Kelas</option>  
                                     <option value="Ekonomi">Ekonomi</option>
                                     <option value="Ekonomi Premium">Ekonomi Premium</option>
                                     <option value="Bisnis">Bisnis</option>
-                                    <option value="Eksekutif">First Class</option>
+                                    <option value="First Class">First Class</option>
                                 `;
+                                perusahaan_angkutan_berangkat.value = '';
                             }else if(jenis_transportasi_berangkat.value == 'Kereta Api'){
                                 jenis_kelas_berangkat.innerHTML = `
                                     <option value="">Jenis Kelas</option>  
@@ -84,12 +108,11 @@
                                     <option value="Eksekutif">Eksekutif</option>
                                     <option value="Luxury">Luxury</option>
                                 `;
-                            }
-                            if(jenis_transportasi_berangkat.value == 'Kapal Laut' || jenis_transportasi_berangkat.value == 'Kendaraan Pribadi'){
+                                perusahaan_angkutan_berangkat.value = '';
+                            }else if(jenis_transportasi_berangkat.value == 'Kapal Laut' || jenis_transportasi_berangkat.value == 'Kendaraan Pribadi'){
                                 jenis_kelas_berangkat.innerHTML = `
                                     <option value="Disesuaikan">Disesuaikan</option>
                                 `;
-                                const perusahaan_angkutan_berangkat = document.getElementById('perusahaan_angkutan_berangkat');
                                 perusahaan_angkutan_berangkat.value = 'Disesuaikan';
                                 perusahaan_angkutan_berangkat.setAttribute('readonly', 'readonly');
                             }
@@ -98,11 +121,17 @@
                 </div>
                 {{-- rute asal --}}
                 <div class="col-span-2 sm:col-span-1">
-                    <input type="text" name="rute_asal_berangkat" id="rute_asal_berangkat" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Rute Asal" required>
+                    <input type="text" name="rute_asal_berangkat" id="rute_asal_berangkat" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Rute Asal" value="{{ old('rute_asal_berangkat') }}">
+                    @error('rute_asal_berangkat')
+                        <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                    @enderror
                 </div>
                 {{-- rute tujuan --}}
                 <div class="col-span-2 sm:col-span-1">
-                    <input type="text" name="rute_tujuan_berangkat" id="rute_tujuan_berangkat" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Rute Tujuan" required>
+                    <input type="text" name="rute_tujuan_berangkat" id="rute_tujuan_berangkat" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Rute Tujuan" value="{{ old('rute_tujuan_berangkat') }}">
+                    @error('rute_tujuan_berangkat')
+                        <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                    @enderror
                 </div>
                 {{-- waktu dan jam berangkat --}}
                 <div class="col-span-2">
@@ -110,7 +139,7 @@
                         <svg class="absolute ml-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
                         </svg>
-                        <input type="text" id="waktu_berangkat" name="waktu_berangkat" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Waktu Berangkat" required>
+                        <input type="text" id="waktu_berangkat" name="waktu_berangkat" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Waktu Berangkat" value="{{ old('waktu_berangkat') }}">
                         <script>
                             const waktu_berangkat = document.getElementById('waktu_berangkat');
                             //change type to datetime-local when focus
@@ -119,11 +148,17 @@
                             });
                         </script>
                     </div>
+                    @error('waktu_berangkat')
+                        <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                    @enderror
                 </div>
                 {{-- perusahaan angkutan --}}
                 <div class="col-span-2">
                     <div class="col-span-2 sm:col-span-1">
-                        <input type="text" name="perusahaan_angkutan_berangkat" id="perusahaan_angkutan_berangkat" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Perusahaan Angkutan" required>
+                        <input type="text" name="perusahaan_angkutan_berangkat" id="perusahaan_angkutan_berangkat" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Perusahaan Angkutan" value="{{ old('perusahaan_angkutan_berangkat') }}">
+                        @error('perusahaan_angkutan_berangkat')
+                            <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                        @enderror
                     </div>
                 </div>
                 
@@ -133,24 +168,38 @@
                 </div>
                 {{-- jenis transportasi --}}
                 <div class="col-span-2 sm:col-span-1">
-                    <select name="jenis_transportasi_kembali" id="jenis_transportasi_kembali" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                    <select name="jenis_transportasi_kembali" id="jenis_transportasi_kembali" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ old('jenis_transportasi_kembali') }}">
                         <option value="">Jenis Transportasi</option>
                         <option value="Penerbangan">Penerbangan</option>
                         <option value="Kereta Api">Kereta Api</option>
                         <option value="Kapal Laut">Kapal Laut</option>
                         <option value="Kendaraan Pribadi">Kendaraan Pribadi</option>
                     </select>
+                    @error('jenis_transportasi_kembali')
+                        <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                    @enderror
                 </div>
                 {{-- jenis kelas --}}
                 <div class="col-span-2 sm:col-span-1">
-                    <select name="jenis_kelas_kembali" id="jenis_kelas_kembali" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                    <select name="jenis_kelas_kembali" id="jenis_kelas_kembali" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ old('jenis_kelas_kembali') }}">
                         <option value="">Jenis Kelas</option>  
                     </select>
+                    @error('jenis_kelas_kembali')
+                        <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                    @enderror
                     <script>
                         const jenis_transportasi_kembali = document.getElementById('jenis_transportasi_kembali');
                         const jenis_kelas_kembali = document.getElementById('jenis_kelas_kembali');
                         jenis_transportasi_kembali.addEventListener('change', function(){
-                            if(jenis_transportasi_kembali.value == 'Penerbangan'){
+                            const perusahaan_angkutan_kembali = document.getElementById('perusahaan_angkutan_kembali');
+                            perusahaan_angkutan_kembali.removeAttribute('readonly');
+                            if(jenis_transportasi_kembali.value == ""){
+                                jenis_kelas_kembali.innerHTML = `
+                                    <option value="">Jenis Kelas</option>  
+                                `;
+                                perusahaan_angkutan_kembali.value = '';
+                            }
+                            else if(jenis_transportasi_kembali.value == 'Penerbangan'){
                                 jenis_kelas_kembali.innerHTML = `
                                     <option value="">Jenis Kelas</option>  
                                     <option value="Ekonomi">Ekonomi</option>
@@ -158,6 +207,7 @@
                                     <option value="Bisnis">Bisnis</option>
                                     <option value="Eksekutif">First Class</option>
                                 `;
+                                perusahaan_angkutan_kembali.value = '';
                             }else if(jenis_transportasi_kembali.value == 'Kereta Api'){
                                 jenis_kelas_kembali.innerHTML = `
                                     <option value="">Jenis Kelas</option>  
@@ -166,12 +216,12 @@
                                     <option value="Eksekutif">Eksekutif</option>
                                     <option value="Luxury">Luxury</option>
                                 `;
+                                perusahaan_angkutan_kembali.value = '';
                             }
-                            if(jenis_transportasi_kembali.value == 'Kapal Laut' || jenis_transportasi_kembali.value == 'Kendaraan Pribadi'){
+                            else if(jenis_transportasi_kembali.value == 'Kapal Laut' || jenis_transportasi_kembali.value == 'Kendaraan Pribadi'){
                                 jenis_kelas_kembali.innerHTML = `
                                     <option value="Disesuaikan">Disesuaikan</option>
                                 `;
-                                const perusahaan_angkutan_kembali = document.getElementById('perusahaan_angkutan_kembali');
                                 perusahaan_angkutan_kembali.value = 'Disesuaikan';
                                 perusahaan_angkutan_kembali.setAttribute('readonly', 'readonly');
                             }
@@ -180,11 +230,17 @@
                 </div>
                 {{-- rute asal --}}
                 <div class="col-span-2 sm:col-span-1">
-                    <input type="text" name="rute_asal_kembali" id="rute_asal_kembali" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Rute Asal" required>
+                    <input type="text" name="rute_asal_kembali" id="rute_asal_kembali" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Rute Asal" value="{{ old('rute_asal_kembali') }}">
+                    @error('rute_asal_kembali')
+                        <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                    @enderror
                 </div>
                 {{-- rute tujuan --}}
                 <div class="col-span-2 sm:col-span-1">
-                    <input type="text" name="rute_tujuan_kembali" id="rute_tujuan_kembali" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Rute Tujuan" required>
+                    <input type="text" name="rute_tujuan_kembali" id="rute_tujuan_kembali" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Rute Tujuan" value="{{ old('rute_tujuan_kembali') }}">
+                    @error('rute_tujuan_kembali')
+                        <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                    @enderror
                 </div>
                 {{-- waktu dan jam berangkat --}}
                 <div class="col-span-2">
@@ -192,7 +248,7 @@
                         <svg class="absolute ml-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
                         </svg>
-                        <input type="text" id="waktu_kembali" name="waktu_kembali" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Waktu Kembali" required>
+                        <input type="text" id="waktu_kembali" name="waktu_kembali" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Waktu Kembali" value="{{ old('waktu_kembali') }}">
                         <script>
                             const waktu_kembali = document.getElementById('waktu_kembali');
                             //change type to datetime-local when focus
@@ -201,11 +257,17 @@
                             });
                         </script>
                     </div>
+                    @error('waktu_kembali')
+                        <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                    @enderror
                 </div>
                 {{-- perusahaan angkutan --}}
                 <div class="col-span-2">
                     <div class="col-span-2 sm:col-span-1">
-                        <input type="text" name="perusahaan_angkutan_kembali" id="perusahaan_angkutan_kembali" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Perusahaan Angkutan" required>
+                        <input type="text" name="perusahaan_angkutan_kembali" id="perusahaan_angkutan_kembali" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Perusahaan Angkutan" value="{{ old('perusahaan_angkutan_kembali') }}">
+                        @error('perusahaan_angkutan_kembali')
+                            <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                        @enderror
                     </div>
                 </div>  
                    

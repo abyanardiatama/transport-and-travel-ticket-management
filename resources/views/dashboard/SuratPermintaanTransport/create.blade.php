@@ -31,15 +31,24 @@
                 </div>
                 {{-- field nama --}}
                 <div class="col-span-2 sm:col-span-1">
-                    <input type="text" name="nama_pemohon" id="nama_pemohon" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Nama Pemohon" value="{{ old('nama_pemohon') }}" required>
+                    <input type="text" name="nama_pemohon" id="nama_pemohon" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Nama Pemohon" value="{{ old('nama_pemohon') }}">
+                    @error('nama_pemohon')
+                        <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                    @enderror
                 </div>
                 {{-- field unit --}}
                 <div class="col-span-2 sm:col-span-1">
-                    <input type="text" name="unit" id="unit" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Portofolio-Sub Portofolio (Cth : SCI-AKL)" value="{{ old('unit') }}" required> 
+                    <input type="text" name="unit" id="unit" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Portofolio-Sub Portofolio (Cth : SCI-AKL)" value="{{ old('unit') }}"> 
+                    @error('unit')
+                        <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                    @enderror
                 </div>
                 {{-- email atasan --}}
                 <div class="col-span-2">
-                    <input type="email" name="email_atasan" id="email_atasan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ old('email_atasan') }}" placeholder="Email Atasan" required>
+                    <input type="email" name="email_atasan" id="email_atasan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ old('email_atasan') }}" placeholder="Email Atasan">
+                    @error('email_atasan')
+                        <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                    @enderror
                     {{-- all email atasan --}}
                     <datalist id="email_atasan_data">
                         @foreach ($users as $item)
@@ -57,23 +66,35 @@
                 </script>
                 {{-- field tujuan --}}
                 <div class="col-span-2 sm:col-span-1">
-                    <input type="text" name="tujuan" id="tujuan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Tujuan" value="{{ old('tujuan') }}" required>
+                    <input type="text" name="tujuan" id="tujuan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Tujuan" value="{{ old('tujuan') }}">
+                    @error('tujuan')
+                        <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                    @enderror
                 </div>
                 {{-- rute pemakaian --}} {{-- dropdown --}}
                 <div class="col-span-2 sm:col-span-1">
-                    <select name="rute_pemakaian" id="rute_pemakaian" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ old('rute_pemakaian') }}" required>
+                    <select name="rute_pemakaian" id="rute_pemakaian" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ old('rute_pemakaian') }}">
                         <option value="">Rute Pemakaian</option>
                         <option value="Dalam Kota">Dalam Kota</option>
                         <option value="Luar Kota">Luar Kota</option>
                     </select>
+                    @error('rute_pemakaian')
+                        <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                    @enderror
                 </div>
                 {{-- keperluan --}}
                 <div class="col-span-2 sm:col-span-1">
-                    <input type="text" name="keperluan" id="keperluan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ old('keperluan') }}" placeholder="Keperluan" required>
+                    <input type="text" name="keperluan" id="keperluan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ old('keperluan') }}" placeholder="Keperluan">
+                    @error('keperluan')
+                        <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                    @enderror
                 </div>
                 {{-- jumlah penumpang --}} {{-- incrementail from 0 --}}
                 <div class="col-span-2 sm:col-span-1">
-                    <input type="number" name="jumlah_penumpang" id="jumlah_penumpang" min="2" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ old('jumlah_penumpang') }}" placeholder="Jumlah Penumpang (Termasuk Driver)" required>
+                    <input type="number" name="jumlah_penumpang" id="jumlah_penumpang" min="2" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ old('jumlah_penumpang') }}" placeholder="Jumlah Penumpang (Termasuk Driver)">
+                    @error('jumlah_penumpang')
+                        <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                    @enderror
                 </div>
                 <div class="col-span-2 sm:col-span-1">
                     <div class="relative">
@@ -86,8 +107,11 @@
                             waktu_berangkat.addEventListener('focus', function(){
                                 this.type = 'datetime-local';
                             });
-                        </script>
+                            </script>
                     </div>
+                    @error('waktu_berangkat')
+                        <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                    @enderror
                 </div> 
                 {{-- waktu dan jam kembali --}}
                 <div class="col-span-2 sm:col-span-1">
@@ -104,6 +128,9 @@
                             });
                         </script>
                     </div>
+                    @error('waktu_kembali')
+                        <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                    @enderror
                 </div>              
             </form>
             {{-- Note bahwa surat akan diteruskan ke atasan untuk persetujuan --}}
@@ -118,7 +145,7 @@
                         <ul class="mt-1.5 list-disc list-inside">
                           <li>Pastikan untuk mengecek jadwal penggunaan kendaraan lebih dahulu</li>
                           <li>Dengan menekan submit Anda telah menyetujui dibuatnya surat permintaan</li>
-                          <li>Surat akan dikirimkan ke atasan untuk disetujui sebelum akhirnya dilengkapi</li>
+                          <li>Surat akan dikirimkan ke atasan untuk disetujui sebelum akhirnya dilengkapi admin</li>
                       </ul>
                     </div>
                   </div>

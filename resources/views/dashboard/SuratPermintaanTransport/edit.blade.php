@@ -48,43 +48,64 @@
                 @endif
                 {{-- field nama --}}
                 <div class="col-span-2 sm:col-span-1">
-                    <input type="text" name="nama_pemohon" id="nama_pemohon" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Nama Pemohon" value="{{ old('nama_pemohon', $suratTransport->nama_pemohon) }}" required>
+                    <input type="text" name="nama_pemohon" id="nama_pemohon" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Nama Pemohon" value="{{ old('nama_pemohon', $suratTransport->nama_pemohon) }}">
+                    @error('nama_pemohon')
+                        <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                    @enderror
                 </div>
                 {{-- field unit --}}
                 <div class="col-span-2 sm:col-span-1">
-                    <input type="text" name="unit" id="unit" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Unit" value="{{ old('unit', $suratTransport->unit) }}" required> 
+                    <input type="text" name="unit" id="unit" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Unit" value="{{ old('unit', $suratTransport->unit) }}"> 
+                    @error('unit')
+                        <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                    @enderror
                 </div>
                 {{-- email atasan --}}
                 <div class="col-span-2">
-                    <input type="email" name="email_atasan" id="email_atasan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ old('email_atasan', $suratTransport->email_atasan) }}" placeholder="Email Atasan" required>
+                    <input type="email" name="email_atasan" id="email_atasan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ old('email_atasan', $suratTransport->email_atasan) }}" placeholder="Email Atasan">
+                    @error('email_atasan')
+                        <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                    @enderror
                 </div>
                 {{-- biaya perjalanan --}}
                 {{-- <div class="col-span-2 sm:col-span-1">
-                    <input type="text" name="biaya_perjalanan" id="biaya_perjalanan" min="0" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ old('biaya_perjalanan', $suratTransport->biaya_perjalanan) }}" placeholder="Biaya Perjalanan" required>
+                    <input type="text" name="biaya_perjalanan" id="biaya_perjalanan" min="0" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ old('biaya_perjalanan', $suratTransport->biaya_perjalanan) }}" placeholder="Biaya Perjalanan">
                 </div> --}}
                 {{-- field tujuan --}}
                 <div class="col-span-2 sm:col-span-1">
-                    <input type="text" name="tujuan" id="tujuan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Tujuan" value="{{ old('tujuan', $suratTransport->tujuan) }}" required>
+                    <input type="text" name="tujuan" id="tujuan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Tujuan" value="{{ old('tujuan', $suratTransport->tujuan) }}">
+                    @error('tujuan')
+                        <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                    @enderror
                 </div>
                 {{-- rute pemakaian --}} {{-- dropdown --}}
                 <div class="col-span-2 sm:col-span-1">
                     @if (Auth::user()->is_pegawai==true)
-                        <select name="rute_pemakaian" id="rute_pemakaian" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $suratTransport->rute_pemakaian }}" required>
+                        <select name="rute_pemakaian" id="rute_pemakaian" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $suratTransport->rute_pemakaian }}">
                             <option value="">Rute Pemakaian</option>
                             <option value="Dalam Kota" {{ $suratTransport->rute_pemakaian == 'Dalam Kota' ? 'selected' : '' }}>Dalam Kota</option>
                             <option value="Luar Kota" {{ $suratTransport->rute_pemakaian == 'Luar Kota' ? 'selected' : '' }}>Luar Kota</option>
                         </select>
                     @elseif (Auth::user()->is_admin==true)
-                        <input name="rute_pemakaian" id="rute_pemakaian" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $suratTransport->rute_pemakaian }}" required></input>
+                        <input name="rute_pemakaian" id="rute_pemakaian" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $suratTransport->rute_pemakaian }}"></input>
                     @endif
+                    @error('rute_pemakaian')
+                        <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                    @enderror
                 </div>
                 {{-- keperluan --}}
                 <div class="col-span-2 sm:col-span-1">
-                    <input type="text" name="keperluan" id="keperluan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ old('keperluan', $suratTransport->keperluan) }}" placeholder="Keperluan" required>
+                    <input type="text" name="keperluan" id="keperluan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ old('keperluan', $suratTransport->keperluan) }}" placeholder="Keperluan">
+                    @error('keperluan')
+                        <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                    @enderror
                 </div>
                 {{-- jumlah penumpang --}} {{-- incrementail from 0 --}}
                 <div class="col-span-2 sm:col-span-1">
-                    <input type="number" name="jumlah_penumpang" id="jumlah_penumpang" min="2" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ old('jumlah_penumpang', $suratTransport->jumlah_penumpang) }}" placeholder="Jumlah Penumpang (Termasuk Driver)" required>
+                    <input type="number" name="jumlah_penumpang" id="jumlah_penumpang" min="2" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ old('jumlah_penumpang', $suratTransport->jumlah_penumpang) }}" placeholder="Jumlah Penumpang (Termasuk Driver)">
+                    @error('jumlah_penumpang')
+                        <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                    @enderror
                 </div>
                 {{-- waktu  --}}
                 <div class="col-span-2 sm:col-span-1">
@@ -100,6 +121,9 @@
                             });
                         </script>
                     </div>
+                    @error('waktu_berangkat')
+                        <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                    @enderror
                 </div> 
                 {{-- waktu dan jam kembali --}}
                 <div class="col-span-2 sm:col-span-1">
@@ -116,12 +140,35 @@
                             });
                         </script>
                     </div>
+                    @error('waktu_kembali')
+                        <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                    @enderror
                 </div>
                 @if (Auth::user()->is_admin==true)
                     {{-- biaya perjalanan --}}
                     <div class="col-span-2">
-                        <input type="text" name="biaya_perjalanan" id="biaya_perjalanan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  placeholder="Biaya Perjalanan" autofocus required>
+                        <input type="text" name="biaya_perjalanan" id="biaya_perjalanan" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  placeholder="Biaya Perjalanan" autofocus>
+                        @error('biaya_perjalanan')
+                            <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                        @enderror
                     </div>
+                    <script>
+                        // add comma to biaya perjalanan when typing
+                        const biaya_perjalanan = document.getElementById('biaya_perjalanan');
+                        // add conditional to detect input typing is number or text
+                        biaya_perjalanan.addEventListener('input', function() {
+                            let value = biaya_perjalanan.value;
+                            if (!isNaN(value)) {
+                                // input is a number
+                                value = value.replace(/[^0-9]/g, ''); // remove non-numeric characters
+                                value = value.replace(/\B(?=(\d{3})+(?!\d))/g, '.'); // add comma every 3 digits
+                            } else {
+                                // input is not a number
+                                // handle accordingly
+                            }
+                            biaya_perjalanan.value = value;
+                        });
+                    </script>
                     {{-- Checkbox ada kendaraan --}}
                     <div class="col-span-2 pt-5"> 
                         <div class="flex items-center mb-4">
@@ -153,11 +200,9 @@
                     {{-- jenis kendaraan --}}
                     <div id="div_kendaraan_lain" class="col-span-2">
                         <input id="kendaraan_lain" type="text" name="kendaraan_lain" id="kendaraan_lain" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Kendaraan Alternatif" value="" required>
-                        @error('kendaraan_lain')
-                            <div class="text-red-500 mt-2 text-sm">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                        {{-- @error('kendaraan_lain')
+                            <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                        @enderror --}}
                     </div>
                     
                     <script>
@@ -194,7 +239,6 @@
                                 //set required to nomor polisi and nama driver to false
                                 nomor_polisi.required = false;
                                 nama_driver.required = false;
-
                             }
                         });  
                     </script>

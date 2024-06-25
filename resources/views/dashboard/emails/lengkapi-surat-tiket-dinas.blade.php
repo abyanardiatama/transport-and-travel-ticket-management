@@ -2,7 +2,7 @@
 
 # Hai 
 
-Surat Permintaan Pengurusan Tiket untuk Perjalanan Dinas Anda telah disetujui.
+Surat Permintaan Pengurusan Tiket Dinas perlu dilengkapi.
 
 Details:
 - Nama Pemohon      : {{ $suratPermintaanTiketDinas['nama_pemohon'] }}

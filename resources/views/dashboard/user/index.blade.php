@@ -89,9 +89,9 @@
                                                 @if ($user->is_admin == true)
                                                     Admin
                                                 @elseif ($user->is_atasan1 == true)
-                                                    Atasan 1
+                                                    Atasan
                                                 @elseif ($user->is_atasan2 == true)
-                                                    Atasan 2
+                                                    Atasan
                                                 @elseif ($user->is_pegawai == true)
                                                     Pegawai
                                                 @elseif ($user->is_driver == true)
@@ -152,8 +152,8 @@
                                                                         <label for="role" class="text-left block mb-2 text-sm font-medium text-gray-900 dark:text-white">Role</label>
                                                                         <select id="role" name="role" autocomplete="role" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 px-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                                                             <option value="admin" @if ($user->is_admin == true) selected @endif>Admin</option>
-                                                                            <option value="atasan1" @if ($user->is_atasan1 == true) selected @endif>Atasan 1</option>
-                                                                            <option value="atasan2" @if ($user->is_atasan2 == true) selected @endif>Atasan 2</option>
+                                                                            <option value="atasan1" @if ($user->is_atasan1 == true) selected @endif>Atasan</option>
+                                                                            {{-- <option value="atasan2" @if ($user->is_atasan2 == true) selected @endif>Atasan 2</option> --}}
                                                                             <option value="pegawai" @if ($user->is_pegawai == true) selected @endif>Pegawai</option>
                                                                             <option value="driver" @if ($user->is_driver == true) selected @endif>Driver</option>
                                                                         </select>
