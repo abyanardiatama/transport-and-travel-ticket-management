@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\LengkapiSuratTiketDinas;
 use App\Mail\SuratPermintaanTiketDinasCreated;
 use App\Mail\SuratPermintaanTiketDinasApproved;
 use App\Mail\SuratPermintaanTiketDinasDitolak;
@@ -140,6 +141,32 @@ class SuratPermintaanTiketDinasController extends Controller
             Session::flash('error', 'Email atasan tidak ditemukan');
             return redirect('/dashboard/permintaantiketdinas/create');
         }
+        // validasi tanggal dan jam
+        // tanggal berangkat harus lebih kecil dari tanggal kembali
+        elseif($tanggal_berangkat > $tanggal_kembali){
+            Session::flash('error', 'Tanggal berangkat tidak valid');
+            return redirect('/dashboard/permintaantiketdinas/create');
+        }
+        // tanggal berangkat dan tanggal kembali sama dan jam berangkat lebih besar dari jam kembali
+        elseif($tanggal_berangkat == $tanggal_kembali && $jam_berangkat > $jam_kembali){
+            Session::flash('error', 'Jam berangkat tidak valid');
+            return redirect('/dashboard/permintaantiketdinas/create');
+        }
+        // tanggal berangkat dan tanggal kembali sama dan jam berangkat sama dengan jam kembali
+        elseif($tanggal_berangkat == $tanggal_kembali && $jam_berangkat == $jam_kembali){
+            Session::flash('error', 'Jam berangkat tidak valid');
+            return redirect('/dashboard/permintaantiketdinas/create');
+        }
+        // tanggal berangkat kurang dari tanggal hari ini
+        elseif($tanggal_berangkat < Carbon::now()->toDateString()){
+            Session::flash('error', 'Tanggal berangkat dan tanggal kembali tidak valid');
+            return redirect('/dashboard/permintaantiketdinas/create');
+        }
+        // jam berangkat kurang dari jam hari ini
+        elseif($tanggal_berangkat == Carbon::now()->toDateString() && $jam_berangkat < Carbon::now()->toTimeString()){
+            Session::flash('error', 'Jam berangkat tidak valid');
+            return redirect('/dashboard/permintaantiketdinas/create');
+        }
         else{
             Mail::to($validatedData['email_atasan'])->send(new SuratPermintaanTiketDinasCreated($validatedData));
             SuratPermintaanTiketDinas::create($validatedData);
@@ -165,6 +192,12 @@ class SuratPermintaanTiketDinasController extends Controller
         $suratPermintaanTiketDinas = SuratPermintaanTiketDinas::find($id);
         $pemohon = User::find($suratPermintaanTiketDinas->id_pemohon);
         Mail::to($pemohon->email)->send(new SuratPermintaanTiketDinasApproved($suratPermintaanTiketDinas));
+        $admin = User::where('is_admin', true)->get();
+        foreach($admin as $admin){
+            // dd($admin->email);
+            
+            Mail::to($admin->email)->send(new LengkapiSuratTiketDinas($suratPermintaanTiketDinas));
+        }
         $suratPermintaanTiketDinas->isApprove_atasan = true;
         $suratPermintaanTiketDinas->save();
         activity()
@@ -285,6 +318,16 @@ class SuratPermintaanTiketDinasController extends Controller
         $jam_berangkat = $request->waktu_berangkat;
         $jam_berangkat = date('H:i', strtotime($jam_berangkat));
 
+        //get date from tanggal_kembali
+        $tanggal_kembali = $request->waktu_kembali;
+        $tanggal_kembali = date('Y-m-d', strtotime($tanggal_kembali));
+        $tanggal_kembali = str_replace('00', '', $tanggal_kembali);
+
+        //get time from jam_kembali
+        $jam_kembali = $request->waktu_kembali;
+        $jam_kembali = date('H:i', strtotime($jam_kembali));
+        
+
         unset($validatedData['waktu_berangkat']);
         $validatedData['tanggal_berangkat'] = $tanggal_berangkat;
         $validatedData['jam_berangkat'] = $jam_berangkat;
@@ -304,6 +347,32 @@ class SuratPermintaanTiketDinasController extends Controller
             //send error to name email_atasan
             Session::flash('error', 'Email atasan tidak ditemukan');
             return redirect('/dashboard/permintaantiketdinas/{id}/edit');
+        }
+        // validasi tanggal dan jam
+        // tanggal berangkat harus lebih kecil dari tanggal kembali
+        elseif($tanggal_berangkat > $tanggal_kembali){
+            Session::flash('error', 'Tanggal berangkat tidak valid');
+            return redirect('/dashboard/permintaantiketdinas/create');
+        }
+        // tanggal berangkat dan tanggal kembali sama dan jam berangkat lebih besar dari jam kembali
+        elseif($tanggal_berangkat == $tanggal_kembali && $jam_berangkat > $jam_kembali){
+            Session::flash('error', 'Jam berangkat tidak valid');
+            return redirect('/dashboard/permintaantiketdinas/create');
+        }
+        // tanggal berangkat dan tanggal kembali sama dan jam berangkat sama dengan jam kembali
+        elseif($tanggal_berangkat == $tanggal_kembali && $jam_berangkat == $jam_kembali){
+            Session::flash('error', 'Jam berangkat tidak valid');
+            return redirect('/dashboard/permintaantiketdinas/create');
+        }
+        // tanggal berangkat kurang dari tanggal hari ini
+        elseif($tanggal_berangkat < Carbon::now()->toDateString()){
+            Session::flash('error', 'Tanggal berangkat dan tanggal kembali tidak valid');
+            return redirect('/dashboard/permintaantiketdinas/create');
+        }
+        // jam berangkat kurang dari jam hari ini
+        elseif($tanggal_berangkat == Carbon::now()->toDateString() && $jam_berangkat < Carbon::now()->toTimeString()){
+            Session::flash('error', 'Jam berangkat tidak valid');
+            return redirect('/dashboard/permintaantiketdinas/create');
         }
         else{
             //update surat dinas

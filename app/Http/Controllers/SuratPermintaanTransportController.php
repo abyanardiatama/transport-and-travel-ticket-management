@@ -183,6 +183,12 @@ class SuratPermintaanTransportController extends Controller
             Session::flash('error', 'Waktu berangkat tidak valid');
             return redirect('/dashboard/permintaantransport/create');
         }
+        //check if tanggal_berangkat is not below current date
+        elseif($validatedData['tanggal_berangkat'] < date('Y-m-d')){
+            //send error message
+            Session::flash('error', 'Tanggal berangkat tidak valid');
+            return redirect('/dashboard/permintaantransport/create');
+        }
         else{
             //Mail to atasan
             Mail::to($validatedData['email_atasan'])->send(new SuratPermintaanTransportMail($validatedData));
@@ -675,7 +681,7 @@ class SuratPermintaanTransportController extends Controller
         //tanggal berangkat must be less than tanggal kembali
         elseif($validatedData['tanggal_berangkat'] > $validatedData['tanggal_kembali']){
             //send error message
-            Session::flash('error', 'Tanggal berangkat tidak valid');
+            Session::flash('error', 'Tanggal tidak valid');
             return redirect('/dashboard/permintaantransport/' . $id . '/edit');
         }
         //check if tanggal_berangkat and tanggal_kembali is same but jam_berangkat is more than jam_kembali
@@ -688,6 +694,12 @@ class SuratPermintaanTransportController extends Controller
         elseif($validatedData['tanggal_berangkat'] == $validatedData['tanggal_kembali'] && $validatedData['jam_berangkat'] == $validatedData['jam_kembali']){
             //send error message
             Session::flash('error', 'Waktu berangkat tidak valid');
+            return redirect('/dashboard/permintaantransport/' . $id . '/edit');
+        }
+        //check if tanngal_berangkat is less than today
+        elseif($validatedData['tanggal_berangkat'] < date('Y-m-d')){
+            //send error message
+            Session::flash('error', 'Tanggal berangkat tidak valid');
             return redirect('/dashboard/permintaantransport/' . $id . '/edit');
         }
         else{
